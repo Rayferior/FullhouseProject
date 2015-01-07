@@ -4,9 +4,7 @@
  */
 package fullhouseprojectgui;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JList;
+import javax.swing.*;
 
 /**
  *
@@ -64,6 +62,11 @@ public class Gui extends javax.swing.JFrame {
 
         jButton3.setText("Masterclass");
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Masterclass toevoegen en aanpassen");
 
@@ -139,6 +142,14 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+      JFrame masterclassFrame = new Masterclass();
+      masterclassFrame.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
         Toernooi frame = new Toernooi();
         frame.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed

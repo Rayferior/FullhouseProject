@@ -4,6 +4,8 @@
  */
 package fullhouseprojectgui;
 
+import javax.swing.*;
+
 /**
  *
  * @author Guus
@@ -130,6 +132,15 @@ public class Gui extends javax.swing.JFrame {
         sframe.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         sframe.setVisible(true);
     }//GEN-LAST:event_jButtonSpelersMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+      JFrame masterclassFrame = new Masterclass();
+      masterclassFrame.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

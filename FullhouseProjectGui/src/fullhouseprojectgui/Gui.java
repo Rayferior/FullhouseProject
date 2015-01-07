@@ -4,7 +4,9 @@
  */
 package fullhouseprojectgui;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JList;
 
 /**
  *
@@ -134,13 +136,9 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSpelersMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    
+        Toernooi frame = new Toernooi();
+        frame.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-      JFrame masterclassFrame = new Masterclass();
-      masterclassFrame.setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

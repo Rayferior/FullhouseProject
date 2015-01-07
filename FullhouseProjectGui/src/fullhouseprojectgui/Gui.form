@@ -64,7 +64,7 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jButtonSpelers" alignment="0" max="32767" attributes="0"/>
                       <Component id="jButtonToernooi" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jButtonMasterclass" alignment="0" pref="111" max="32767" attributes="0"/>
+                      <Component id="jButton3" alignment="0" pref="111" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -90,7 +90,7 @@
                   </Group>
                   <EmptySpace type="separate" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButtonMasterclass" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="jButton3" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -136,7 +136,7 @@
             <Property name="text" type="java.lang.String" value="Toernooi toevoegen en aanpassen"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButtonMasterclass">
+        <Component class="javax.swing.JButton" name="jButton3">
           <Properties>
             <Property name="text" type="java.lang.String" value="Masterclass"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">

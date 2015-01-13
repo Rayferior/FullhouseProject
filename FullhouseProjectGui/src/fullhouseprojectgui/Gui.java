@@ -151,16 +151,24 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSpelersMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
     Toernooi frame = new Toernooi();
     frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        frame.setVisible(true);
+     frame.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
       JFrame masterclassFrame = new Masterclass();
       masterclassFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
       masterclassFrame.setVisible(true);
+    }                                        
+
+    {
     }//GEN-LAST:event_jButton3ActionPerformed
+   
+                                  
+
 
     /**
      * @param args the command line arguments

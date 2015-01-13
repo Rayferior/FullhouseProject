@@ -4,6 +4,9 @@
  */
 package fullhouseprojectgui;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.Window;
 import javax.swing.*;
 
 /**
@@ -11,7 +14,9 @@ import javax.swing.*;
  * @author Guus
  */
 public class Gui extends javax.swing.JFrame {
-
+ 
+ static Toernooi frame = new Toernooi();
+ 
     /**
      * Creates new form Gui
      */
@@ -148,13 +153,14 @@ public class Gui extends javax.swing.JFrame {
         SpelersFrame sframe = new SpelersFrame();
         sframe.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         sframe.setVisible(true);
+        centreWindow(sframe);
     }//GEN-LAST:event_jButtonSpelersMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
     Toernooi frame = new Toernooi();
     frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
      frame.setVisible(true);
+    centreWindow(frame);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -162,11 +168,18 @@ public class Gui extends javax.swing.JFrame {
       JFrame masterclassFrame = new Masterclass();
       masterclassFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
       masterclassFrame.setVisible(true);
+      centreWindow(masterclassFrame);
     }                                        
-
     {
     }//GEN-LAST:event_jButton3ActionPerformed
    
+    public static void centreWindow(Window frame)
+    {
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth()- frame.getWidth())/2);
+        int y = (int) ((dimension.getHeight()- frame.getHeight())/2);
+        frame.setLocation(x, y);
+    }
                                   
 
 

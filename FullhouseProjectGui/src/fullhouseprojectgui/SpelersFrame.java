@@ -45,6 +45,7 @@ public class SpelersFrame extends javax.swing.JFrame {
         jCheckBox7 = new javax.swing.JCheckBox();
         jCheckBox1 = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
+        TerugButtonSpeler = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -189,6 +190,13 @@ public class SpelersFrame extends javax.swing.JFrame {
                 .addComponent(jCheckBox7))
         );
 
+        TerugButtonSpeler.setText("Home");
+        TerugButtonSpeler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TerugButtonSpelerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -201,10 +209,12 @@ public class SpelersFrame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addGap(404, 404, 404))
+                                .addGap(274, 274, 274))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addGap(357, 357, 357))))
+                                .addGap(241, 241, 241)))
+                        .addComponent(TerugButtonSpeler, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPaneSpeler)
                         .addContainerGap())
@@ -221,9 +231,12 @@ public class SpelersFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1))
+                    .addComponent(TerugButtonSpeler, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -250,6 +263,7 @@ public class SpelersFrame extends javax.swing.JFrame {
         SpelerWijzigFrame swFrame = new SpelerWijzigFrame();
         swFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         swFrame.setVisible(true);
+        Gui.centreWindow(swFrame);
     }//GEN-LAST:event_jButtonUpdateMouseClicked
 
     private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
@@ -257,10 +271,15 @@ public class SpelersFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonUpdateActionPerformed
 
     private void jButtonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertActionPerformed
-       SpelerInvoerFrame swFrame = new SpelerInvoerFrame();
-        swFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        swFrame.setVisible(true);
+       SpelerInvoerFrame siFrame = new SpelerInvoerFrame();
+        siFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        siFrame.setVisible(true);
+        Gui.centreWindow(siFrame);
     }//GEN-LAST:event_jButtonInsertActionPerformed
+
+    private void TerugButtonSpelerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TerugButtonSpelerActionPerformed
+    this.dispose();
+    }//GEN-LAST:event_TerugButtonSpelerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -304,6 +323,7 @@ public class SpelersFrame extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton TerugButtonSpeler;
     private javax.swing.JButton jButtonInsert;
     private javax.swing.JButton jButtonToonSpeler;
     private javax.swing.JButton jButtonUpdate;

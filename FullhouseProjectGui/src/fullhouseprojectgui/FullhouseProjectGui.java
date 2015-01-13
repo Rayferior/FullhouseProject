@@ -19,5 +19,6 @@ public class FullhouseProjectGui {
          JFrame frame=new Gui();       
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+        Gui.centreWindow(frame);
     }
 }

@@ -24,7 +24,7 @@ public class ModelItemToernooi {
    
     @Override
     public String toString(){
-        String description = datum + locatie;
+        String description = datum + "     " + locatie;
         return description;
     }
 }

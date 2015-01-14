@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -54,7 +55,7 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
             ResultSet rs = stat.executeQuery();
             SpelersFrame.jTableSpelerWeergave.removeAll();
             int Ccount = rs.getMetaData().getColumnCount();
-            for (int i = 1; i < Ccount; i++) {
+            for (int i = 1; i <= Ccount; i++) {
                 String name = rs.getMetaData().getColumnName(i);
                 kolomnamenS.add(name);
             }
@@ -96,7 +97,7 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
             ResultSet rs = stat.executeQuery();
             Toernooi.jTable1.removeAll();
             int Ccount = rs.getMetaData().getColumnCount();
-            for (int i = 1; i < Ccount; i++) {
+            for (int i = 1; i <= Ccount; i++) {
                 String name = rs.getMetaData().getColumnName(i);
                 kolomnamenT.add(name);
             }
@@ -168,6 +169,133 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
             System.out.println(e);
         }
         }
-    }
+          public static void ToernooiLijstTonen()
+          {
+               DefaultListModel model = new DefaultListModel();
+               ModelItemToernooi test1 = new ModelItemToernooi();
+                       
+        String Query = "select * from Toernooi";
+        try {
+            PreparedStatement stat = (PreparedStatement) (Statement) con.prepareStatement(Query);
+
+            ResultSet rs = stat.executeQuery();
+            rs.first();
+            do {
+                test1.datum = rs.getString("datum");
+                test1.locatie = rs.getString("locatie");
+                model.addElement(test1);
+            } while (rs.next());
+           Toernooi.ToernooiLijst.setModel(model);
+           } catch (Exception e) {
+            System.out.println(e);
+        }
+        }
+          public static void SpelerLijstTonen()
+          {
+               DefaultListModel model = new DefaultListModel();
+               
+                       
+        String Query = "select * from Speler";
+        try {
+            PreparedStatement stat = (PreparedStatement) (Statement) con.prepareStatement(Query);
+
+            ResultSet rs = stat.executeQuery();
+            rs.first();
+            do {
+                ModelItem test1 = new ModelItem();
+                test1.s_code = rs.getString("s_code");
+                test1.naam = rs.getString("naam");
+                model.addElement(test1);
+            } while (rs.next());
+           SpelersFrame.SpelerLijst.setModel(model);
+           } catch (Exception e) {
+            System.out.println(e);
+        }
+        }
+          public static void MasterclassLijstTonen()
+          {
+              DefaultListModel model = new DefaultListModel();
+               
+                       
+        String Query = "select * from Masterclass";
+        try {
+            PreparedStatement stat = (PreparedStatement) (Statement) con.prepareStatement(Query);
+
+            ResultSet rs = stat.executeQuery();
+            rs.first();
+            do {
+                ModelItemMasterclass test1 = new ModelItemMasterclass();
+                test1.datum = rs.getString("datum");
+                test1.locatie = rs.getString("locatie");
+                model.addElement(test1);
+            } while (rs.next());
+           Masterclass.masterclassLijst.setModel(model);
+           } catch (Exception e) {
+            System.out.println(e);
+        }
+          }
+          
+          
+           public static void SpelerToevoegen() {
+        String insertQuery = "insert into Speler(s_code, naam, adres, postcode,plaats, telefoonnummer, email, rating, kanMasterclassGeven) values( ?,?,?,?,?,?,?,?,?)";
+
+        try {
+            PreparedStatement stat = (PreparedStatement) (Statement) con.prepareStatement(insertQuery);
+            stat.setString(1, SpelerInvoerFrame.s_codeT.getText());
+            stat.setString(2, SpelerInvoerFrame.naamT.getText());
+            stat.setString(3, SpelerInvoerFrame.adresT.getText());
+            stat.setString(4, SpelerInvoerFrame.postcodeT.getText());
+             stat.setString(5, SpelerInvoerFrame.WoonplaatsT.getText());
+             stat.setString(7, SpelerInvoerFrame.emailT.getText());
+             stat.setString(6, SpelerInvoerFrame.telefoonnummerT.getText());
+            stat.setString(9, SpelerInvoerFrame.MasterclassLeraarT.getText());
+             stat.setString(8, SpelerInvoerFrame.ratingT.getText());
+            stat.execute();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+           }
+
+         public static void ToernooiToevoegen() 
+         {
+              String insertQuery = "insert into Toernooi(t_code,aantalSpelers, inschrijfgeld, locatie, datum, 1e, 2e, 3e) values( ?,?,?,?,?,?,?,?)";
+
+        try {
+            PreparedStatement stat = (PreparedStatement) (Statement) con.prepareStatement(insertQuery);
+            stat.setString(1, ToernooiToevoegen.t_codeT.getText());
+            stat.setString(5, ToernooiToevoegen.datumT.getText());
+            stat.setString(4, ToernooiToevoegen.locatieT.getText());
+            stat.setString(3, ToernooiToevoegen.inschrijfGeldT.getText());
+            stat.setString(2, null);
+            stat.setString(6, null);
+            stat.setString(7, null);
+            stat.setString(8, null);
+            stat.execute();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+         }
+         public static void MasterclassToevoegen() 
+         {
+              String insertQuery = "insert into Masterclass(m_code,aantalSpelers, minimaleRating,inschrijfGeld, locatie, datum, masterclassGever) values( ?,?,?,?,?,?,?)";
+
+        try {
+            PreparedStatement stat = (PreparedStatement) (Statement) con.prepareStatement(insertQuery);
+            stat.setString(1, MasterclassInvoeren.M_codeT.getText());
+            stat.setString(2, MasterclassInvoeren.aantalSpelersT.getText());
+            stat.setString(3, MasterclassInvoeren.minimaleRatingT.getText());
+            stat.setString(4, MasterclassInvoeren.inschrijfGeldT.getText());
+            stat.setString(5, MasterclassInvoeren.locatieT.getText());
+            stat.setString(6, MasterclassInvoeren.datumT.getText());
+            stat.setString(7, MasterclassInvoeren.MasterclassGeverT.getText());
+            stat.execute();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+         }
+        }
+
+          
+    
 
 

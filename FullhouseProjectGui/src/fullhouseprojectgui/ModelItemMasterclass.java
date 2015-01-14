@@ -23,7 +23,7 @@ public class ModelItemMasterclass {
    
     @Override
     public String toString(){
-        String description = minimale_rating;
+        String description = datum +  "    " + locatie;
         return description;
     }
 }

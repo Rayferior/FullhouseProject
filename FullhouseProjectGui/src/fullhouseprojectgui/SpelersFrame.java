@@ -15,7 +15,6 @@ public class SpelersFrame extends javax.swing.JFrame {
      */
     public SpelersFrame() {
         initComponents();
-        jTableSpelerWeergave.setVisible(false);
     }
 
     /**
@@ -70,6 +69,11 @@ public class SpelersFrame extends javax.swing.JFrame {
         jButtonToonSpeler.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonToonSpelerMouseClicked(evt);
+            }
+        });
+        jButtonToonSpeler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonToonSpelerActionPerformed(evt);
             }
         });
 
@@ -205,7 +209,15 @@ public class SpelersFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 382, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(197, 197, 197)
+                                .addComponent(jButtonToonSpeler))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 393, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel1)
@@ -217,15 +229,7 @@ public class SpelersFrame extends javax.swing.JFrame {
                         .addGap(30, 30, 30))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPaneSpeler)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(197, 197, 197)
-                                .addComponent(jButtonToonSpeler))
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,8 +259,7 @@ public class SpelersFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonToonSpelerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonToonSpelerMouseClicked
-        jScrollPaneSpeler.setVisible(true);
-        jTableSpelerWeergave.setVisible(true);
+       FullhouseProjectGui.SpelerTonen();
     }//GEN-LAST:event_jButtonToonSpelerMouseClicked
 
     private void jButtonUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonUpdateMouseClicked
@@ -280,6 +283,10 @@ public class SpelersFrame extends javax.swing.JFrame {
     private void TerugButtonSpelerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TerugButtonSpelerActionPerformed
     this.dispose();
     }//GEN-LAST:event_TerugButtonSpelerActionPerformed
+
+    private void jButtonToonSpelerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonToonSpelerActionPerformed
+        
+    }//GEN-LAST:event_jButtonToonSpelerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -340,7 +347,7 @@ public class SpelersFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPaneSpeler;
-    private javax.swing.JTable jTableSpelerWeergave;
+    public static javax.swing.JScrollPane jScrollPaneSpeler;
+    public static javax.swing.JTable jTableSpelerWeergave;
     // End of variables declaration//GEN-END:variables
 }

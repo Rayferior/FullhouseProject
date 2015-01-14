@@ -7,7 +7,9 @@ package fullhouseprojectgui;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Window;
+import java.sql.*;
 import javax.swing.*;
+
 
 /**
  *
@@ -15,13 +17,16 @@ import javax.swing.*;
  */
 public class Gui extends javax.swing.JFrame {
  
- static Toernooi frame = new Toernooi();
+  Connection con;
+  FullhouseProjectGui verbinding = new FullhouseProjectGui();
  
     /**
      * Creates new form Gui
      */
     public Gui() {
         initComponents();
+        con = verbinding.maakVerbinding();
+       
     }
 
     /**

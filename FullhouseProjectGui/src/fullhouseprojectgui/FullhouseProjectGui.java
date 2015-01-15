@@ -10,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 
 /**
@@ -293,8 +295,35 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
             System.out.println(e);
         }
          }
-        }
+         public static void SpelerWijzigen()
+         {
+             
+             /*String updateQuery = "update speler set naam = ?, adres = ?, postcode = ?, plaats = ?, telefoonnummer = ?, email = ?, kanMasterclassGeven = ? WHERE s_code = ?";
+        try {
+            PreparedStatement stat = con.prepareStatement(updateQuery);
+            ModelItem speler = (ModelItem) SpelersFrame.SpelerLijst.getSelectedValue();
+            stat.setString(1);
+            stat.setString(2);
+            stat.setString(3);
+            stat.setString(4);
+            stat.setString(5);
+            stat.setString(6);
+            stat.setString(7);
+            stat.setString(8, speler.s_code);
+             stat.execute();
 
+            
+            
+            stat.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(FullhouseProjectGui.class.getName()).log(Level.SEVERE, null, ex);
+      
+             
+         }
+         */
+         
+        }
+}
           
     
 

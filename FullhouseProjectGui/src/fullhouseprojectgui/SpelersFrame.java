@@ -55,7 +55,6 @@ public class SpelersFrame extends javax.swing.JFrame {
         ));
         jScrollPaneSpeler.setViewportView(jTableSpelerWeergave);
 
-        jButtonToonSpeler.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonToonSpeler.setText("Spelers Tonen");
         jButtonToonSpeler.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -145,7 +144,7 @@ public class SpelersFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 68, Short.MAX_VALUE)
+                        .addGap(0, 70, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

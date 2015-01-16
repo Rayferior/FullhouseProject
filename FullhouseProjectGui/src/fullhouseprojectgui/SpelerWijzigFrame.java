@@ -37,9 +37,9 @@ public class SpelerWijzigFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabelSpelersWonplaats = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        jTextFieldSpelersEmail = new javax.swing.JTextField();
+        jTextFieldTelefoon = new javax.swing.JTextField();
+        jTextFieldMasterclass = new javax.swing.JTextField();
         jTextFieldRating = new javax.swing.JTextField();
         jLabelSpelersEmail = new javax.swing.JLabel();
         jLabelSpelersTelefoon = new javax.swing.JLabel();
@@ -102,10 +102,10 @@ public class SpelerWijzigFrame extends javax.swing.JFrame {
                     .addComponent(jLabelSpelersEmail))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+                    .addComponent(jTextFieldMasterclass, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
                     .addComponent(jTextFieldRating)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField1))
+                    .addComponent(jTextFieldTelefoon)
+                    .addComponent(jTextFieldSpelersEmail))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(226, 226, 226)
@@ -119,19 +119,19 @@ public class SpelerWijzigFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldWijzigSpelerNaam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldSpelersEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelSpelersEmail))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldSpelersAdres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldTelefoon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelSpelersTelefoon))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldSpelersPostcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldMasterclass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelSpelersLeraar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -249,13 +249,13 @@ public class SpelerWijzigFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelSpelersTelefoon;
     private javax.swing.JLabel jLabelSpelersWonplaats;
     private javax.swing.JPanel jPanel1;
-    public static javax.swing.JTextField jTextField1;
-    public static javax.swing.JTextField jTextField2;
-    public static javax.swing.JTextField jTextField3;
+    public static javax.swing.JTextField jTextFieldMasterclass;
     public static javax.swing.JTextField jTextFieldRating;
     public static javax.swing.JTextField jTextFieldSpelersAdres;
+    public static javax.swing.JTextField jTextFieldSpelersEmail;
     public static javax.swing.JTextField jTextFieldSpelersPostcode;
     public static javax.swing.JTextField jTextFieldSpelersWoonplaats;
+    public static javax.swing.JTextField jTextFieldTelefoon;
     public static javax.swing.JTextField jTextFieldWijzigSpelerNaam;
     private javax.swing.JButton swHome;
     // End of variables declaration//GEN-END:variables

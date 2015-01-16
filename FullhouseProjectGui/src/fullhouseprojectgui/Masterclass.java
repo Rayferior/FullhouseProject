@@ -158,6 +158,7 @@ public class Masterclass extends javax.swing.JFrame {
        MWijzigFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
        MWijzigFrame.setVisible(true);
        Gui.centreWindow(MWijzigFrame);
+       FullhouseProjectGui.tekstVullenMasterclass();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

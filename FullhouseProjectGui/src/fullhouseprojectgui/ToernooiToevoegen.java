@@ -29,7 +29,7 @@ public class ToernooiToevoegen extends javax.swing.JFrame {
     private void initComponents() {
 
         t_codeT = new javax.swing.JTextField();
-        datumT = new javax.swing.JTextField();
+        tcodeT = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -38,15 +38,15 @@ public class ToernooiToevoegen extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        datumT = new javax.swing.JTextField();
         locatieT = new javax.swing.JTextField();
         inschrijfGeldT = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        datumT.addActionListener(new java.awt.event.ActionListener() {
+        tcodeT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                datumTActionPerformed(evt);
+                tcodeTActionPerformed(evt);
             }
         });
 
@@ -101,8 +101,8 @@ public class ToernooiToevoegen extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton2))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(datumT, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-                                .addComponent(jTextField1)
+                                .addComponent(tcodeT, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                                .addComponent(datumT)
                                 .addComponent(locatieT)
                                 .addComponent(inschrijfGeldT)))
                         .addContainerGap())))
@@ -124,11 +124,11 @@ public class ToernooiToevoegen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(datumT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tcodeT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
                         .addGap(32, 32, 32))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(datumT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -154,9 +154,9 @@ this.dispose();
         FullhouseProjectGui.ToernooiToevoegen();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void datumTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datumTActionPerformed
+    private void tcodeTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tcodeTActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_datumTActionPerformed
+    }//GEN-LAST:event_tcodeTActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,8 +204,8 @@ this.dispose();
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField jTextField1;
     public static javax.swing.JTextField locatieT;
     public static javax.swing.JTextField t_codeT;
+    public static javax.swing.JTextField tcodeT;
     // End of variables declaration//GEN-END:variables
 }

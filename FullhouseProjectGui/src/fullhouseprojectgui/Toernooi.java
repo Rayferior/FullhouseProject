@@ -211,6 +211,7 @@ public class Toernooi extends javax.swing.JFrame {
         TWframe.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         TWframe.setVisible(true);
         Gui.centreWindow(TWframe);
+        FullhouseProjectGui.tekstVullenToernooi();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed

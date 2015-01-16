@@ -260,18 +260,14 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
 
          public static void ToernooiToevoegen() 
          {
-              String insertQuery = "insert into Toernooi(t_code,aantalSpelers, inschrijfgeld, locatie, datum, 1e, 2e, 3e) values( ?,?,?,?,?,?,?,?)";
+              String insertQuery = "insert into Toernooi(t_code, datum, locatie, inschrijfGeld) values( ?,?,?,?)";
 
         try {
             PreparedStatement stat = (PreparedStatement) (Statement) con.prepareStatement(insertQuery);
             stat.setString(1, ToernooiToevoegen.t_codeT.getText());
-            stat.setString(5, ToernooiToevoegen.datumT.getText());
-            stat.setString(4, ToernooiToevoegen.locatieT.getText());
-            stat.setString(3, ToernooiToevoegen.inschrijfGeldT.getText());
-            stat.setString(2, null);
-            stat.setString(6, null);
-            stat.setString(7, null);
-            stat.setString(8, null);
+            stat.setString(2, ToernooiToevoegen.datumT.getText());
+            stat.setString(3, ToernooiToevoegen.locatieT.getText());
+            stat.setString(4, ToernooiToevoegen.inschrijfGeldT.getText());
             stat.execute();
         } catch (Exception e) {
             System.out.println(e);
@@ -295,35 +291,110 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
             System.out.println(e);
         }
          }
-         public static void SpelerWijzigen()
+         public static void tekstVullen()
          {
-             
-             /*String updateQuery = "update speler set naam = ?, adres = ?, postcode = ?, plaats = ?, telefoonnummer = ?, email = ?, kanMasterclassGeven = ? WHERE s_code = ?";
+             ModelItem speler = (ModelItem) SpelersFrame.SpelerLijst.getSelectedValue();
+             String selectQuery = "select * from Speler where s_code = ?";
+            
         try {
-            PreparedStatement stat = con.prepareStatement(updateQuery);
-            ModelItem speler = (ModelItem) SpelersFrame.SpelerLijst.getSelectedValue();
-            stat.setString(1);
-            stat.setString(2);
-            stat.setString(3);
-            stat.setString(4);
-            stat.setString(5);
-            stat.setString(6);
-            stat.setString(7);
-            stat.setString(8, speler.s_code);
-             stat.execute();
-
+            PreparedStatement stat = con.prepareStatement(selectQuery);
+            stat.setString(1, speler.s_code);
+            ResultSet rs = stat.executeQuery();
+            rs.first();
+            do{
+             String naam = rs.getString("naam");
+             String adres = rs.getString("adres");
+             String postcode = rs.getString("postcode");
+             String plaats = rs.getString("plaats");
+             String telefoonnummer = rs.getString("telefoonnummer");
+             String email = rs.getString("email");
+             String rating = rs.getString("rating");
+             String kanMasterclassGeven = rs.getString("kanMasterclassGeven");
+            
+            SpelerWijzigFrame.jTextFieldWijzigSpelerNaam.setText(naam);
+            SpelerWijzigFrame.jTextFieldSpelersAdres.setText(adres);
+            SpelerWijzigFrame.jTextFieldSpelersPostcode.setText(postcode);
+            SpelerWijzigFrame.jTextFieldSpelersWoonplaats.setText(plaats);
+            SpelerWijzigFrame.jTextField1.setText(email);
+            SpelerWijzigFrame.jTextField2.setText(telefoonnummer);
+            SpelerWijzigFrame.jTextFieldRating.setText(rating);
+            SpelerWijzigFrame.jTextField3.setText(kanMasterclassGeven);
+            
+            }while(rs.next());
             
             
-            stat.execute();
         } catch (SQLException ex) {
-            Logger.getLogger(FullhouseProjectGui.class.getName()).log(Level.SEVERE, null, ex);
-      
-             
+            Logger.getLogger(FullhouseProjectGui.class.getName()).log(Level.SEVERE, null, ex);        
          }
-         */
-         
         }
-}
+         public static void spelerWijzigen()
+         {
+             ModelItem s_code = (ModelItem) SpelersFrame.SpelerLijst.getSelectedValue();
+           String updateQuery = "update Speler set naam = ?, adres = ?, postcode = ?, plaats = ?, telefoonnummer = ?, email = ?, rating = ?, kanMasterclassGeven = ? WHERE s_code = ?";
+           try
+           {
+               PreparedStatement stat = con.prepareStatement(updateQuery);
+            String naam = SpelerWijzigFrame.jTextFieldWijzigSpelerNaam.getText();
+            String adres = SpelerWijzigFrame.jTextFieldSpelersAdres.getText();
+            String postcode = SpelerWijzigFrame.jTextFieldSpelersPostcode.getText();
+            String plaats = SpelerWijzigFrame.jTextFieldSpelersWoonplaats.getText();
+            String text1 = SpelerWijzigFrame.jTextField1.getText();
+            String text2 = SpelerWijzigFrame.jTextField2.getText();
+            String rating = SpelerWijzigFrame.jTextFieldRating.getText();
+            String text3 = SpelerWijzigFrame.jTextField3.getText();
+            
+            stat.setString(1, naam);
+            stat.setString(2, adres);
+            stat.setString(3, postcode);
+            stat.setString(4, plaats);
+            stat.setString(5, text2);
+            stat.setString(6, text1);
+            stat.setString(7, rating);
+            stat.setString(8, text3);
+            stat.setString(9, s_code.s_code);
+            stat.execute();
+           } catch (SQLException ex) {
+            Logger.getLogger(FullhouseProjectGui.class.getName()).log(Level.SEVERE, null, ex);        
+         }
+         }
+          public static void tekstVullenToernooi()
+          {
+              ModelItem toernooi = (ModelItem) Toernooi.ToernooiLijst.getSelectedValue();
+             String selectQuery = "select * from Toernooi where t_code = ?";
+            
+        try {
+            PreparedStatement stat = con.prepareStatement(selectQuery);
+            //stat.setString(1);
+            ResultSet rs = stat.executeQuery();
+            rs.first();
+            do{
+             String naam = rs.getString("naam");
+             String adres = rs.getString("adres");
+             String postcode = rs.getString("postcode");
+             String plaats = rs.getString("plaats");
+             String telefoonnummer = rs.getString("telefoonnummer");
+             String email = rs.getString("email");
+             String rating = rs.getString("rating");
+             String kanMasterclassGeven = rs.getString("kanMasterclassGeven");
+            
+            SpelerWijzigFrame.jTextFieldWijzigSpelerNaam.setText(naam);
+            SpelerWijzigFrame.jTextFieldSpelersAdres.setText(adres);
+            SpelerWijzigFrame.jTextFieldSpelersPostcode.setText(postcode);
+            SpelerWijzigFrame.jTextFieldSpelersWoonplaats.setText(plaats);
+            SpelerWijzigFrame.jTextField1.setText(email);
+            SpelerWijzigFrame.jTextField2.setText(telefoonnummer);
+            SpelerWijzigFrame.jTextFieldRating.setText(rating);
+            SpelerWijzigFrame.jTextField3.setText(kanMasterclassGeven);
+            
+            }while(rs.next());
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(FullhouseProjectGui.class.getName()).log(Level.SEVERE, null, ex);        
+         }
+        }
+         }
+
           
     
 

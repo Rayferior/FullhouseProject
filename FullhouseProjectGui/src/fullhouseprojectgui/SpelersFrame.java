@@ -170,10 +170,11 @@ public class SpelersFrame extends javax.swing.JFrame {
         swFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         swFrame.setVisible(true);
         Gui.centreWindow(swFrame);
+        FullhouseProjectGui.tekstVullen();   
     }//GEN-LAST:event_jButtonUpdateMouseClicked
 
     private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
-     
+    //FullhouseProjectGui.SpelerWijzigen();     
     }//GEN-LAST:event_jButtonUpdateActionPerformed
 
     private void jButtonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertActionPerformed

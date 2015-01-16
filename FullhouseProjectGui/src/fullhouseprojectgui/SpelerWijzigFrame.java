@@ -73,6 +73,11 @@ public class SpelerWijzigFrame extends javax.swing.JFrame {
         jLabelSpelersRating.setText("Rating");
 
         jButtonWijzigCommit.setText("Wijzigen");
+        jButtonWijzigCommit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonWijzigCommitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -194,6 +199,10 @@ public class SpelerWijzigFrame extends javax.swing.JFrame {
 
        this.dispose();
     }//GEN-LAST:event_swHomeActionPerformed
+
+    private void jButtonWijzigCommitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWijzigCommitActionPerformed
+        FullhouseProjectGui.spelerWijzigen();
+    }//GEN-LAST:event_jButtonWijzigCommitActionPerformed
 
     /**
      * @param args the command line arguments

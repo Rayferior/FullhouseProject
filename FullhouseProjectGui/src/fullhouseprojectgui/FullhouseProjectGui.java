@@ -184,6 +184,7 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
             rs.first();
             do {
                 ModelItemToernooi test1 = new ModelItemToernooi();
+                test1.id = rs.getString("t_code");
                 test1.datum = rs.getString("datum");
                 test1.locatie = rs.getString("locatie");
                 model.addElement(test1);
@@ -486,13 +487,17 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
             int aantalRest = 0;
             int icodeTeller = 0;
             int spelerPerTafel = 0;
-            String insertQuery = "insert into TafelIndeling set i_code = ?, spelersAantal = ?";
+            String insertQuery = "insert into TafelIndeling set i_code = ?, spelersAantal = ?, toernooi = ?";
             String toonQuery = "select aantalSpelers from Toernooi where t_code = ?";
             try {
                 PreparedStatement stat = con.prepareStatement(insertQuery);
                 PreparedStatement toonstat = con.prepareStatement(toonQuery);
+                ModelItemToernooi toer = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
+                toonstat.setString(1, toer.id);
                 ResultSet rs = toonstat.executeQuery();
+                rs.first();
                 String spelersAantal = rs.getString("aantalSpelers");
+                
                  int totaalSpelers = (int) (Integer.parseInt(spelersAantal));
                  int aantalTafels = totaalSpelers / 5;
                  if (totaalSpelers % 5 == 0)
@@ -509,7 +514,8 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
                      icodeTeller++;
                      stat.setInt(1, icodeTeller);
                      stat.setInt(2, restTafel);
-                     stat.executeQuery();
+                     stat.setString(3, toer.id);
+                     stat.executeUpdate();
                      for (int j = 0; j < restTafel; j++) {
                      }    
                 }      
@@ -518,14 +524,16 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
                      icodeTeller++;
                      stat.setInt(1, icodeTeller);
                      stat.setInt(2, restTafel);
-                     stat.executeQuery();
+                     stat.setString(3, toer.id);
+                     stat.executeUpdate();
                      for (int j = 0; j < restTafel; j++) {
                      }    
                 }      
                  
-    
+                JOptionPane.showMessageDialog(null, "Ingedeeld");  
                  
             } catch (Exception e) {
+                System.out.println(e);
             }
         }
         public static void toonTafelLijst()

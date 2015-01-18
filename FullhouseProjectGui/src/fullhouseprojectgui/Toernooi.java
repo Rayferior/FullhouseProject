@@ -102,9 +102,7 @@ public class Toernooi extends javax.swing.JFrame {
             }
         ));
         jScrollPane3.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setResizable(false);
-        }
+        jTable2.getColumnModel().getColumn(0).setResizable(false);
 
         jLabel2.setText("Openstaande betalingen -->");
 
@@ -129,7 +127,12 @@ public class Toernooi extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Tafelindelingen tonen");
+        jButton3.setText("Tafels Tonen");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -196,7 +199,7 @@ public class Toernooi extends javax.swing.JFrame {
                             .addComponent(jButton2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 70, Short.MAX_VALUE)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -233,6 +236,13 @@ public class Toernooi extends javax.swing.JFrame {
         FullhouseProjectGui.ToernooiTonen();
         FullhouseProjectGui.ToernooiLijstTonen();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        TafelIndeling tiFrame = new TafelIndeling();
+        tiFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        tiFrame.setVisible(true);
+        Gui.centreWindow(tiFrame);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

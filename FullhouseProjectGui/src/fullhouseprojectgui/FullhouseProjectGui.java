@@ -493,46 +493,32 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
                 PreparedStatement toonstat = con.prepareStatement(toonQuery);
                 ResultSet rs = toonstat.executeQuery();
                 String spelersAantal = rs.getString("aantalSpelers");
-                ResultSet rs2 = stat.executeQuery();
                  int totaalSpelers = (int) (Integer.parseInt(spelersAantal));
                  int aantalTafels = totaalSpelers / 5;
-                 if (aantalTafels % 5 == 0)
+                 if (totaalSpelers % 5 == 0)
                  {
                      restTafel = 5;
                      
                  }
-                 else if (aantalTafels % 5 == 1)
+                 else 
                  {
                      restTafel = 6;
-                     aantalRest = 1;
-                     
+                     aantalRest = totaalSpelers%5;
                  }
-                 else if (aantalTafels % 5 == 2)
-                 {
-                     restTafel = 6;
-                     aantalRest = 2;
-                 }
-                 else if (aantalTafels % 5 == 3)
-                 {
-                     restTafel = 6;
-                     aantalRest = 3;
-                 }
-                 else if (aantalTafels % 5 == 4)
-                         {
-                             restTafel = 6;
-                             aantalRest = 4;
-                         }
-                 for (int i = 0; i <= aantalRest; i++) {
+                 for (int i = 0; i < aantalRest; i++) {
                      icodeTeller++;
-                     stat.setString(1, ""+icodeTeller);
-                     stat.setString(2, ""+restTafel);
+                     stat.setInt(1, icodeTeller);
+                     stat.setInt(2, restTafel);
+                     stat.executeQuery();
                      for (int j = 0; j < restTafel; j++) {
                      }    
                 }      
-                  for (int i = 0; i <= aantalTafels -1; i++) {
+                  restTafel = 5;
+                  for (int i = 0; i < aantalTafels - aantalRest; i++) {
                      icodeTeller++;
-                     stat.setString(1, ""+icodeTeller);
-                     stat.setString(2, ""+restTafel);
+                     stat.setInt(1, icodeTeller);
+                     stat.setInt(2, restTafel);
+                     stat.executeQuery();
                      for (int j = 0; j < restTafel; j++) {
                      }    
                 }      

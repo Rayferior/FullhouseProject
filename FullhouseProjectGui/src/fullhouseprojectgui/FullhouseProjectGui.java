@@ -479,4 +479,76 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
             Logger.getLogger(FullhouseProjectGui.class.getName()).log(Level.SEVERE, null, ex);        
          }
          }
+        
+        public static void deelIn()
+        {
+            int restTafel = 0;
+            int aantalRest = 0;
+            int icodeTeller = 0;
+            int spelerPerTafel = 0;
+            String insertQuery = "insert into TafelIndeling set i_code = ?, spelersAantal = ?";
+            String toonQuery = "select aantalSpelers from Toernooi where t_code = ?";
+            try {
+                PreparedStatement stat = con.prepareStatement(insertQuery);
+                PreparedStatement toonstat = con.prepareStatement(toonQuery);
+                ResultSet rs = toonstat.executeQuery();
+                String spelersAantal = rs.getString("aantalSpelers");
+                ResultSet rs2 = stat.executeQuery();
+                 int totaalSpelers = (int) (Integer.parseInt(spelersAantal));
+                 int aantalTafels = totaalSpelers / 5;
+                 if (aantalTafels % 5 == 0)
+                 {
+                     restTafel = 5;
+                     
+                 }
+                 else if (aantalTafels % 5 == 1)
+                 {
+                     restTafel = 6;
+                     aantalRest = 1;
+                     
+                 }
+                 else if (aantalTafels % 5 == 2)
+                 {
+                     restTafel = 6;
+                     aantalRest = 2;
+                 }
+                 else if (aantalTafels % 5 == 3)
+                 {
+                     restTafel = 6;
+                     aantalRest = 3;
+                 }
+                 else if (aantalTafels % 5 == 4)
+                         {
+                             restTafel = 6;
+                             aantalRest = 4;
+                         }
+                 for (int i = 0; i <= aantalRest; i++) {
+                     icodeTeller++;
+                     stat.setString(1, ""+icodeTeller);
+                     stat.setString(2, ""+restTafel);
+                     for (int j = 0; j < restTafel; j++) {
+                     }    
+                }      
+                  for (int i = 0; i <= aantalTafels -1; i++) {
+                     icodeTeller++;
+                     stat.setString(1, ""+icodeTeller);
+                     stat.setString(2, ""+restTafel);
+                     for (int j = 0; j < restTafel; j++) {
+                     }    
+                }      
+                 
+    
+                 
+            } catch (Exception e) {
+            }
+        }
+        public static void toonTafelLijst()
+        {
+            String toonQuery ="select * from Tafel";
+            try {
+                PreparedStatement stat = con.prepareStatement(toonQuery);
+                
+            } catch (Exception e) {
+            }
+        }
 }

@@ -45,3 +45,4 @@ Temporary Items
 /FullhouseProjectGui/build/
 !/FullhouseProjectGui/src/fullhouseprojectgui/Gui.form
 !/FullhouseProjectGui/src/fullhouseprojectgui/Gui.java
+/FullhouseProjectGui/dist/

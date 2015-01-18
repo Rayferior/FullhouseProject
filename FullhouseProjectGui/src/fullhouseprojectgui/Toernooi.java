@@ -141,6 +141,11 @@ public class Toernooi extends javax.swing.JFrame {
                 jButtonIndelingMouseClicked(evt);
             }
         });
+        jButtonIndeling.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonIndelingActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -259,6 +264,10 @@ public class Toernooi extends javax.swing.JFrame {
         FullhouseProjectGui.deelIn();
         
     }//GEN-LAST:event_jButtonIndelingMouseClicked
+
+    private void jButtonIndelingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIndelingActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonIndelingActionPerformed
 
     /**
      * @param args the command line arguments

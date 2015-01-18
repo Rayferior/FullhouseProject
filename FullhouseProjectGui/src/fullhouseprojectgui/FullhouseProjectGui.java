@@ -251,7 +251,7 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
             String naam = rs.getString("hoogste");
             int Hoogste = (int) (Integer.parseInt(naam));
             Hoogste = Hoogste + 1;
-            stat.setString(1, ""+Hoogste);
+            stat.setInt(1, Hoogste);
             stat.setString(2, SpelerInvoerFrame.naamT.getText());
             stat.setString(3, SpelerInvoerFrame.adresT.getText());
             stat.setString(4, SpelerInvoerFrame.postcodeT.getText());
@@ -269,10 +269,18 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
          public static void ToernooiToevoegen() 
          {
               String insertQuery = "insert into Toernooi(t_code, datum, locatie, inschrijfGeld) values( ?,?,?,?)";
+               String toonHoogste = "select max(t_code) as hoogste from Toernooi";
 
         try {
             PreparedStatement stat = (PreparedStatement) (Statement) con.prepareStatement(insertQuery);
-            stat.setString(1, ToernooiToevoegen.tcodeT.getText());
+            PreparedStatement Toonstat = (PreparedStatement) (Statement) con.prepareStatement(toonHoogste);
+            ResultSet rs = Toonstat.executeQuery();
+            rs.first();
+            String naam = rs.getString("hoogste");
+            int Hoogste = (int) (Integer.parseInt(naam));
+            Hoogste = Hoogste + 1;
+           
+            stat.setInt(1, Hoogste);
             stat.setString(2, ToernooiToevoegen.datumT.getText());
             stat.setString(3, ToernooiToevoegen.locatieT.getText());
             stat.setString(4, ToernooiToevoegen.inschrijfGeldT.getText());
@@ -284,10 +292,17 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
          public static void MasterclassToevoegen() 
          {
               String insertQuery = "insert into Masterclass(m_code,aantalSpelers, minimaleRating,inschrijfGeld, locatie, datum, masterclassGever) values( ?,?,?,?,?,?,?)";
-
+               String toonHoogste = "select max(m_code) as hoogste from Masterclass";
         try {
             PreparedStatement stat = (PreparedStatement) (Statement) con.prepareStatement(insertQuery);
-            stat.setString(1, MasterclassInvoeren.M_codeT.getText());
+             PreparedStatement Toonstat = (PreparedStatement) (Statement) con.prepareStatement(toonHoogste);
+            ResultSet rs = Toonstat.executeQuery();
+            rs.first();
+            String naam = rs.getString("hoogste");
+            int Hoogste = (int) (Integer.parseInt(naam));
+            Hoogste = Hoogste + 1;
+           
+            stat.setInt(1, Hoogste);
             stat.setString(2, MasterclassInvoeren.aantalSpelersT.getText());
             stat.setString(3, MasterclassInvoeren.minimaleRatingT.getText());
             stat.setString(4, MasterclassInvoeren.inschrijfGeldT.getText());

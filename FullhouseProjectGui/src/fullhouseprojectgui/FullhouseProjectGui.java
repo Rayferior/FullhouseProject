@@ -510,9 +510,21 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
             int spelerPerTafel = 0;
             String insertQuery = "insert into TafelIndeling set i_code = ?, spelersAantal = ?, toernooi = ?";
             String toonQuery = "select aantalSpelers from Toernooi where t_code = ?";
+            String insertTafelQuery ="insert into Tafel set i_code = ?, s_code = ?";
+            String toonTiQuery =  "select i_code from TafelIndeling where i_code = ?";
+            String toonHoogste = "select max(s_code) as hoogste from Speler";
             try {
                 PreparedStatement stat = con.prepareStatement(insertQuery);
                 PreparedStatement toonstat = con.prepareStatement(toonQuery);
+                PreparedStatement tafelstat = con.prepareStatement(insertTafelQuery);
+                PreparedStatement Toonstat = (PreparedStatement) (Statement) con.prepareStatement(toonHoogste);
+                
+            ResultSet rs1 = Toonstat.executeQuery();
+            rs1.first();
+            String naam = rs1.getString("hoogste");
+            int Hoogste = (int) (Integer.parseInt(naam));
+            
+            
                 ModelItemToernooi toer = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
                 toonstat.setString(1, toer.id);
                 ResultSet rs = toonstat.executeQuery();
@@ -538,6 +550,10 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
                      stat.setString(3, toer.id);
                      stat.executeUpdate();
                      for (int j = 0; j < restTafel; j++) {
+                         int randomGetal = (int)(Math.random() * Hoogste) +1;
+                         tafelstat.setInt(1, icodeTeller);
+                         tafelstat.setInt(2, randomGetal);
+                         tafelstat.executeQuery();
                      }    
                 }      
                   restTafel = 5;
@@ -548,6 +564,10 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
                      stat.setString(3, toer.id);
                      stat.executeUpdate();
                      for (int j = 0; j < restTafel; j++) {
+                         int randomGetal = (int)(Math.random() * Hoogste) +1;
+                         tafelstat.setInt(1, icodeTeller);
+                         tafelstat.setInt(2, randomGetal);
+                         tafelstat.executeQuery();
                      }    
                 }      
                  

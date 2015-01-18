@@ -242,10 +242,16 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
           
            public static void SpelerToevoegen() {
         String insertQuery = "insert into Speler(s_code, naam, adres, postcode,plaats, telefoonnummer, email, rating, kanMasterclassGeven) values( ?,?,?,?,?,?,?,?,?)";
-
+        String toonHoogste = "select max(s_code) as hoogste from Speler";
         try {
             PreparedStatement stat = (PreparedStatement) (Statement) con.prepareStatement(insertQuery);
-            stat.setString(1, SpelerInvoerFrame.s_codeT.getText());
+            PreparedStatement Toonstat = (PreparedStatement) (Statement) con.prepareStatement(toonHoogste);
+            ResultSet rs = Toonstat.executeQuery();
+            rs.first();
+            String naam = rs.getString("hoogste");
+            int Hoogste = (int) (Integer.parseInt(naam));
+            Hoogste = Hoogste + 1;
+            stat.setString(1, ""+Hoogste);
             stat.setString(2, SpelerInvoerFrame.naamT.getText());
             stat.setString(3, SpelerInvoerFrame.adresT.getText());
             stat.setString(4, SpelerInvoerFrame.postcodeT.getText());

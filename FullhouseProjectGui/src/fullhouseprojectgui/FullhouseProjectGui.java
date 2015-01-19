@@ -244,8 +244,8 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
         String insertQuery = "insert into Speler(s_code, naam, adres, postcode,plaats, telefoonnummer, email, rating, kanMasterclassGeven) values( ?,?,?,?,?,?,?,?,?)";
         String toonHoogste = "select max(s_code) as hoogste from Speler";
         try {
-            PreparedStatement stat = (PreparedStatement) (Statement) con.prepareStatement(insertQuery);
-            PreparedStatement Toonstat = (PreparedStatement) (Statement) con.prepareStatement(toonHoogste);
+            PreparedStatement stat =  con.prepareStatement(insertQuery);
+            PreparedStatement Toonstat =  con.prepareStatement(toonHoogste);
             ResultSet rs = Toonstat.executeQuery();
             rs.first();
             String naam = rs.getString("hoogste");
@@ -272,8 +272,8 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
                String toonHoogste = "select max(t_code) as hoogste from Toernooi";
 
         try {
-            PreparedStatement stat = (PreparedStatement) (Statement) con.prepareStatement(insertQuery);
-            PreparedStatement Toonstat = (PreparedStatement) (Statement) con.prepareStatement(toonHoogste);
+            PreparedStatement stat =  con.prepareStatement(insertQuery);
+            PreparedStatement Toonstat =  con.prepareStatement(toonHoogste);
             ResultSet rs = Toonstat.executeQuery();
             rs.first();
             String naam = rs.getString("hoogste");
@@ -294,8 +294,8 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
               String insertQuery = "insert into Masterclass(m_code,aantalSpelers, minimaleRating,inschrijfGeld, locatie, datum, masterclassGever) values( ?,?,?,?,?,?,?)";
                String toonHoogste = "select max(m_code) as hoogste from Masterclass";
         try {
-            PreparedStatement stat = (PreparedStatement) (Statement) con.prepareStatement(insertQuery);
-             PreparedStatement Toonstat = (PreparedStatement) (Statement) con.prepareStatement(toonHoogste);
+            PreparedStatement stat =  con.prepareStatement(insertQuery);
+             PreparedStatement Toonstat =  con.prepareStatement(toonHoogste);
             ResultSet rs = Toonstat.executeQuery();
             rs.first();
             String naam = rs.getString("hoogste");
@@ -517,7 +517,7 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
                 PreparedStatement stat = con.prepareStatement(insertQuery);
                 PreparedStatement toonstat = con.prepareStatement(toonQuery);
                 PreparedStatement tafelstat = con.prepareStatement(insertTafelQuery);
-                PreparedStatement Toonstat = (PreparedStatement) (Statement) con.prepareStatement(toonHoogste);
+                PreparedStatement Toonstat = con.prepareStatement(toonHoogste);
                 
             ResultSet rs1 = Toonstat.executeQuery();
             rs1.first();
@@ -579,11 +579,21 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
         }
         public static void toonTafelLijst()
         {
-            String toonQuery ="select * from Tafel";
+            DefaultListModel model = new DefaultListModel();           
+                       
+            String toonQuery ="select i_code from TafelIndeling";
             try {
                 PreparedStatement stat = con.prepareStatement(toonQuery);
-                
+                ResultSet rs = stat.executeQuery();
+            rs.first();
+            do {
+                ModelItemTi test1 = new ModelItemTi();
+                test1.i_code = rs.getString("i_code");
+                model.addElement(test1);
+            } while (rs.next());
+                  TafelIndeling.TiLijst.setModel(model);
             } catch (Exception e) {
+                System.out.println(e);
             }
         }
 }

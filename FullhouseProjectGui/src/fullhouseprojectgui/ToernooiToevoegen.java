@@ -6,6 +6,8 @@
 
 package fullhouseprojectgui;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Joep
@@ -136,6 +138,37 @@ this.dispose();
         FullhouseProjectGui.ToernooiToevoegen();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+
+    private void tcodeTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tcodeTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tcodeTActionPerformed
+
+    private void tcodeTFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tcodeTFocusLost
+
+    float num1;
+
+    try {
+        num1 = Float.parseFloat(locatieT.getText());
+
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(rootPane, "De invoer mag alleen uit nummers bestaan", "Error", JOptionPane.CANCEL_OPTION);
+    }
+    
+    String tcode = locatieT.getText();
+    int tcodeLengte = tcode.length();
+    
+    if(tcodeLengte > 4) {
+        JOptionPane.showMessageDialog(rootPane, "Getal mag niet langer zijn dan vier getallen", "Error", JOptionPane.CANCEL_OPTION);
+    }
+    
+    else if(tcodeLengte < 3){
+        JOptionPane.showMessageDialog(rootPane, "Getal mag niet korter zijn dan drie getallen", "Error", JOptionPane.CANCEL_OPTION);
+    }
+    
+    }//GEN-LAST:event_tcodeTFocusLost
+
+
     /**
      * @param args the command line arguments
      */
@@ -169,6 +202,8 @@ this.dispose();
                 new ToernooiToevoegen().setVisible(true);
             }
         });
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -31,13 +31,11 @@ public class ToernooiToevoegen extends javax.swing.JFrame {
     private void initComponents() {
 
         t_codeT = new javax.swing.JTextField();
-        tcodeT = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         datumT = new javax.swing.JTextField();
@@ -45,17 +43,6 @@ public class ToernooiToevoegen extends javax.swing.JFrame {
         inschrijfGeldT = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        tcodeT.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                tcodeTFocusLost(evt);
-            }
-        });
-        tcodeT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tcodeTActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("Datum");
 
@@ -77,8 +64,6 @@ public class ToernooiToevoegen extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("t_code");
-
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setText("Fullhouse manager");
 
@@ -92,7 +77,6 @@ public class ToernooiToevoegen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
@@ -108,8 +92,7 @@ public class ToernooiToevoegen extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton2))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(tcodeT, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-                                .addComponent(datumT)
+                                .addComponent(datumT, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
                                 .addComponent(locatieT)
                                 .addComponent(inschrijfGeldT)))
                         .addContainerGap())))
@@ -127,16 +110,10 @@ public class ToernooiToevoegen extends javax.swing.JFrame {
                     .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tcodeT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(32, 32, 32))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(datumT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)))
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(datumT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(locatieT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -161,6 +138,7 @@ this.dispose();
         FullhouseProjectGui.ToernooiToevoegen();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+
     private void tcodeTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tcodeTActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tcodeTActionPerformed
@@ -170,14 +148,14 @@ this.dispose();
     float num1;
 
     try {
-        num1 = Float.parseFloat(tcodeT.getText());
+        num1 = Float.parseFloat(locatieT.getText());
 
 
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(rootPane, "De invoer mag alleen uit nummers bestaan", "Error", JOptionPane.CANCEL_OPTION);
     }
     
-    String tcode = tcodeT.getText();
+    String tcode = locatieT.getText();
     int tcodeLengte = tcode.length();
     
     if(tcodeLengte > 4) {
@@ -189,6 +167,7 @@ this.dispose();
     }
     
     }//GEN-LAST:event_tcodeTFocusLost
+
 
     /**
      * @param args the command line arguments
@@ -235,11 +214,9 @@ this.dispose();
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     public static javax.swing.JTextField locatieT;
     public static javax.swing.JTextField t_codeT;
-    public static javax.swing.JTextField tcodeT;
     // End of variables declaration//GEN-END:variables
 }

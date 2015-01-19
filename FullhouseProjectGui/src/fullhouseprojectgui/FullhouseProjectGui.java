@@ -184,6 +184,7 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
             rs.first();
             do {
                 ModelItemToernooi test1 = new ModelItemToernooi();
+                test1.id = rs.getString("t_code");
                 test1.datum = rs.getString("datum");
                 test1.locatie = rs.getString("locatie");
                 model.addElement(test1);
@@ -241,10 +242,16 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
           
            public static void SpelerToevoegen() {
         String insertQuery = "insert into Speler(s_code, naam, adres, postcode,plaats, telefoonnummer, email, rating, kanMasterclassGeven) values( ?,?,?,?,?,?,?,?,?)";
-
+        String toonHoogste = "select max(s_code) as hoogste from Speler";
         try {
             PreparedStatement stat = (PreparedStatement) (Statement) con.prepareStatement(insertQuery);
-            stat.setString(1, SpelerInvoerFrame.s_codeT.getText());
+            PreparedStatement Toonstat = (PreparedStatement) (Statement) con.prepareStatement(toonHoogste);
+            ResultSet rs = Toonstat.executeQuery();
+            rs.first();
+            String naam = rs.getString("hoogste");
+            int Hoogste = (int) (Integer.parseInt(naam));
+            Hoogste = Hoogste + 1;
+            stat.setInt(1, Hoogste);
             stat.setString(2, SpelerInvoerFrame.naamT.getText());
             stat.setString(3, SpelerInvoerFrame.adresT.getText());
             stat.setString(4, SpelerInvoerFrame.postcodeT.getText());
@@ -262,10 +269,18 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
          public static void ToernooiToevoegen() 
          {
               String insertQuery = "insert into Toernooi(t_code, datum, locatie, inschrijfGeld) values( ?,?,?,?)";
+               String toonHoogste = "select max(t_code) as hoogste from Toernooi";
 
         try {
             PreparedStatement stat = (PreparedStatement) (Statement) con.prepareStatement(insertQuery);
-            stat.setString(1, ToernooiToevoegen.tcodeT.getText());
+            PreparedStatement Toonstat = (PreparedStatement) (Statement) con.prepareStatement(toonHoogste);
+            ResultSet rs = Toonstat.executeQuery();
+            rs.first();
+            String naam = rs.getString("hoogste");
+            int Hoogste = (int) (Integer.parseInt(naam));
+            Hoogste = Hoogste + 1;
+           
+            stat.setInt(1, Hoogste);
             stat.setString(2, ToernooiToevoegen.datumT.getText());
             stat.setString(3, ToernooiToevoegen.locatieT.getText());
             stat.setString(4, ToernooiToevoegen.inschrijfGeldT.getText());
@@ -277,10 +292,17 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
          public static void MasterclassToevoegen() 
          {
               String insertQuery = "insert into Masterclass(m_code,aantalSpelers, minimaleRating,inschrijfGeld, locatie, datum, masterclassGever) values( ?,?,?,?,?,?,?)";
-
+               String toonHoogste = "select max(m_code) as hoogste from Masterclass";
         try {
             PreparedStatement stat = (PreparedStatement) (Statement) con.prepareStatement(insertQuery);
-            stat.setString(1, MasterclassInvoeren.M_codeT.getText());
+             PreparedStatement Toonstat = (PreparedStatement) (Statement) con.prepareStatement(toonHoogste);
+            ResultSet rs = Toonstat.executeQuery();
+            rs.first();
+            String naam = rs.getString("hoogste");
+            int Hoogste = (int) (Integer.parseInt(naam));
+            Hoogste = Hoogste + 1;
+           
+            stat.setInt(1, Hoogste);
             stat.setString(2, MasterclassInvoeren.aantalSpelersT.getText());
             stat.setString(3, MasterclassInvoeren.minimaleRatingT.getText());
             stat.setString(4, MasterclassInvoeren.inschrijfGeldT.getText());
@@ -479,4 +501,89 @@ static ArrayList<String> kolomnamenM = new ArrayList<String>();
             Logger.getLogger(FullhouseProjectGui.class.getName()).log(Level.SEVERE, null, ex);        
          }
          }
+        
+        public static void deelIn()
+        {
+            int restTafel = 0;
+            int aantalRest = 0;
+            int icodeTeller = 0;
+            int spelerPerTafel = 0;
+            String insertQuery = "insert into TafelIndeling set i_code = ?, spelersAantal = ?, toernooi = ?";
+            String toonQuery = "select aantalSpelers from Toernooi where t_code = ?";
+            String insertTafelQuery ="insert into Tafel set i_code = ?, s_code = ?";
+            String toonTiQuery =  "select i_code from TafelIndeling where i_code = ?";
+            String toonHoogste = "select max(s_code) as hoogste from Speler";
+            try {
+                PreparedStatement stat = con.prepareStatement(insertQuery);
+                PreparedStatement toonstat = con.prepareStatement(toonQuery);
+                PreparedStatement tafelstat = con.prepareStatement(insertTafelQuery);
+                PreparedStatement Toonstat = (PreparedStatement) (Statement) con.prepareStatement(toonHoogste);
+                
+            ResultSet rs1 = Toonstat.executeQuery();
+            rs1.first();
+            String naam = rs1.getString("hoogste");
+            int Hoogste = (int) (Integer.parseInt(naam));
+            
+            
+                ModelItemToernooi toer = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
+                toonstat.setString(1, toer.id);
+                ResultSet rs = toonstat.executeQuery();
+                rs.first();
+                String spelersAantal = rs.getString("aantalSpelers");
+                
+                 int totaalSpelers = (int) (Integer.parseInt(spelersAantal));
+                 int aantalTafels = totaalSpelers / 5;
+                 if (totaalSpelers % 5 == 0)
+                 {
+                     restTafel = 5;
+                     
+                 }
+                 else 
+                 {
+                     restTafel = 6;
+                     aantalRest = totaalSpelers%5;
+                 }
+                 for (int i = 0; i < aantalRest; i++) {
+                     icodeTeller++;
+                     stat.setInt(1, icodeTeller);
+                     stat.setInt(2, restTafel);
+                     stat.setString(3, toer.id);
+                     stat.executeUpdate();
+                     for (int j = 0; j < restTafel; j++) {
+                         int randomGetal = (int)(Math.random() * Hoogste) +1;
+                         tafelstat.setInt(1, icodeTeller);
+                         tafelstat.setInt(2, randomGetal);
+                         tafelstat.executeQuery();
+                     }    
+                }      
+                  restTafel = 5;
+                  for (int i = 0; i < aantalTafels - aantalRest; i++) {
+                     icodeTeller++;
+                     stat.setInt(1, icodeTeller);
+                     stat.setInt(2, restTafel);
+                     stat.setString(3, toer.id);
+                     stat.executeUpdate();
+                     for (int j = 0; j < restTafel; j++) {
+                         int randomGetal = (int)(Math.random() * Hoogste) +1;
+                         tafelstat.setInt(1, icodeTeller);
+                         tafelstat.setInt(2, randomGetal);
+                         tafelstat.executeQuery();
+                     }    
+                }      
+                 
+                JOptionPane.showMessageDialog(null, "Ingedeeld");  
+                 
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+        public static void toonTafelLijst()
+        {
+            String toonQuery ="select * from Tafel";
+            try {
+                PreparedStatement stat = con.prepareStatement(toonQuery);
+                
+            } catch (Exception e) {
+            }
+        }
 }

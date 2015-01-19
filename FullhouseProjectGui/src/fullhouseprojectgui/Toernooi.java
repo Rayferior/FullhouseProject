@@ -6,6 +6,10 @@
 
 package fullhouseprojectgui;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Joep
@@ -261,7 +265,26 @@ public class Toernooi extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButtonIndelingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonIndelingMouseClicked
-        FullhouseProjectGui.deelIn();
+        Table[] tables = FullhouseProjectGui.deelIn();
+        
+        String IndelingQuery = "Insert into TafelIndeling SET i_code = ?, spelersAantal  = ?, toernooi = ?";
+        
+        try {
+            PreparedStatement Indeling = FullhouseProjectGui.con.prepareStatement(IndelingQuery);
+            for (Table table : tables) {
+            Indeling.setInt(1, table.number);
+            Indeling.setInt(2, table.aantalSpelers);
+            ModelItemToernooi toer = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
+            Indeling.setString(3, toer.id);
+           
+            Indeling.execute();
+            
+        }
+            JOptionPane.showMessageDialog(null, "Ingedeeld");
+        } catch (SQLException E) {
+            System.out.println(E);
+        }
+        
         
     }//GEN-LAST:event_jButtonIndelingMouseClicked
 

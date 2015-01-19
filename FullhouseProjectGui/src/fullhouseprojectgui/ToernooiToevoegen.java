@@ -6,6 +6,8 @@
 
 package fullhouseprojectgui;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Joep
@@ -44,6 +46,11 @@ public class ToernooiToevoegen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        tcodeT.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tcodeTFocusLost(evt);
+            }
+        });
         tcodeT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tcodeTActionPerformed(evt);
@@ -158,6 +165,31 @@ this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_tcodeTActionPerformed
 
+    private void tcodeTFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tcodeTFocusLost
+
+    float num1;
+
+    try {
+        num1 = Float.parseFloat(tcodeT.getText());
+
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(rootPane, "De invoer mag alleen uit nummers bestaan", "Error", JOptionPane.CANCEL_OPTION);
+    }
+    
+    String tcode = tcodeT.getText();
+    int tcodeLengte = tcode.length();
+    
+    if(tcodeLengte > 4) {
+        JOptionPane.showMessageDialog(rootPane, "Getal mag niet langer zijn dan vier getallen", "Error", JOptionPane.CANCEL_OPTION);
+    }
+    
+    else if(tcodeLengte < 3){
+        JOptionPane.showMessageDialog(rootPane, "Getal mag niet korter zijn dan drie getallen", "Error", JOptionPane.CANCEL_OPTION);
+    }
+    
+    }//GEN-LAST:event_tcodeTFocusLost
+
     /**
      * @param args the command line arguments
      */
@@ -191,6 +223,8 @@ this.dispose();
                 new ToernooiToevoegen().setVisible(true);
             }
         });
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

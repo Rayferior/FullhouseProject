@@ -26,6 +26,7 @@ public class FullhouseProjectGui {
     static ArrayList<String> kolomnamenT = new ArrayList<String>();
     static ArrayList<String> kolomnamenM = new ArrayList<String>();
     static ArrayList<String> IndelingGroep = new ArrayList<String>();
+    static int spelerint = 0;
 
     /**
      * @param args the command line arguments
@@ -541,6 +542,7 @@ public class FullhouseProjectGui {
        String insertQuery = "Insert into Tafel set s_code = ?, i_code = ?, rondeNummer = ?";
        String TiQuery = "select i_code, spelersAantal from TafelIndeling where t_code = ? order by i_code";
        int tafelAantal;
+       int i = 0;
        ModelItemToernooi toer = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
        
        try {
@@ -564,9 +566,6 @@ public class FullhouseProjectGui {
         
         String[] spelers = (String[]) new String[IndelingGroep.size()];
         spelers = kolomnamenM.toArray(spelers);
-        
-        ;
-        
         try {
                 PreparedStatement insertstat = con.prepareStatement(insertQuery);
                 
@@ -577,9 +576,12 @@ public class FullhouseProjectGui {
                 while(TiRS.next()){
                 String aantal = TiRS.getString("spelersAantal");
                 tafelAantal = Integer.parseInt(aantal);
-                    for (int i = 0; i < tafelAantal; i++) {
-                        int insert = Integer.parseInt(spelers[i]);
+                tafelAantal = spelerint + tafelAantal;
+                   while (spelerint <= tafelAantal) {
+                        int insert = Integer.parseInt(spelers[spelerint]);
                         insertstat.setInt(1,insert);
+                        spelerint++;
+                        
                        
                     }
             }    

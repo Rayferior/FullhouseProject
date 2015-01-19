@@ -43,7 +43,7 @@ public class Toernooi extends javax.swing.JFrame {
         ToernooiLijst = new javax.swing.JList();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        OpenBet = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         ToernooiHomeButton = new javax.swing.JButton();
@@ -89,7 +89,7 @@ public class Toernooi extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(ToernooiLijst);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        OpenBet.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -106,8 +106,8 @@ public class Toernooi extends javax.swing.JFrame {
                 "Naam", "Openstaand Bedrag", "Toernooi Datum", "E-mail Adres"
             }
         ));
-        jScrollPane3.setViewportView(jTable2);
-        jTable2.getColumnModel().getColumn(0).setResizable(false);
+        jScrollPane3.setViewportView(OpenBet);
+        OpenBet.getColumnModel().getColumn(0).setResizable(false);
 
         jLabel2.setText("Openstaande betalingen -->");
 
@@ -239,7 +239,7 @@ public class Toernooi extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+       FullhouseProjectGui.vulOpenBetalingen();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -329,6 +329,7 @@ public class Toernooi extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JTable OpenBet;
     private javax.swing.JButton ToernooiHomeButton;
     public static javax.swing.JList ToernooiLijst;
     private javax.swing.JButton jButton1;
@@ -345,6 +346,5 @@ public class Toernooi extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     public static javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }

@@ -535,13 +535,119 @@ public class FullhouseProjectGui {
 
 
     }
-
-    public static void toonTafelLijst() {
-        String toonQuery = "select * from Tafel";
-        try {
-            PreparedStatement stat = con.prepareStatement(toonQuery);
-
-        } catch (Exception e) {
+    
+     public static void deelSpelerIn() {
+        String spelerQuery = "Select S.s_code, S.naam from Speler S JOIN ToernooiInshrijving T ON S.s_code = T.s_code where t_code = ?";
+       String insertQuery = "Insert into Tafel set s_code = ?, i_code = ?, rondeNummer = ?";
+       String TiQuery = "select i_code, spelersAantal from TafelIndeling where t_code = ? order by i_code";
+       int tafelAantal;
+       ModelItemToernooi toer = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
+       
+       try {
+            PreparedStatement stat = con.prepareStatement(spelerQuery);
+            stat.setString(2, toer.id);
+            
+            ResultSet rs = stat.executeQuery();
+            rs.first();
+            while(rs.next())
+            {
+            String speler = rs.getString("s_code");
+            IndelingGroep.add(speler);
+            }
         }
+            
+        catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        
+        Collections.shuffle(IndelingGroep);
+        
+        String[] spelers = (String[]) new String[IndelingGroep.size()];
+        spelers = kolomnamenM.toArray(spelers);
+        
+        ;
+        
+        try {
+                PreparedStatement insertstat = con.prepareStatement(insertQuery);
+                
+                PreparedStatement TiStat = con.prepareStatement(TiQuery);
+                TiStat.setString(1, toer.id);
+                ResultSet TiRS = TiStat.executeQuery();
+                TiRS.first();
+                while(TiRS.next()){
+                String aantal = TiRS.getString("spelersAantal");
+                tafelAantal = Integer.parseInt(aantal);
+                    for (int i = 0; i < tafelAantal; i++) {
+                        int insert = Integer.parseInt(spelers[i]);
+                        insertstat.setInt(1,insert);
+                       
+                    }
+            }    
+            } catch (Exception e) {
+                System.out.println(e);
+            }
     }
-}
+ public static void toonTafelLijst()
+        {
+            DefaultListModel model = new DefaultListModel();           
+                       
+            String toonQuery ="select i_code from TafelIndeling where toernooi = ?";
+            try {
+                PreparedStatement stat = con.prepareStatement(toonQuery);
+                ResultSet rs = stat.executeQuery();
+            rs.first();
+            do {
+                ModelItemTi test1 = new ModelItemTi();
+                test1.i_code = rs.getString("i_code");
+                model.addElement(test1);
+            } while (rs.next());
+                  TafelIndeling.TiLijst.setModel(model);
+            } catch (Exception e) {
+                System.out.println(e);
+
+            }
+        }
+    public static void vulOpenBetalingen()
+    {
+        ModelItemToernooi tcode = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
+        DefaultTableModel model = new DefaultTableModel();
+        String Query = "select S.naam,Toer.inschrijfGeld, Toer.datum, S.email from Speler S join ToernooiInschrijving T ON S.s_code = T.S_code join Toernooi Toer on T.t_code = Toer.t_code"
+                + " where Toer.t_code = ? AND T.heeftBetaald != 'j' ";
+        try {
+            PreparedStatement stat =  con.prepareStatement(Query);
+            stat.setString(1, tcode.id);
+            ResultSet rs = stat.executeQuery();
+            Toernooi.OpenBet.removeAll();
+            int Ccount = rs.getMetaData().getColumnCount();
+            for (int i = 1; i <= Ccount; i++) {
+                String name = rs.getMetaData().getColumnName(i);
+                kolomnamenM.add(name);
+            }
+            String[] cnamen = (String[]) new String[kolomnamenM.size()];
+            cnamen = kolomnamenM.toArray(cnamen);
+            model.setColumnIdentifiers(cnamen);
+            model.setRowCount(0);
+            model.setColumnCount(Ccount);
+            rs.first();
+            do {
+                ModelItem test1 = new ModelItem();
+                test1.naam = rs.getString("naam");
+                test1.email = rs.getString("email");
+                ModelItemToernooi test2 = new ModelItemToernooi();
+                test2.inschrijfgeld = rs.getString("inschrijfGeld");
+                test2.datum= rs.getString("datum");
+                Object rowData[] = {test1.naam, test2.inschrijfgeld, test2.datum, test1.email};
+                model.addRow(rowData);
+            } while (rs.next());
+            Toernooi.OpenBet.setModel(model);
+        
+        } catch (Exception e) {
+                System.out.println(e);
+
+            }
+        
+    }
+    
+    
+    }
+

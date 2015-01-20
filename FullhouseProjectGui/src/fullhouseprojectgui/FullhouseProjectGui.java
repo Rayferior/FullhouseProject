@@ -665,7 +665,7 @@ public class FullhouseProjectGui {
         ModelItemTi ticode = (ModelItemTi) TafelIndeling.TiLijst.getSelectedValue();
         DefaultTableModel model = new DefaultTableModel();
         DefaultListModel model1 = new DefaultListModel();
-        String Query = "select T.rondeNummer, T.s_code, S.naam from Tafel T join Speler S on T.s_code = S.S_code where i_code = ?";
+        String Query = "select T.rondeNummer, T.s_code, S.naam, T.i_code from Tafel T join Speler S on T.s_code = S.S_code where i_code = ?";
         try {
             PreparedStatement stat = con.prepareStatement(Query);
             stat.setString(1, ticode.i_code);
@@ -687,20 +687,52 @@ public class FullhouseProjectGui {
                 ModelItem test = new ModelItem();
                 test1.rondeNummer = rs.getString("rondeNummer");
                 test1.s_code = rs.getString("s_code");
+                test1.i_code = rs.getString("i_code");
                 test.naam = rs.getString("naam");
-                String scode = rs.getString("s_code");
-                String naam = rs.getString("naam");
+                test.s_code = rs.getString("s_code");
                 Object rowData[] = {test1.rondeNummer, test1.s_code, test.naam};
                 model.addRow(rowData);
-                model1.addElement(scode + "         " + naam);
+                model1.addElement(test);
             } while (rs.next());
             TafelIndeling.TiTabel.setModel(model);
             TafelIndeling.TsLijst.setModel(model1);
-
         } catch (Exception e) {
             System.out.println(e);
 
         }
 
+    }
+    public static void selecteerWinaar()
+    {
+         ModelItem ticode = (ModelItem) TafelIndeling.TsLijst.getSelectedValue();
+         String Query = "UPDATE Tafel SET tafelWinnaar = ? WHERE i_code = ?";
+         String spelerQuery = "UPDATE Tafel SET tafelWinnaar = ? WHERE s_code = ?";
+         String selectQuery = "Select I.spelersAantal, I.i_code from TafelIndeling I JOIN Tafel T on I.i_code = T.i_code where T.s_code = ?";
+         
+         try {
+              PreparedStatement stat = con.prepareStatement(Query);
+              PreparedStatement spelerStat = con.prepareStatement(spelerQuery);
+              PreparedStatement selectStat = con.prepareStatement(selectQuery);
+              
+              selectStat.setString(1, ticode.s_code);
+              spelerStat.setString(2, ticode.s_code);
+              
+              ResultSet Selectrs = selectStat.executeQuery();
+              Selectrs.first();
+              int i_code = Selectrs.getInt("i_code");
+              int aantalSpelers =  Selectrs.getInt("spelersAantal");
+              stat.setInt(2, i_code);
+              
+              for (int i = 0; i < aantalSpelers; i++) {
+                stat.setString(1, "n");
+                stat.execute();
+              }
+              spelerStat.setString(1, "j");
+              spelerStat.execute();
+              JOptionPane.showMessageDialog(null, "Winnaar bevestigd");
+            
+        } catch (Exception e) {
+             System.out.println(e);
+        }
     }
 }

@@ -259,11 +259,12 @@ public class Toernooi extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButtonIndelingSchermActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIndelingSchermActionPerformed
-        FullhouseProjectGui.deelSpelerIn();
+        //FullhouseProjectGui.deelSpelerIn();
         TafelIndeling tiFrame = new TafelIndeling();
         tiFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         tiFrame.setVisible(true);
         Gui.centreWindow(tiFrame);
+        FullhouseProjectGui.toonTafelLijst();
     }//GEN-LAST:event_jButtonIndelingSchermActionPerformed
 
     private void jButtonIndelingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonIndelingMouseClicked
@@ -294,7 +295,7 @@ public class Toernooi extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonIndelingMouseClicked
 
     private void jButtonIndelingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIndelingActionPerformed
-        // TODO add your handling code here:
+FullhouseProjectGui.deelIn();        
     }//GEN-LAST:event_jButtonIndelingActionPerformed
 
     /**

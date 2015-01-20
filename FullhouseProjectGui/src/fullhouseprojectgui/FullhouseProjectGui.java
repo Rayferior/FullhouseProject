@@ -603,10 +603,11 @@ public class FullhouseProjectGui {
 
     public static void toonTafelLijst() {
         DefaultListModel model = new DefaultListModel();
-
-        String toonQuery = "select i_code from TafelIndeling where toernooi = ?";
+        ModelItemToernooi toer = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
+        String toonQuery = "select i_code from TafelIndeling where toernooi = ? order by i_code";
         try {
             PreparedStatement stat = con.prepareStatement(toonQuery);
+            stat.setString(1, toer.id);
             ResultSet rs = stat.executeQuery();
             rs.first();
             do {
@@ -653,6 +654,48 @@ public class FullhouseProjectGui {
                 model.addRow(rowData);
             } while (rs.next());
             Toernooi.OpenBet.setModel(model);
+
+        } catch (Exception e) {
+            System.out.println(e);
+
+        }
+
+    }
+    public static void vulTiTabel() {
+        ModelItemTi ticode = (ModelItemTi) TafelIndeling.TiLijst.getSelectedValue();
+        DefaultTableModel model = new DefaultTableModel();
+        DefaultListModel model1 = new DefaultListModel();
+        String Query = "select T.rondeNummer, T.s_code, S.naam from Tafel T join Speler S on T.s_code = S.S_code where i_code = ?";
+        try {
+            PreparedStatement stat = con.prepareStatement(Query);
+            stat.setString(1, ticode.i_code);
+            ResultSet rs = stat.executeQuery();
+            TafelIndeling.TiLijst.removeAll();
+            int Ccount = rs.getMetaData().getColumnCount();
+            for (int i = 1; i <= Ccount; i++) {
+                String name = rs.getMetaData().getColumnName(i);
+                kolomnamenM.add(name);
+            }
+            String[] cnamen = (String[]) new String[kolomnamenM.size()];
+            cnamen = kolomnamenM.toArray(cnamen);
+            model.setColumnIdentifiers(cnamen);
+            model.setRowCount(0);
+            model.setColumnCount(Ccount);
+            rs.first();
+            do {
+                ModelItemTi test1 = new ModelItemTi();
+                ModelItem test = new ModelItem();
+                test1.rondeNummer = rs.getString("rondeNummer");
+                test1.s_code = rs.getString("s_code");
+                test.naam = rs.getString("naam");
+                String scode = rs.getString("s_code");
+                String naam = rs.getString("naam");
+                Object rowData[] = {test1.rondeNummer, test1.s_code, test.naam};
+                model.addRow(rowData);
+                model1.addElement(scode + "         " + naam);
+            } while (rs.next());
+            TafelIndeling.TiTabel.setModel(model);
+            TafelIndeling.TsLijst.setModel(model1);
 
         } catch (Exception e) {
             System.out.println(e);

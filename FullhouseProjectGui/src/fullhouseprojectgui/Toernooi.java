@@ -48,7 +48,7 @@ public class Toernooi extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         ToernooiHomeButton = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButtonIndelingScherm = new javax.swing.JButton();
         jButtonIndeling = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -132,10 +132,10 @@ public class Toernooi extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Tafels tonen");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonIndelingScherm.setText("Tafels tonen");
+        jButtonIndelingScherm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonIndelingSchermActionPerformed(evt);
             }
         });
 
@@ -143,11 +143,6 @@ public class Toernooi extends javax.swing.JFrame {
         jButtonIndeling.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonIndelingMouseClicked(evt);
-            }
-        });
-        jButtonIndeling.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonIndelingActionPerformed(evt);
             }
         });
 
@@ -181,7 +176,7 @@ public class Toernooi extends javax.swing.JFrame {
                                 .addComponent(jButton5)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jButtonIndeling, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButtonIndelingScherm, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -211,7 +206,7 @@ public class Toernooi extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButtonIndeling)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton3))
+                                .addComponent(jButtonIndelingScherm))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addGap(31, 31, 31)
@@ -258,29 +253,33 @@ public class Toernooi extends javax.swing.JFrame {
         FullhouseProjectGui.ToernooiLijstTonen();
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButtonIndelingSchermActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIndelingSchermActionPerformed
+        FullhouseProjectGui.deelSpelerIn();
         TafelIndeling tiFrame = new TafelIndeling();
         tiFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         tiFrame.setVisible(true);
         Gui.centreWindow(tiFrame);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButtonIndelingSchermActionPerformed
 
     private void jButtonIndelingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonIndelingMouseClicked
         Table[] tables = FullhouseProjectGui.deelIn();
         
         String IndelingQuery = "Insert into TafelIndeling SET i_code = ?, spelersAantal  = ?, toernooi = ?";
+        String rondeNummer = "Insert into Ronde SET rondeNummer = 1, t_code = ?";
         
         try {
             PreparedStatement Indeling = FullhouseProjectGui.con.prepareStatement(IndelingQuery);
+            PreparedStatement ronde = FullhouseProjectGui.con.prepareStatement(rondeNummer);
+            ModelItemToernooi toer = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
+            Indeling.setString(3, toer.id);
             for (Table table : tables) {
             Indeling.setInt(1, table.number);
             Indeling.setInt(2, table.aantalSpelers);
-            ModelItemToernooi toer = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
-            Indeling.setString(3, toer.id);
-           
             Indeling.execute();
             
         }
+            ronde.setString(1, toer.id);
+            ronde.execute();
             JOptionPane.showMessageDialog(null, "Ingedeeld");
         } catch (SQLException E) {
             System.out.println(E);
@@ -288,10 +287,6 @@ public class Toernooi extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jButtonIndelingMouseClicked
-
-    private void jButtonIndelingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIndelingActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonIndelingActionPerformed
 
     /**
      * @param args the command line arguments
@@ -334,10 +329,10 @@ public class Toernooi extends javax.swing.JFrame {
     public static javax.swing.JList ToernooiLijst;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButtonIndeling;
+    private javax.swing.JButton jButtonIndelingScherm;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

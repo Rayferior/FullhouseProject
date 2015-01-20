@@ -26,6 +26,7 @@ public class FullhouseProjectGui {
     static ArrayList<String> kolomnamenT = new ArrayList<String>();
     static ArrayList<String> kolomnamenM = new ArrayList<String>();
     static ArrayList<String> IndelingGroep = new ArrayList<String>();
+    static int spelerint = 0;
 
     /**
      * @param args the command line arguments
@@ -537,9 +538,10 @@ public class FullhouseProjectGui {
     }
     
      public static void deelSpelerIn() {
-        String spelerQuery = "Select S.s_code, S.naam from Speler S JOIN ToernooiInshrijving T ON S.s_code = T.s_code where t_code = ?";
+       String spelerQuery = "Select S.s_code, S.naam from Speler S JOIN ToernooiInshrijving T ON S.s_code = T.s_code where t_code = ?";
        String insertQuery = "Insert into Tafel set s_code = ?, i_code = ?, rondeNummer = ?";
-       String TiQuery = "select i_code, spelersAantal from TafelIndeling where t_code = ? order by i_code";
+       String TiQuery = "select T.i_code, T.spelersAantal, R.rondeNummer from TafelIndeling T JOIN Ronde R ON R.t_code = T.toernooi "
+               + "where T.toernooi = ? order by i_code";
        int tafelAantal;
        ModelItemToernooi toer = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
        
@@ -569,20 +571,31 @@ public class FullhouseProjectGui {
         
         try {
                 PreparedStatement insertstat = con.prepareStatement(insertQuery);
-                
                 PreparedStatement TiStat = con.prepareStatement(TiQuery);
+                
+                
                 TiStat.setString(1, toer.id);
+                
                 ResultSet TiRS = TiStat.executeQuery();
                 TiRS.first();
                 while(TiRS.next()){
                 String aantal = TiRS.getString("spelersAantal");
+                String icode = TiRS.getString("i_code");
+                String ronde = TiRS.getString("rondeNummer");
+                
+                int rondeID = Integer.parseInt(ronde);
+                int tafelID = Integer.parseInt(icode);
+                insertstat.setInt(2,tafelID);
+                insertstat.setInt(3,rondeID);
                 tafelAantal = Integer.parseInt(aantal);
-                    for (int i = 0; i < tafelAantal; i++) {
-                        int insert = Integer.parseInt(spelers[i]);
+                tafelAantal = spelerint + tafelAantal;
+                   while (spelerint <= tafelAantal) {
+                        int insert = Integer.parseInt(spelers[spelerint]);
                         insertstat.setInt(1,insert);
-                       
+                        spelerint++;
                     }
-            }    
+                insertstat.execute();
+            }   JOptionPane.showMessageDialog(null, "Spelers Ingedeeld"); 
             } catch (Exception e) {
                 System.out.println(e);
             }

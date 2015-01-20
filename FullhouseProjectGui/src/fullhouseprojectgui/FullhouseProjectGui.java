@@ -522,8 +522,6 @@ public class FullhouseProjectGui {
             aantalTafels = 1;
             aantalRest = totaalSpelers - 4;
         }
-
-
         for (int i = 0; i < aantalTafels; i++) {
             int aantalSpelersPerTafel = 4;
             if (i == aantalTafels - 1) {
@@ -531,11 +529,40 @@ public class FullhouseProjectGui {
             }
             tables[i] = new Table(i + 1, aantalSpelersPerTafel);
         }
-
         return tables;
-
-
-
+    }
+    
+    public static Table[] deelWinnaars(){
+        String winnaarQuery = "select count(s_code) as totaal from Tafel where tafelWinnaar = 'j'";
+        int totaalSpelers = 0;
+        try {
+            PreparedStatement stat = con.prepareStatement(winnaarQuery);
+            
+            ResultSet ToerRS = stat.executeQuery();
+            ToerRS.first();
+            String aantalS = ToerRS.getString("totaal");
+            totaalSpelers = (int) Integer.parseInt(aantalS);
+        } catch (SQLException E) {
+            System.out.println(E);
+        }
+        
+        int aantalTafels = totaalSpelers / 4;
+        int aantalRest = totaalSpelers % 4;
+        Table[] tables = new Table[aantalTafels];
+        
+        if (totaalSpelers <= 8) {
+            aantalTafels = 1;
+            aantalRest = totaalSpelers - 4;
+        }
+        for (int i = 0; i < aantalTafels; i++) {
+            int aantalSpelersPerTafel = 4;
+            if (i == aantalTafels - 1) {
+                aantalSpelersPerTafel += aantalRest;
+            }
+            tables[i] = new Table(i + 1, aantalSpelersPerTafel);
+        }
+        
+        return tables;        
     }
 
     public static void deelSpelerIn() {

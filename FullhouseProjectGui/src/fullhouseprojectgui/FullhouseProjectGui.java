@@ -543,6 +543,7 @@ public class FullhouseProjectGui {
        String TiQuery = "select T.i_code, T.spelersAantal, R.rondeNummer from TafelIndeling T JOIN Ronde R ON R.t_code = T.toernooi "
                + "where T.toernooi = ? order by i_code";
        int tafelAantal;
+       int i = 0;
        ModelItemToernooi toer = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
        
        try {
@@ -566,9 +567,6 @@ public class FullhouseProjectGui {
         
         String[] spelers = (String[]) new String[IndelingGroep.size()];
         spelers = kolomnamenM.toArray(spelers);
-        
-        ;
-        
         try {
                 PreparedStatement insertstat = con.prepareStatement(insertQuery);
                 PreparedStatement TiStat = con.prepareStatement(TiQuery);
@@ -593,6 +591,8 @@ public class FullhouseProjectGui {
                         int insert = Integer.parseInt(spelers[spelerint]);
                         insertstat.setInt(1,insert);
                         spelerint++;
+                        
+                       
                     }
                 insertstat.execute();
             }   JOptionPane.showMessageDialog(null, "Spelers Ingedeeld"); 

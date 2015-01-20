@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -242,8 +243,8 @@ public class FullhouseProjectGui {
         String insertQuery = "insert into Speler(s_code, naam, adres, postcode,plaats, telefoonnummer, email, rating, kanMasterclassGeven) values( ?,?,?,?,?,?,?,?,?)";
         String toonHoogste = "select max(s_code) as hoogste from Speler";
         try {
-            PreparedStatement stat =  con.prepareStatement(insertQuery);
-            PreparedStatement Toonstat =  con.prepareStatement(toonHoogste);
+            PreparedStatement stat = con.prepareStatement(insertQuery);
+            PreparedStatement Toonstat = con.prepareStatement(toonHoogste);
             ResultSet rs = Toonstat.executeQuery();
             rs.first();
             String naam = rs.getString("hoogste");
@@ -269,8 +270,8 @@ public class FullhouseProjectGui {
         String toonHoogste = "select max(t_code) as hoogste from Toernooi";
 
         try {
-            PreparedStatement stat =  con.prepareStatement(insertQuery);
-            PreparedStatement Toonstat =  con.prepareStatement(toonHoogste);
+            PreparedStatement stat = con.prepareStatement(insertQuery);
+            PreparedStatement Toonstat = con.prepareStatement(toonHoogste);
             ResultSet rs = Toonstat.executeQuery();
             rs.first();
             String naam = rs.getString("hoogste");
@@ -291,8 +292,8 @@ public class FullhouseProjectGui {
         String insertQuery = "insert into Masterclass(m_code,aantalSpelers, minimaleRating,inschrijfGeld, locatie, datum, masterclassGever) values( ?,?,?,?,?,?,?)";
         String toonHoogste = "select max(m_code) as hoogste from Masterclass";
         try {
-            PreparedStatement stat =  con.prepareStatement(insertQuery);
-             PreparedStatement Toonstat =  con.prepareStatement(toonHoogste);
+            PreparedStatement stat = con.prepareStatement(insertQuery);
+            PreparedStatement Toonstat = con.prepareStatement(toonHoogste);
             ResultSet rs = Toonstat.executeQuery();
             rs.first();
             String naam = rs.getString("hoogste");
@@ -536,98 +537,97 @@ public class FullhouseProjectGui {
 
 
     }
-    
-     public static void deelSpelerIn() {
-       String spelerQuery = "Select S.s_code, S.naam from Speler S JOIN ToernooiInshrijving T ON S.s_code = T.s_code where t_code = ?";
-       String insertQuery = "Insert into Tafel set s_code = ?, i_code = ?, rondeNummer = ?";
-       String TiQuery = "select T.i_code, T.spelersAantal, R.rondeNummer from TafelIndeling T JOIN Ronde R ON R.t_code = T.toernooi "
-               + "where T.toernooi = ? order by i_code";
-       int tafelAantal;
-       int i = 0;
-       ModelItemToernooi toer = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
-       
-       try {
+
+    public static void deelSpelerIn() {
+        String spelerQuery = "Select S.s_code, S.naam from Speler S JOIN ToernooiInschrijving T ON S.s_code = T.s_code where t_code = ?";
+        String insertQuery = "Insert into Tafel set s_code = ?, i_code = ?, rondeNummer = ?";
+        String TiQuery = "select T.i_code, T.spelersAantal, R.rondeNummer from TafelIndeling T JOIN Ronde R ON R.t_code = T.toernooi "
+                + "where T.toernooi = ? order by i_code";
+        int tafelAantal;
+        ModelItemToernooi toer = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
+
+        try {
             PreparedStatement stat = con.prepareStatement(spelerQuery);
-            stat.setString(2, toer.id);
-            
+            stat.setString(1, toer.id);
             ResultSet rs = stat.executeQuery();
-            rs.first();
-            while(rs.next())
-            {
-            String speler = rs.getString("s_code");
-            IndelingGroep.add(speler);
+            rs.beforeFirst();
+            while (rs.next()) {
+                String speler = rs.getString("s_code");
+                IndelingGroep.add(speler);
             }
-        }
-            
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             System.out.println(ex);
         }
-        
+
         Collections.shuffle(IndelingGroep);
-        
+        System.out.println(IndelingGroep);
         String[] spelers = (String[]) new String[IndelingGroep.size()];
-        spelers = kolomnamenM.toArray(spelers);
+        spelers = IndelingGroep.toArray(spelers);
+        System.out.println(Arrays.toString(spelers));
+
         try {
-                PreparedStatement insertstat = con.prepareStatement(insertQuery);
-                PreparedStatement TiStat = con.prepareStatement(TiQuery);
-                
-                
-                TiStat.setString(1, toer.id);
-                
-                ResultSet TiRS = TiStat.executeQuery();
-                TiRS.first();
-                while(TiRS.next()){
+            PreparedStatement insertstat = con.prepareStatement(insertQuery);
+            PreparedStatement TiStat = con.prepareStatement(TiQuery);
+
+
+            TiStat.setString(1, toer.id);
+
+            ResultSet TiRS = TiStat.executeQuery();
+            TiRS.first();
+            do {
                 String aantal = TiRS.getString("spelersAantal");
                 String icode = TiRS.getString("i_code");
                 String ronde = TiRS.getString("rondeNummer");
-                
+
                 int rondeID = Integer.parseInt(ronde);
                 int tafelID = Integer.parseInt(icode);
-                insertstat.setInt(2,tafelID);
-                insertstat.setInt(3,rondeID);
+                insertstat.setInt(2, tafelID);
+                insertstat.setInt(3, rondeID);
+
                 tafelAantal = Integer.parseInt(aantal);
                 tafelAantal = spelerint + tafelAantal;
-                   while (spelerint <= tafelAantal) {
-                        int insert = Integer.parseInt(spelers[spelerint]);
-                        insertstat.setInt(1,insert);
-                        spelerint++;
-                        
-                       
-                    }
-                insertstat.execute();
-            }   JOptionPane.showMessageDialog(null, "Spelers Ingedeeld"); 
-            } catch (Exception e) {
-                System.out.println(e);
-            }
+                while (spelerint < tafelAantal) {
+                    int insert = Integer.parseInt(spelers[spelerint]);
+                    insertstat.setInt(1, insert);
+                    spelerint++;
+                    insertstat.execute();
+
+                }
+                
+            }while (TiRS.next());
+            JOptionPane.showMessageDialog(null, "Spelers Ingedeeld");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
- public static void toonTafelLijst()
-        {
-            DefaultListModel model = new DefaultListModel();           
-                       
-            String toonQuery ="select i_code from TafelIndeling where toernooi = ?";
-            try {
-                PreparedStatement stat = con.prepareStatement(toonQuery);
-                ResultSet rs = stat.executeQuery();
+
+    public static void toonTafelLijst() {
+        DefaultListModel model = new DefaultListModel();
+
+        String toonQuery = "select i_code from TafelIndeling where toernooi = ?";
+        try {
+            PreparedStatement stat = con.prepareStatement(toonQuery);
+            ResultSet rs = stat.executeQuery();
             rs.first();
             do {
                 ModelItemTi test1 = new ModelItemTi();
                 test1.i_code = rs.getString("i_code");
                 model.addElement(test1);
             } while (rs.next());
-                  TafelIndeling.TiLijst.setModel(model);
-            } catch (Exception e) {
-                System.out.println(e);
+            TafelIndeling.TiLijst.setModel(model);
+        } catch (Exception e) {
+            System.out.println(e);
 
-            }
         }
-    public static void vulOpenBetalingen()
-    {
+    }
+
+    public static void vulOpenBetalingen() {
         ModelItemToernooi tcode = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
         DefaultTableModel model = new DefaultTableModel();
         String Query = "select S.naam,Toer.inschrijfGeld, Toer.datum, S.email from Speler S join ToernooiInschrijving T ON S.s_code = T.S_code join Toernooi Toer on T.t_code = Toer.t_code"
                 + " where Toer.t_code = ? AND T.heeftBetaald != 'j' ";
         try {
-            PreparedStatement stat =  con.prepareStatement(Query);
+            PreparedStatement stat = con.prepareStatement(Query);
             stat.setString(1, tcode.id);
             ResultSet rs = stat.executeQuery();
             Toernooi.OpenBet.removeAll();
@@ -648,19 +648,16 @@ public class FullhouseProjectGui {
                 test1.email = rs.getString("email");
                 ModelItemToernooi test2 = new ModelItemToernooi();
                 test2.inschrijfgeld = rs.getString("inschrijfGeld");
-                test2.datum= rs.getString("datum");
+                test2.datum = rs.getString("datum");
                 Object rowData[] = {test1.naam, test2.inschrijfgeld, test2.datum, test1.email};
                 model.addRow(rowData);
             } while (rs.next());
             Toernooi.OpenBet.setModel(model);
-        
+
         } catch (Exception e) {
-                System.out.println(e);
+            System.out.println(e);
 
-            }
-        
-    }
-    
-    
-    }
+        }
 
+    }
+}

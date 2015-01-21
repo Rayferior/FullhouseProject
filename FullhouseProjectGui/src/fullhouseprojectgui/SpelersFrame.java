@@ -56,6 +56,7 @@ public class SpelersFrame extends javax.swing.JFrame {
         jScrollPaneSpeler.setViewportView(jTableSpelerWeergave);
 
         jButtonToonSpeler.setText("Spelers Tonen");
+        jButtonToonSpeler.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonToonSpeler.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonToonSpelerMouseClicked(evt);
@@ -71,6 +72,7 @@ public class SpelersFrame extends javax.swing.JFrame {
         jLabel1.setText("Spelers");
 
         TerugButtonSpeler.setText("Home");
+        TerugButtonSpeler.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         TerugButtonSpeler.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TerugButtonSpelerActionPerformed(evt);
@@ -80,6 +82,7 @@ public class SpelersFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(SpelerLijst);
 
         jButtonInsert.setText("Speler Invoeren");
+        jButtonInsert.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonInsert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonInsertActionPerformed(evt);
@@ -87,6 +90,7 @@ public class SpelersFrame extends javax.swing.JFrame {
         });
 
         jButtonUpdate.setText("Speler Wijzigen");
+        jButtonUpdate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonUpdateMouseClicked(evt);

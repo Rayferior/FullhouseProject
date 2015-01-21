@@ -901,4 +901,65 @@ public class FullhouseProjectGui {
 
         }
     }
+    public static void veranderRating()
+    {
+        int verschilRating;
+         int nieuwRating = 0;
+         int somRating = 0;
+        ModelItem ticode = (ModelItem) TafelIndeling.TsLijst.getSelectedValue();
+        String JaQuery = "Select T.i_code, S.rating from Tafel T join Speler S on T.s_code = S.s_code where T.s_code = ? and tafelWinnaar = 'j'";
+        String NeeQuery = "Select T.s_code, S.rating from Tafel  T join Speler S on T.s_code = S.s_code where i_code = ? and tafelWinnaar = 'n'";
+        String updateQuery = "Update Speler set rating = ? where s_code =?";
+       
+        
+        try {
+            PreparedStatement Jastat = con.prepareStatement(JaQuery);
+            PreparedStatement Neestat = con.prepareStatement(NeeQuery);
+            PreparedStatement updatestat = con.prepareStatement(updateQuery);
+            
+ 
+            Jastat.setString(1, ticode.s_code);
+            ResultSet Jars = Jastat.executeQuery();
+            Jars.first();
+            String iCodeN = Jars.getString("i_code"); 
+            Neestat.setString(1, iCodeN);
+          
+            
+            ResultSet Neers = Neestat.executeQuery();
+            Neers.beforeFirst();
+    
+            
+            int winnaarRating = Jars.getInt("rating");
+            while(Neers.next()) {
+           
+            
+            int verliezerRating = Neers.getInt("rating");
+            int speler = Neers.getInt("s_code");
+            int beginRating = verliezerRating;
+            double percentageverliezer = verliezerRating/10000;
+            if (winnaarRating > verliezerRating){
+            verschilRating = winnaarRating - verliezerRating;
+                    }
+            else
+            {
+                verschilRating = verliezerRating - winnaarRating;
+            }
+               updatestat.setInt(2, speler);
+               verliezerRating = (int) (percentageverliezer * verschilRating) + 10;
+               verliezerRating = verliezerRating / 2;
+                System.out.println(verliezerRating);
+               nieuwRating = beginRating - verliezerRating;
+               somRating = somRating + (verliezerRating * 2);
+               updatestat.setInt(1, nieuwRating);
+               updatestat.executeUpdate();
+            }
+            System.out.println(somRating);
+            int winnaar = Integer.parseInt(ticode.s_code);
+            updatestat.setInt(2, winnaar);
+            updatestat.setInt(1, somRating + winnaarRating);
+            updatestat.executeUpdate(); 
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }

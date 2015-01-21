@@ -41,6 +41,7 @@ public class ToernooiToevoegen extends javax.swing.JFrame {
         datumT = new javax.swing.JTextField();
         locatieT = new javax.swing.JTextField();
         inschrijfGeldT = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,6 +52,7 @@ public class ToernooiToevoegen extends javax.swing.JFrame {
         jLabel3.setText("Inschrijfgeld");
 
         jButton1.setText("Toevoegen");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -58,6 +60,7 @@ public class ToernooiToevoegen extends javax.swing.JFrame {
         });
 
         jButton2.setText("Terug");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -69,6 +72,24 @@ public class ToernooiToevoegen extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText(" Toernooi Toevoegen");
+
+        locatieT.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                locatieTFocusLost(evt);
+            }
+        });
+
+        inschrijfGeldT.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inschrijfGeldTFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inschrijfGeldTFocusLost(evt);
+            }
+        });
+
+        jLabel4.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel4.setText("jjjj-mm-dd");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,10 +112,14 @@ public class ToernooiToevoegen extends javax.swing.JFrame {
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton2))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(datumT, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-                                .addComponent(locatieT)
-                                .addComponent(inschrijfGeldT)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(datumT, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                                    .addComponent(locatieT)
+                                    .addComponent(inschrijfGeldT))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel4)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
                 .addGap(141, 141, 141)
@@ -113,7 +138,8 @@ public class ToernooiToevoegen extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(datumT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(locatieT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,7 +161,56 @@ this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+    float num1;
+
+    try {
+        num1 = Float.parseFloat(inschrijfGeldT.getText());
+        
+    
+    String inschrijfGeld = inschrijfGeldT.getText();
+    String locatie = locatieT.getText();
+    String datum = datumT.getText();
+    
+    int jaar = Integer.parseInt(datum.substring(0,4));
+    int maand = Integer.parseInt(datum.substring(5,7));
+    int dagen = Integer.parseInt(datum.substring(8,10));
+        
+    
+    if(inschrijfGeld == null) {
+        JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Inschrijfgeld", JOptionPane.CANCEL_OPTION);
+        }
+    if(locatie.matches(".*\\d.*")) {
+        JOptionPane.showMessageDialog(rootPane, "Invoer mag geen getallen bevatten", "Locatie", JOptionPane.CANCEL_OPTION);
+        }
+    if(locatie == null) {
+        JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Locatie", JOptionPane.CANCEL_OPTION);
+        }
+    if(datum == null) {
+        JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Datum", JOptionPane.CANCEL_OPTION);
+    }
+    if(jaar < 2015){
+        JOptionPane.showMessageDialog(rootPane, "Jaar mag niet eerder dan 2015 zijn", "Datum", JOptionPane.CANCEL_OPTION);
+    }
+    if(maand > 12){
+        JOptionPane.showMessageDialog(rootPane, "Maand mag niet hoger dan 12 zijn", "Datum", JOptionPane.CANCEL_OPTION);
+    }
+    if(dagen > 31){
+        JOptionPane.showMessageDialog(rootPane, "Dagen mag niet hoger zijn dan 31", "Datum", JOptionPane.CANCEL_OPTION);
+    }
+    /*if((dagen > 30) && (maand == 04) || (maand == 06) || (maand == 02) || (maand == 08) || (maand == 02)){
+        System.out.println("error");
+        JOptionPane.showMessageDialog(rootPane, "Maand heeft maar 30 dagen", "Datum", JOptionPane.CANCEL_OPTION);
+    }
+   */
+ 
+    } 
+    catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(rootPane, "De invoer mag alleen uit nummers bestaan", "Inschrijfgeld", JOptionPane.CANCEL_OPTION);
+        }
+    /*else {    
         FullhouseProjectGui.ToernooiToevoegen();
+        }*/
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -145,28 +220,19 @@ this.dispose();
 
     private void tcodeTFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tcodeTFocusLost
 
-    float num1;
-
-    try {
-        num1 = Float.parseFloat(locatieT.getText());
-
-
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(rootPane, "De invoer mag alleen uit nummers bestaan", "Error", JOptionPane.CANCEL_OPTION);
-    }
-    
-    String tcode = locatieT.getText();
-    int tcodeLengte = tcode.length();
-    
-    if(tcodeLengte > 4) {
-        JOptionPane.showMessageDialog(rootPane, "Getal mag niet langer zijn dan vier getallen", "Error", JOptionPane.CANCEL_OPTION);
-    }
-    
-    else if(tcodeLengte < 3){
-        JOptionPane.showMessageDialog(rootPane, "Getal mag niet korter zijn dan drie getallen", "Error", JOptionPane.CANCEL_OPTION);
-    }
-    
     }//GEN-LAST:event_tcodeTFocusLost
+
+    private void inschrijfGeldTFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inschrijfGeldTFocusLost
+       
+    }//GEN-LAST:event_inschrijfGeldTFocusLost
+
+    private void locatieTFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_locatieTFocusLost
+       
+    }//GEN-LAST:event_locatieTFocusLost
+
+    private void inschrijfGeldTFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inschrijfGeldTFocusGained
+        
+    }//GEN-LAST:event_inschrijfGeldTFocusGained
 
 
     /**
@@ -214,6 +280,7 @@ this.dispose();
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     public static javax.swing.JTextField locatieT;

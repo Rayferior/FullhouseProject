@@ -66,12 +66,10 @@
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="28" pref="28" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="103" groupAlignment="1" attributes="0">
-                                                      <Component id="locatieT" min="-2" pref="189" max="-2" attributes="0"/>
-                                                      <Component id="datumT" alignment="1" min="-2" pref="189" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Component id="inschrijfGeldT" alignment="1" min="-2" pref="189" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="locatieT" pref="189" max="32767" attributes="0"/>
+                                                  <Component id="inschrijfGeldT" alignment="0" pref="189" max="32767" attributes="0"/>
+                                                  <Component id="datumT" max="32767" attributes="0"/>
                                               </Group>
                                               <EmptySpace max="32767" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
@@ -122,9 +120,9 @@
               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="datumT" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="eersteT" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="datumT" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -154,11 +152,6 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JTextField" name="eersteT">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JTextField" name="datumT">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
@@ -257,6 +250,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="aantalSpelersT">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="datumT">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>

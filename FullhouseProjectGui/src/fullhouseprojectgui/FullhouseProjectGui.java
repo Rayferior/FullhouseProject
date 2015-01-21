@@ -1073,4 +1073,22 @@ public class FullhouseProjectGui {
             System.out.println(e);
         }
     }
+    public static void totaalBetaaldInschrijfgeld()
+    {
+        ModelItemToernooi toernooi = (ModelItemToernooi) Overzichten.jListOverzichtTenM.getSelectedValue();
+        DefaultListModel model = new DefaultListModel();
+        String totaalGeld = "select sum(inschrijfGeld * aantalSpelers) as prijsgeld from Toernooi where t_code = ?";
+        try {
+        PreparedStatement stat = con.prepareStatement(totaalGeld);
+        stat.setString(1, toernooi.id);
+        ResultSet rs = stat.executeQuery();
+            rs.first();
+            String totaalTgeld = rs.getString("prijsgeld");
+            model.addElement(totaalTgeld);
+            Overzichten.jListResultaat.setModel(model);
+            } catch (Exception e) {
+                System.out.println(e);
+        }
+    }
 }
+

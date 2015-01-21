@@ -127,6 +127,11 @@ public class Overzichten extends javax.swing.JFrame {
         jButtonOverzicht1.setText("Overzicht 1");
 
         jButtonOverzicht2.setText("Overzicht 2");
+        jButtonOverzicht2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOverzicht2ActionPerformed(evt);
+            }
+        });
 
         jButtonOverzicht3.setText("Overzicht 3");
         jButtonOverzicht3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -346,6 +351,10 @@ public class Overzichten extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonOverzicht3MouseClicked
 
+    private void jButtonOverzicht2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOverzicht2ActionPerformed
+    FullhouseProjectGui.totaalBetaaldInschrijfgeld();
+    }//GEN-LAST:event_jButtonOverzicht2ActionPerformed
+
     private void homeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeButtonMouseClicked
         this.dispose();
     }//GEN-LAST:event_homeButtonMouseClicked
@@ -405,8 +414,8 @@ public class Overzichten extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelResultaat;
-    private javax.swing.JList jListOverzichtTenM;
-    private javax.swing.JList jListResultaat;
+    public static javax.swing.JList jListOverzichtTenM;
+    public static javax.swing.JList jListResultaat;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

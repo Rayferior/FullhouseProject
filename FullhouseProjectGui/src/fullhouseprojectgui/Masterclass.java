@@ -169,6 +169,7 @@ public class Masterclass extends javax.swing.JFrame {
         try {
             FullhouseProjectGui.tekstVullenMasterclass();
         } catch (ParseException ex) {
+
             System.out.println(ex);
         }
     }//GEN-LAST:event_jButton2ActionPerformed

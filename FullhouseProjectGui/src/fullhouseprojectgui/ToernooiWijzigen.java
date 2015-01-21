@@ -6,6 +6,10 @@
 
 package fullhouseprojectgui;
 
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Joep
@@ -30,7 +34,6 @@ public class ToernooiWijzigen extends javax.swing.JFrame {
 
         jTextField8 = new javax.swing.JTextField();
         eersteT = new javax.swing.JTextField();
-        datumT = new javax.swing.JTextField();
         inschrijfGeldT = new javax.swing.JTextField();
         locatieT = new javax.swing.JTextField();
         tweedeT = new javax.swing.JTextField();
@@ -47,6 +50,7 @@ public class ToernooiWijzigen extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         aantalSpelersT = new javax.swing.JTextField();
+        datumT = new javax.swing.JFormattedTextField();
 
         jTextField8.setText("jTextField8");
 
@@ -123,11 +127,10 @@ public class ToernooiWijzigen extends javax.swing.JFrame {
                                                 .addGap(31, 31, 31))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(28, 28, 28)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(locatieT, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(datumT, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addComponent(inschrijfGeldT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(locatieT, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                                                    .addComponent(inschrijfGeldT, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                                                    .addComponent(datumT))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(jLabel5)
@@ -160,9 +163,9 @@ public class ToernooiWijzigen extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(datumT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(eersteT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(eersteT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(datumT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(locatieT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -192,7 +195,11 @@ public class ToernooiWijzigen extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        FullhouseProjectGui.toernooiWijzigen();
+        try {
+            FullhouseProjectGui.toernooiWijzigen();
+        } catch (ParseException ex) {
+            Logger.getLogger(ToernooiWijzigen.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -232,7 +239,7 @@ public class ToernooiWijzigen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTextField aantalSpelersT;
-    public static javax.swing.JTextField datumT;
+    public static javax.swing.JFormattedTextField datumT;
     public static javax.swing.JTextField derdeT;
     public static javax.swing.JTextField eersteT;
     public static javax.swing.JTextField inschrijfGeldT;

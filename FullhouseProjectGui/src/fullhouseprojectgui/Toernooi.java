@@ -8,6 +8,9 @@ package fullhouseprojectgui;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -257,7 +260,11 @@ public class Toernooi extends javax.swing.JFrame {
         TWframe.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         TWframe.setVisible(true);
         Gui.centreWindow(TWframe);
-        FullhouseProjectGui.tekstVullenToernooi();
+        try {
+            FullhouseProjectGui.tekstVullenToernooi();
+        } catch (ParseException ex) {
+            Logger.getLogger(Toernooi.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed

@@ -6,6 +6,8 @@
 
 package fullhouseprojectgui;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Joep
@@ -190,7 +192,44 @@ public class ToernooiWijzigen extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        FullhouseProjectGui.toernooiWijzigen();
+        
+        String aantalSpelers = aantalSpelersT.getText();
+        String eerste = eersteT.getText();
+        String tweede = tweedeT.getText();
+        String derde = derdeT.getText();
+        
+        if((eerste.isEmpty()) || (tweede.isEmpty()) || (derde.isEmpty()) || (aantalSpelers.isEmpty())
+        || (eerste.matches("[0-9]+")) || (tweede.matches("[0-9]+")) || (derde.matches("[0-9]+")) || (!aantalSpelers.matches("[0-9]+"))){
+            
+        }
+        else{
+            JOptionPane.showMessageDialog(rootPane, "Toernooi is succesvol gewijzigd", "Succes", JOptionPane.CANCEL_OPTION);
+            //FullhouseProjectGui.toernooiWijzigen();
+        }
+        if(eerste.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Eerste Plaats", JOptionPane.CANCEL_OPTION);
+        }
+        if(tweede.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Tweede Plaats", JOptionPane.CANCEL_OPTION);
+        }
+        if(derde.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Derde Plaats", JOptionPane.CANCEL_OPTION);
+        }
+        if(aantalSpelers.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Aantal Spelers", JOptionPane.CANCEL_OPTION);
+        }
+        if(eerste.matches("[0-9]+")){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag geen getallen bevatten", "Eerste", JOptionPane.CANCEL_OPTION);
+        }
+        if(tweede.matches("[0-9]+")){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag geen getallen bevatten", "Tweede", JOptionPane.CANCEL_OPTION);
+        }
+        if(derde.matches("[0-9]+")){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag geen getallen bevatten", "Derde", JOptionPane.CANCEL_OPTION);
+        }
+        if(!aantalSpelers.matches("[0-9]+")){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag geen letters bevatten", "Aantal Spelers", JOptionPane.CANCEL_OPTION);
+        } 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

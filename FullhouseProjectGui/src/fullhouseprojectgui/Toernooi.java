@@ -74,6 +74,7 @@ public class Toernooi extends javax.swing.JFrame {
         jLabel4.setText("Fullhouse Manager");
 
         jButton1.setText("Toernooi invoeren");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -81,6 +82,7 @@ public class Toernooi extends javax.swing.JFrame {
         });
 
         jButton2.setText("Toernooi wijzigen");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -112,6 +114,7 @@ public class Toernooi extends javax.swing.JFrame {
         jLabel2.setText("Openstaande betalingen -->");
 
         jButton5.setText("Toon");
+        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -119,6 +122,7 @@ public class Toernooi extends javax.swing.JFrame {
         });
 
         ToernooiHomeButton.setText("Home");
+        ToernooiHomeButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ToernooiHomeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ToernooiHomeButtonActionPerformed(evt);
@@ -126,6 +130,7 @@ public class Toernooi extends javax.swing.JFrame {
         });
 
         jButton4.setText("Toernooien tonen");
+        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -133,6 +138,7 @@ public class Toernooi extends javax.swing.JFrame {
         });
 
         jButtonIndelingScherm.setText("Tafels tonen");
+        jButtonIndelingScherm.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonIndelingScherm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonIndelingSchermActionPerformed(evt);
@@ -140,6 +146,7 @@ public class Toernooi extends javax.swing.JFrame {
         });
 
         jButtonIndeling.setText("Tafels indelen");
+        jButtonIndeling.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonIndeling.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonIndelingMouseClicked(evt);

@@ -48,6 +48,7 @@ public class Masterclass extends javax.swing.JFrame {
         jLabel5.setText("Masterclass");
 
         jButton1.setText("Masterclass invoeren");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -68,6 +69,7 @@ public class Masterclass extends javax.swing.JFrame {
         jScrollPane1.setViewportView(MasterclassTabel);
 
         jButton2.setText("Masterclass Wijzigen");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -75,6 +77,7 @@ public class Masterclass extends javax.swing.JFrame {
         });
 
         MhomeButton.setText("Home");
+        MhomeButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         MhomeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MhomeButtonActionPerformed(evt);
@@ -82,6 +85,7 @@ public class Masterclass extends javax.swing.JFrame {
         });
 
         jButton4.setText("Toon");
+        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);

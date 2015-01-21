@@ -70,6 +70,7 @@ public class TafelIndeling extends javax.swing.JFrame {
         jScrollPane2.setViewportView(TiTabel);
 
         jButton1.setText("Toon");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -77,6 +78,7 @@ public class TafelIndeling extends javax.swing.JFrame {
         });
 
         jButton2.setText("Terug");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.setMaximumSize(new java.awt.Dimension(59, 23));
         jButton2.setMinimumSize(new java.awt.Dimension(59, 23));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -88,6 +90,7 @@ public class TafelIndeling extends javax.swing.JFrame {
         jScrollPane3.setViewportView(TsLijst);
 
         jButton3.setText("Selecteer Tafelwinnaar");
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);

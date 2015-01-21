@@ -169,11 +169,7 @@ public class Masterclass extends javax.swing.JFrame {
         try {
             FullhouseProjectGui.tekstVullenMasterclass();
         } catch (ParseException ex) {
-<<<<<<< HEAD
-            Logger.getLogger(Masterclass.class.getName()).log(Level.SEVERE, null, ex);
-=======
             System.out.println(ex);
->>>>>>> origin/master
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 

@@ -258,12 +258,11 @@ public class Toernooi extends javax.swing.JFrame {
         try {
             FullhouseProjectGui.tekstVullenToernooi();
         } catch (ParseException ex) {
-<<<<<<< HEAD
+
             Logger.getLogger(Toernooi.class.getName()).log(Level.SEVERE, null, ex);
-=======
+
             System.out.println(ex);
         
->>>>>>> origin/master
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 

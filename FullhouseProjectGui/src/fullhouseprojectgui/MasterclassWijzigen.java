@@ -182,11 +182,8 @@ public class MasterclassWijzigen extends javax.swing.JFrame {
         try {
             FullhouseProjectGui.masterclassWijzigen();
         } catch (ParseException ex) {
-<<<<<<< HEAD
-            Logger.getLogger(MasterclassWijzigen.class.getName()).log(Level.SEVERE, null, ex);
-=======
             System.out.println(ex);
->>>>>>> origin/master
+
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

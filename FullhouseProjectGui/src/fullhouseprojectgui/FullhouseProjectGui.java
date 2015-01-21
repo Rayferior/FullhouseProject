@@ -408,15 +408,14 @@ public class FullhouseProjectGui {
             ResultSet rs = stat.executeQuery();
             rs.first();
             do {
-                String datum = rs.getString("datum");
+                Date datum = rs.getDate("datum");
                 String locatie = rs.getString("locatie");
                 String inschrijfGeld = rs.getString("inschrijfGeld");
                 String aantalSpelers = rs.getString("aantalSpelers");
                 String eerste = rs.getString("1e");
                 String tweede = rs.getString("2e");
                 String derde = rs.getString("3e");
-                java.sql.Date sqlDate = dateStringToMySqlDate(datum);
-                String datumT = mySqlDateToString(sqlDate);
+                String datumT = mySqlDateToString(datum);
 
                 ToernooiWijzigen.datumT.setText(datumT);
                 ToernooiWijzigen.locatieT.setText(locatie);
@@ -474,10 +473,9 @@ public class FullhouseProjectGui {
                 String minimaleRating = rs.getString("minimaleRating");
                 String inschrijfGeld = rs.getString("inschrijfGeld");
                 String locatie = rs.getString("locatie");
-                String datum = rs.getString("datum");
+                Date datum = rs.getDate("datum");
                 String mGever = rs.getString("masterclassGever");
-                java.sql.Date sqlDate= dateStringToMySqlDate(datum);
-                String datumT = mySqlDateToString(sqlDate);
+                String datumT = mySqlDateToString(datum);
 
 
                 MasterclassWijzigen.aantalSpelersT.setText(aantalSpelers);

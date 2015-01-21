@@ -183,7 +183,6 @@ public class MasterclassWijzigen extends javax.swing.JFrame {
             FullhouseProjectGui.masterclassWijzigen();
         } catch (ParseException ex) {
             System.out.println(ex);
-
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -258,11 +258,7 @@ public class Toernooi extends javax.swing.JFrame {
         try {
             FullhouseProjectGui.tekstVullenToernooi();
         } catch (ParseException ex) {
-
-            Logger.getLogger(Toernooi.class.getName()).log(Level.SEVERE, null, ex);
-
             System.out.println(ex);
-        
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 

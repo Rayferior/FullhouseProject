@@ -6,7 +6,10 @@ package fullhouseprojectgui;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 
@@ -125,6 +128,11 @@ public class Overzichten extends javax.swing.JFrame {
         jButtonOverzicht2.setText("Overzicht 2");
 
         jButtonOverzicht3.setText("Overzicht 3");
+        jButtonOverzicht3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonOverzicht3MouseClicked(evt);
+            }
+        });
 
         jButtonOverzicht4.setText("Overzicht 4");
 
@@ -216,16 +224,16 @@ public class Overzichten extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabelResultaat)
-                                .addGap(61, 61, 61))))
+                                .addGap(61, 61, 61)))
+                        .addContainerGap(28, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(207, 207, 207)
+                        .addGap(193, 193, 193)
                         .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
-                .addGap(360, 360, 360)
+                .addGap(349, 349, 349)
                 .addComponent(jLabel1)
-                .addContainerGap())
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,6 +307,31 @@ public class Overzichten extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_jButtonOverzichtLijstTonenMouseClicked
+
+    private void jButtonOverzicht3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonOverzicht3MouseClicked
+        DefaultListModel modeldrie = new DefaultListModel();
+        String queryDrie = "SELECT I.s_code, S.naam FROM ToernooiInschrijving I JOIN Speler S ON I.s_code = S.s_code WHERE I.t_code = ?";
+        ModelItemToernooi toer = (ModelItemToernooi) jListOverzichtTenM.getSelectedValue();
+        try {
+            PreparedStatement driestat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(queryDrie);
+            driestat.setString(1, toer.id);
+            driestat.executeQuery();
+            jListResultaat.removeAll();
+            ResultSet rsdrie = driestat.executeQuery();
+            rsdrie.beforeFirst();
+            while(rsdrie.next()){
+                ModelItem speler = new ModelItem();
+                speler.s_code = rsdrie.getString("s_code");
+                speler.naam = rsdrie.getString("naam");
+                modeldrie.addElement(speler);
+            }
+            jListResultaat.setModel(modeldrie);
+            
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        
+    }//GEN-LAST:event_jButtonOverzicht3MouseClicked
 
     /**
      * @param args the command line arguments

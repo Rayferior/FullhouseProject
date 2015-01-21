@@ -28,7 +28,7 @@ public class FullhouseProjectGui {
     static ArrayList<String> kolomnamenT = new ArrayList<String>();
     static ArrayList<String> kolomnamenM = new ArrayList<String>();
     static ArrayList<String> IndelingGroep = new ArrayList<String>();
-    static DefaultListModel tafelmodel = new DefaultListModel();
+    
 
     /**
      * @param args the command line arguments
@@ -696,23 +696,28 @@ public class FullhouseProjectGui {
     }
 
     public static void toonTafelLijst() {
-        
+        DefaultListModel tafelmodel = new DefaultListModel();
         ModelItemToernooi toer = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
-        TafelIndeling.TiLijst.removeAll();
-        tafelmodel.clear();
-        String toonQuery = "select T.i_code, R.rondeNummer from TafelIndeling T join Ronde R ON T.toernooi = R.t_code where toernooi = ? order by i_code";
+        String toonQuery = "select distinct I.i_code, T.rondeNummer from TafelIndeling I join Tafel T ON I.i_code = T.i_code where toernooi = ? order by i_code";
+        
         try {
             PreparedStatement stat = con.prepareStatement(toonQuery);
+            
             stat.setString(1, toer.id);
             ResultSet rs = stat.executeQuery();
-            rs.first();
-            do {
+            
+            TafelIndeling.TiLijst.removeAll();
+            tafelmodel.clear();
+            
+            rs.beforeFirst();
+            
+            while (rs.next()) {
                 ModelItemTi test1 = new ModelItemTi();
                 test1.i_code = rs.getString("i_code");
                 test1.rondeNummer = rs.getString("rondeNummer");
                 test1.t_code = toer.id;
                 tafelmodel.addElement(test1);
-            } while (rs.next());
+            }
             TafelIndeling.TiLijst.setModel(tafelmodel);
         } catch (Exception e) {
             System.out.println(e);

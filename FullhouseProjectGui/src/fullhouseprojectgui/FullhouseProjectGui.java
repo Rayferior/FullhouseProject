@@ -6,6 +6,9 @@ package fullhouseprojectgui;
 
 import java.sql.*;
 import java.sql.DriverManager;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -52,6 +55,18 @@ public class FullhouseProjectGui {
             System.out.println(e);
         }
         return con;
+    }
+    public static java.sql.Date dateStringToMySqlDate (String date) throws ParseException {
+        /* ik verwacht de datum tekst als dd-MM-yyyy */
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        java.util.Date parsed = format.parse(date);
+        return new java.sql.Date(parsed.getTime());
+    }
+
+    public static String mySqlDateToString (java.sql.Date date) {
+        /* ik schrijf de datum als dd-MM-yyyy */
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        return df.format(date);
     }
 
     public static void SpelerTonen() {
@@ -278,9 +293,11 @@ public class FullhouseProjectGui {
             String naam = rs.getString("hoogste");
             int Hoogste = (int) (Integer.parseInt(naam));
             Hoogste = Hoogste + 1;
+            java.sql.Date sqlDate = dateStringToMySqlDate(ToernooiToevoegen.datumT.getText());
+   
 
             stat.setInt(1, Hoogste);
-            stat.setString(2, ToernooiToevoegen.datumT.getText());
+            stat.setDate(2, sqlDate);
             stat.setString(3, ToernooiToevoegen.locatieT.getText());
             stat.setString(4, ToernooiToevoegen.inschrijfGeldT.getText());
             stat.execute();
@@ -300,13 +317,15 @@ public class FullhouseProjectGui {
             String naam = rs.getString("hoogste");
             int Hoogste = (int) (Integer.parseInt(naam));
             Hoogste = Hoogste + 1;
+            java.sql.Date sqlDate = dateStringToMySqlDate(MasterclassInvoeren.datumT.getText());
+            
 
             stat.setInt(1, Hoogste);
             stat.setString(2, MasterclassInvoeren.aantalSpelersT.getText());
             stat.setString(3, MasterclassInvoeren.minimaleRatingT.getText());
             stat.setString(4, MasterclassInvoeren.inschrijfGeldT.getText());
             stat.setString(5, MasterclassInvoeren.locatieT.getText());
-            stat.setString(6, MasterclassInvoeren.datumT.getText());
+            stat.setDate(6, sqlDate);
             stat.setString(7, MasterclassInvoeren.MasterclassGeverT.getText());
             stat.execute();
         } catch (Exception e) {
@@ -379,7 +398,7 @@ public class FullhouseProjectGui {
         }
     }
 
-    public static void tekstVullenToernooi() {
+    public static void tekstVullenToernooi() throws ParseException {
         ModelItemToernooi toernooi = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
         String selectQuery = "select * from Toernooi where datum = ?";
 
@@ -396,8 +415,10 @@ public class FullhouseProjectGui {
                 String eerste = rs.getString("1e");
                 String tweede = rs.getString("2e");
                 String derde = rs.getString("3e");
+                java.sql.Date sqlDate = dateStringToMySqlDate(datum);
+                String datumT = mySqlDateToString(sqlDate);
 
-                ToernooiWijzigen.datumT.setText(datum);
+                ToernooiWijzigen.datumT.setText(datumT);
                 ToernooiWijzigen.locatieT.setText(locatie);
                 ToernooiWijzigen.inschrijfGeldT.setText(inschrijfGeld);
                 ToernooiWijzigen.aantalSpelersT.setText(aantalSpelers);
@@ -412,21 +433,20 @@ public class FullhouseProjectGui {
         }
     }
 
-    public static void toernooiWijzigen() {
+    public static void toernooiWijzigen() throws ParseException {
         ModelItemToernooi tcode = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
         String updateQuery = "update Toernooi set datum = ?, locatie = ?, aantalSpelers = ?,inschrijfGeld = ?, 1e = ?, 2e = ?, 3e = ? WHERE datum = ?";
         try {
             PreparedStatement stat = con.prepareStatement(updateQuery);
-            String datum = ToernooiWijzigen.datumT.getText();
             String locatie = ToernooiWijzigen.locatieT.getText();
             String inschrijfGeld = ToernooiWijzigen.inschrijfGeldT.getText();
             String aantalSpelers = ToernooiWijzigen.aantalSpelersT.getText();
             String eerste = ToernooiWijzigen.eersteT.getText();
             String tweede = ToernooiWijzigen.tweedeT.getText();
             String derde = ToernooiWijzigen.derdeT.getText();
+            java.sql.Date sqlDate = dateStringToMySqlDate(ToernooiWijzigen.datumT.getText());
 
-
-            stat.setString(1, datum);
+            stat.setDate(1, sqlDate);
             stat.setString(2, locatie);
             stat.setString(3, aantalSpelers);
             stat.setString(4, inschrijfGeld);
@@ -440,7 +460,7 @@ public class FullhouseProjectGui {
         }
     }
 
-    public static void tekstVullenMasterclass() {
+    public static void tekstVullenMasterclass() throws ParseException {
         ModelItemMasterclass masterclass = (ModelItemMasterclass) Masterclass.masterclassLijst.getSelectedValue();
         String selectQuery = "select * from Masterclass where datum = ?";
 
@@ -456,13 +476,15 @@ public class FullhouseProjectGui {
                 String locatie = rs.getString("locatie");
                 String datum = rs.getString("datum");
                 String mGever = rs.getString("masterclassGever");
+                java.sql.Date sqlDate= dateStringToMySqlDate(datum);
+                String datumT = mySqlDateToString(sqlDate);
 
 
                 MasterclassWijzigen.aantalSpelersT.setText(aantalSpelers);
                 MasterclassWijzigen.minimaleRatingT.setText(minimaleRating);
                 MasterclassWijzigen.inschrijfGeldT.setText(inschrijfGeld);
                 MasterclassWijzigen.locatieT.setText(locatie);
-                MasterclassWijzigen.datumT.setText(datum);
+                MasterclassWijzigen.datumT.setText(datumT);
                 MasterclassWijzigen.masterclassGever.setText(mGever);
             } while (rs.next());
 
@@ -472,7 +494,7 @@ public class FullhouseProjectGui {
         }
     }
 
-    public static void masterclassWijzigen() {
+    public static void masterclassWijzigen() throws ParseException {
         ModelItemMasterclass mcode = (ModelItemMasterclass) Masterclass.masterclassLijst.getSelectedValue();
         String updateQuery = "update Masterclass set aantalSpelers = ?, minimaleRating = ?, inschrijfGeld = ?, locatie = ?, datum = ?, masterclassGever = ? WHERE datum = ?";
         try {
@@ -481,15 +503,16 @@ public class FullhouseProjectGui {
             String minimaleRating = MasterclassWijzigen.minimaleRatingT.getText();
             String inschrijfGeld = MasterclassWijzigen.inschrijfGeldT.getText();
             String locatie = MasterclassWijzigen.locatieT.getText();
-            String datum = MasterclassWijzigen.datumT.getText();
             String masterclassGever = MasterclassWijzigen.masterclassGever.getText();
+           java.sql.Date sqlDate = dateStringToMySqlDate(MasterclassInvoeren.datumT.getText());
+                
 
 
             stat.setString(1, aantalSpelers);
             stat.setString(2, minimaleRating);
             stat.setString(3, inschrijfGeld);
             stat.setString(4, locatie);
-            stat.setString(5, datum);
+            stat.setDate(5, sqlDate);
             stat.setString(6, masterclassGever);
             stat.setString(7, mcode.datum);
             stat.execute();
@@ -963,6 +986,91 @@ public class FullhouseProjectGui {
             updatestat.setInt(2, winnaar);
             updatestat.setInt(1, somRating + winnaarRating);
             updatestat.executeUpdate(); 
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    public static void finaleTafelVullen()
+            {
+             DefaultListModel model = new DefaultListModel();
+             ModelItemToernooi toernooi = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
+            String maxRonde = "select max(rondeNummer) as finaleRonde from Ronde where t_code = ?";
+            String spelersTafel = "select T.s_code, S.naam from Tafel T join Speler S on T.s_code = S.s_code where rondeNummer = ?";
+            
+        try {
+            PreparedStatement stat = con.prepareStatement(maxRonde);
+            PreparedStatement spelerstat = con.prepareStatement(spelersTafel);
+            stat.setString(1, toernooi.id);
+            ResultSet rs = stat.executeQuery();
+            rs.first();
+            String finaleRonde = rs.getString("finaleRonde");
+            spelerstat.setString(1, finaleRonde);
+            FinaleTafel.finaleTafel.removeAll();
+            ResultSet spelerRS = spelerstat.executeQuery();
+            
+            while (spelerRS.next())
+            {
+                ModelItem test1 = new ModelItem();
+                test1.naam = spelerRS.getString("naam");
+                test1.s_code = spelerRS.getString("s_code");
+                model.addElement(test1);
+                
+            } 
+            FinaleTafel.finaleTafel.setModel(model);
+        
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+            }
+    public static void selecteerPlaats()
+    {
+        DefaultListModel model2 = new DefaultListModel();
+       ModelItem model = (ModelItem) FinaleTafel.finaleTafel.getSelectedValue();
+       
+       String plaatsQuery = "Update Toernooi set 1e = ?";
+       String prijzenGeld = "select sum(inschrijfGeld * aantalSpelers) as prijsgeld from Toernooi";
+        String prijzenGeld2 = "Update Toernooi set 2e = ?";
+        String prijzenGeld3 = "Update Toernooi set 3e = ?";
+        try {
+            PreparedStatement stat = con.prepareStatement(plaatsQuery);
+            PreparedStatement prijsGeld = con.prepareStatement(prijzenGeld);
+            PreparedStatement prijs2stat = con.prepareStatement(prijzenGeld2);
+            PreparedStatement prijs3stat = con.prepareStatement(prijzenGeld3);
+            
+            ResultSet rs = prijsGeld.executeQuery();
+            rs.first();
+            int Geld = rs.getInt("prijsgeld");
+            
+            if (FinaleTafel.eerste.isSelected())
+                    {
+            ModelItemPrijsgeld prijs = new ModelItemPrijsgeld();
+             stat.setString(1, model.s_code);
+             prijs.naam = model.naam;
+             int eersteGeld = (int) (Geld * 0.4);
+             prijs.prijsgeld = eersteGeld;
+             model2.addElement(prijs);
+             stat.executeUpdate();
+            }
+            if (FinaleTafel.tweede.isSelected()){
+                ModelItemPrijsgeld prijs2 = new ModelItemPrijsgeld();
+             prijs2stat.setString(1, model.s_code);
+             prijs2.naam = model.naam;
+             int tweedeGeld= (int) (Geld * 0.25);
+             prijs2.prijsgeld = tweedeGeld;
+             model2.addElement(prijs2);
+             prijs2stat.executeUpdate();
+            }
+            if (FinaleTafel.derde.isSelected()){
+                ModelItemPrijsgeld prijs3 = new ModelItemPrijsgeld();
+             prijs3stat.setString(1, model.s_code);
+             prijs3.naam = model.naam;
+             int derdeGeld = (int) (Geld * 0.1);
+              prijs3.prijsgeld = derdeGeld;
+             model2.addElement(prijs3);
+             prijs3stat.executeUpdate();
+            }
+            
+            FinaleTafel.prijzenGeld.setModel(model2);
         } catch (Exception e) {
             System.out.println(e);
         }

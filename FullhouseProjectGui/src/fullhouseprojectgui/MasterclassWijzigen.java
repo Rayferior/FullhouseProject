@@ -4,6 +4,10 @@
  */
 package fullhouseprojectgui;
 
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Menno
@@ -175,7 +179,11 @@ public class MasterclassWijzigen extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      FullhouseProjectGui.masterclassWijzigen();
+        try {
+            FullhouseProjectGui.masterclassWijzigen();
+        } catch (ParseException ex) {
+            System.out.println(ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

@@ -198,7 +198,7 @@ public class ToernooiWijzigen extends javax.swing.JFrame {
         try {
             FullhouseProjectGui.toernooiWijzigen();
         } catch (ParseException ex) {
-            Logger.getLogger(ToernooiWijzigen.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

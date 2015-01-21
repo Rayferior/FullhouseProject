@@ -40,6 +40,7 @@
                               <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace pref="28" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -56,7 +57,6 @@
                       <Component id="homeButton" min="-2" pref="76" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="28" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -295,6 +295,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Overzicht 3"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonOverzicht3MouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonOverzicht4">
           <Properties>

@@ -156,11 +156,6 @@ public class Toernooi extends javax.swing.JFrame {
                 jButtonIndelingMouseClicked(evt);
             }
         });
-        jButtonIndeling.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonIndelingActionPerformed(evt);
-            }
-        });
 
         jButton3.setText("Finaletafel tonen");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -263,7 +258,12 @@ public class Toernooi extends javax.swing.JFrame {
         try {
             FullhouseProjectGui.tekstVullenToernooi();
         } catch (ParseException ex) {
+<<<<<<< HEAD
             Logger.getLogger(Toernooi.class.getName()).log(Level.SEVERE, null, ex);
+=======
+            System.out.println(ex);
+        
+>>>>>>> origin/master
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -288,7 +288,6 @@ public class Toernooi extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButtonIndelingSchermActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIndelingSchermActionPerformed
-        //FullhouseProjectGui.deelSpelerIn();
         TafelIndeling tiFrame = new TafelIndeling();
         tiFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         tiFrame.setVisible(true);
@@ -320,7 +319,7 @@ public class Toernooi extends javax.swing.JFrame {
         } catch (SQLException E) {
             System.out.println(E);
         }
-        
+            FullhouseProjectGui.deelSpelerIn();
     }//GEN-LAST:event_jButtonIndelingMouseClicked
 
     private void jButtonIndelingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIndelingActionPerformed

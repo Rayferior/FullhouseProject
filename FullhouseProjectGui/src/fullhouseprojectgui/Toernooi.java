@@ -271,12 +271,12 @@ public class Toernooi extends javax.swing.JFrame {
         Table[] tables = FullhouseProjectGui.deelIn();
         
         String IndelingQuery = "Insert into TafelIndeling SET i_code = ?, spelersAantal  = ?, toernooi = ?";
-        String rondeNummer = "Insert into Ronde SET rondeNummer = 1, t_code = ?";
+        String rondeNummer = "Insert into Ronde SET rondeNummer = ?, t_code = ?";
         
         try {
             PreparedStatement Indeling = FullhouseProjectGui.con.prepareStatement(IndelingQuery);
             PreparedStatement ronde = FullhouseProjectGui.con.prepareStatement(rondeNummer);
-            ModelItemToernooi toer = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
+            ModelItemToernooi toer = (ModelItemToernooi) ToernooiLijst.getSelectedValue();
             Indeling.setString(3, toer.id);
             for (Table table : tables) {
             Indeling.setInt(1, table.number);
@@ -284,13 +284,13 @@ public class Toernooi extends javax.swing.JFrame {
             Indeling.execute();
             
         }
+            
             ronde.setString(1, toer.id);
             ronde.execute();
             JOptionPane.showMessageDialog(null, "Ingedeeld");
         } catch (SQLException E) {
             System.out.println(E);
         }
-        
         
     }//GEN-LAST:event_jButtonIndelingMouseClicked
 

@@ -16,6 +16,7 @@ public class ModelItemTi {
     public String spelersAantal;
     public String rondeNummer;
     public String s_code;
+    public String t_code;
     
     
     

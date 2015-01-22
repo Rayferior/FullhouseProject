@@ -18,7 +18,7 @@ public class ModelItemPrijsgeld {
    
     @Override
     public String toString(){
-        String description = naam + "                                        " + prijsgeld + " Euro";
+        String description = naam + ""+ prijsgeld;
         return description;
     }
 }

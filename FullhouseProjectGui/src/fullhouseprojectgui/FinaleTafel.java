@@ -6,7 +6,9 @@ package fullhouseprojectgui;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,6 +16,7 @@ import javax.swing.DefaultListModel;
  */
 public class FinaleTafel extends javax.swing.JFrame {
     String t_code;
+     static ArrayList<String> kolomnamenS = new ArrayList<String>();
     /**
      * Creates new form FinaleTafel
      */
@@ -33,24 +36,46 @@ public class FinaleTafel extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        Finaletafel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         finaleTafel = new javax.swing.JList();
+        jLabel1 = new javax.swing.JLabel();
         eerste = new javax.swing.JRadioButton();
         tweede = new javax.swing.JRadioButton();
         derde = new javax.swing.JRadioButton();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        Finaletafel = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        prijzenGeld = new javax.swing.JList();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        prijzenGeld = new javax.swing.JTable();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setText("Fullhouse Manager");
+
+        Finaletafel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        Finaletafel.setText("Finaletafel");
+
         jScrollPane1.setViewportView(finaleTafel);
+
+        jLabel1.setText("Selecteer de plaats");
 
         buttonGroup1.add(eerste);
         eerste.setText("Eerste");
@@ -61,7 +86,12 @@ public class FinaleTafel extends javax.swing.JFrame {
         buttonGroup1.add(derde);
         derde.setText("Derde");
 
-        jLabel1.setText("Selecteer de plaats");
+        jButton2.setText("Terug");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Selecteer");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -70,107 +100,108 @@ public class FinaleTafel extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("Fullhouse Manager");
-
-        Finaletafel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        Finaletafel.setText("Finaletafel");
-
-        jScrollPane2.setViewportView(prijzenGeld);
-
-        jLabel3.setText("Speler");
-
-        jLabel4.setText("Prijzengeld");
-
-        jButton2.setText("Terug");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+        prijzenGeld.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Naam", "Gewonnen geld"
             }
-        });
+        ));
+        jScrollPane4.setViewportView(prijzenGeld);
+        prijzenGeld.getColumnModel().getColumn(1).setResizable(false);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(185, 185, 185)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(226, 226, 226)
+                        .addComponent(Finaletafel))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(eerste)
+                                    .addComponent(tweede)
+                                    .addComponent(derde)
+                                    .addComponent(jButton1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Finaletafel)
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(eerste)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tweede)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(derde)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(eerste)
-                                    .addComponent(tweede)
-                                    .addComponent(derde)
-                                    .addComponent(jLabel1))
-                                .addGap(51, 51, 51)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel4))
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(225, 225, 225)
-                        .addComponent(Finaletafel)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(182, 182, 182)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Finaletafel)
-                        .addGap(31, 31, 31))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addGap(10, 10, 10)
-                            .addComponent(eerste)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(tweede)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(derde)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1))))
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 43, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     DefaultListModel model2 = new DefaultListModel();
+     DefaultTableModel model2 = new DefaultTableModel();
        ModelItem model = (ModelItem) FinaleTafel.finaleTafel.getSelectedValue();
        
+       
         String plaatsQuery = "Update Toernooi set 1e = ? where t_code =?";
-        String prijzenGeld = "select sum(inschrijfGeld * aantalSpelers) as prijsgeld from Toernooi where t_code =?";
+        String prijzenGeld = "select S.s_code as naam, sum(T.inschrijfGeld * T.aantalSpelers) as prijsgeld from Toernooi T JOIN ToernooiInschrijving S ON T.t_code = S.t_code where T.t_code =?";
         String prijzenGeld2 = "Update Toernooi set 2e = ? where t_code =?";
         String prijzenGeld3 = "Update Toernooi set 3e = ? where t_code =?";
         
@@ -181,38 +212,45 @@ public class FinaleTafel extends javax.swing.JFrame {
             PreparedStatement prijs3stat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(prijzenGeld3);
             prijsGeld.setString(1, t_code);
             ResultSet rs = prijsGeld.executeQuery();
+            
+            int Ccount = rs.getMetaData().getColumnCount();
+            for (int i = 1; i <= Ccount; i++) {
+                String name = rs.getMetaData().getColumnName(i);
+                kolomnamenS.add(name);
+            }
+            String[] cnamen = (String[]) new String[kolomnamenS.size()];
+            cnamen = kolomnamenS.toArray(cnamen);
+            model2.setColumnIdentifiers(cnamen);
+            model2.setRowCount(0);
+            model2.setColumnCount(Ccount);
+            
+
             rs.first();
             int Geld = rs.getInt("prijsgeld");
             
             if (FinaleTafel.eerste.isSelected())
                     {
-            ModelItemPrijsgeld prijs = new ModelItemPrijsgeld();
              stat.setString(1, model.s_code);
              stat.setString(2, t_code);
-             prijs.naam = model.naam;
              int eersteGeld = (int) (Geld * 0.4);
-             prijs.prijsgeld = eersteGeld;
-             model2.addElement(prijs);
+             Object rowData[] = {model.naam, eersteGeld};
+             model2.addRow(rowData);
              stat.executeUpdate();
             }
             if (FinaleTafel.tweede.isSelected()){
-                ModelItemPrijsgeld prijs2 = new ModelItemPrijsgeld();
              prijs2stat.setString(1, model.s_code);
              prijs2stat.setString(2, t_code);
-             prijs2.naam = model.naam;
              int tweedeGeld= (int) (Geld * 0.25);
-             prijs2.prijsgeld = tweedeGeld;
-             model2.addElement(prijs2);
+             Object rowData[] = {model.naam, tweedeGeld};
+             model2.addRow(rowData);
              prijs2stat.executeUpdate();
             }
             if (FinaleTafel.derde.isSelected()){
-                ModelItemPrijsgeld prijs3 = new ModelItemPrijsgeld();
              prijs3stat.setString(1, model.s_code);
              prijs3stat.setString(2, t_code);
-             prijs3.naam = model.naam;
              int derdeGeld = (int) (Geld * 0.1);
-              prijs3.prijsgeld = derdeGeld;
-             model2.addElement(prijs3);
+             Object rowData[] = {model.naam, derdeGeld};
+             model2.addRow(rowData);
              prijs3stat.executeUpdate();
             }
             
@@ -277,11 +315,12 @@ public class FinaleTafel extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    public static javax.swing.JList prijzenGeld;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable jTable1;
+    public static javax.swing.JTable prijzenGeld;
     public static javax.swing.JRadioButton tweede;
     // End of variables declaration//GEN-END:variables
 }

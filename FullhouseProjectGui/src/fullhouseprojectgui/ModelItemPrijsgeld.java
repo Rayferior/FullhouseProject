@@ -8,22 +8,19 @@ package fullhouseprojectgui;
  *
  * @author Menno
  */
-public class ModelItemTi {
-    
-    public ModelItemTi() {
+public class ModelItemPrijsgeld {
+    public ModelItemPrijsgeld() {
     }
-    public String i_code;
-    public String spelersAantal;
-    public String rondeNummer;
     public String s_code;
-    public String t_code;
-    
-    
+    public String naam;
+    public int prijsgeld;
     
    
     @Override
     public String toString(){
-        String description = "Tafel " + i_code;
+        String description = naam + "        " + prijsgeld;
         return description;
     }
 }
+    
+

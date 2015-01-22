@@ -88,6 +88,7 @@ public class SpelerInvoerFrame extends javax.swing.JFrame {
         jLabel10.setText("Rating");
 
         invoerButton.setText("Voer in");
+        invoerButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         invoerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 invoerButtonActionPerformed(evt);
@@ -95,6 +96,7 @@ public class SpelerInvoerFrame extends javax.swing.JFrame {
         });
 
         jButton2.setText("Terug");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);

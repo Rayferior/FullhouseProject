@@ -21,7 +21,7 @@ class ModelItem {
    
     @Override
     public String toString(){
-        String description = naam;
+        String description = s_code + " " + naam;
         return description;
     }
 }

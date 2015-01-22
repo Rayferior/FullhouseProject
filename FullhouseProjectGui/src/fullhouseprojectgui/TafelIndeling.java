@@ -6,6 +6,11 @@
 
 package fullhouseprojectgui;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Joep
@@ -17,6 +22,7 @@ public class TafelIndeling extends javax.swing.JFrame {
      */
     public TafelIndeling() {
         initComponents();
+        
     }
 
     /**
@@ -39,6 +45,7 @@ public class TafelIndeling extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         TsLijst = new javax.swing.JList();
         jButton3 = new javax.swing.JButton();
+        jButtonNextRound = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,6 +77,7 @@ public class TafelIndeling extends javax.swing.JFrame {
         jScrollPane2.setViewportView(TiTabel);
 
         jButton1.setText("Toon");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -77,6 +85,7 @@ public class TafelIndeling extends javax.swing.JFrame {
         });
 
         jButton2.setText("Terug");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.setMaximumSize(new java.awt.Dimension(59, 23));
         jButton2.setMinimumSize(new java.awt.Dimension(59, 23));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -88,9 +97,17 @@ public class TafelIndeling extends javax.swing.JFrame {
         jScrollPane3.setViewportView(TsLijst);
 
         jButton3.setText("Selecteer Tafelwinnaar");
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButtonNextRound.setText("Volgende ronde");
+        jButtonNextRound.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonNextRoundMouseClicked(evt);
             }
         });
 
@@ -108,14 +125,19 @@ public class TafelIndeling extends javax.swing.JFrame {
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(282, 282, 282)
                                 .addComponent(jLabel1))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(132, 132, 132)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(28, 28, 28)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButtonNextRound, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -139,7 +161,8 @@ public class TafelIndeling extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(jButtonNextRound))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -156,7 +179,48 @@ public class TafelIndeling extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         FullhouseProjectGui.selecteerWinaar();
+        FullhouseProjectGui.veranderRating();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButtonNextRoundMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonNextRoundMouseClicked
+        Table[] tables = FullhouseProjectGui.deelWinnaars();
+        
+        String IndelingQuery = "Insert into TafelIndeling SET i_code = ?, spelersAantal  = ?, toernooi = ?";
+        String rondeNummer = "Insert into Ronde SET rondeNummer = ?, t_code = ?";
+        String maxI = "Select max(i_code) as hoogste from TafelIndeling where toernooi = ?";
+        
+        try {
+            PreparedStatement Indeling = FullhouseProjectGui.con.prepareStatement(IndelingQuery);
+            PreparedStatement ronde = FullhouseProjectGui.con.prepareStatement(rondeNummer);
+            PreparedStatement hoog = FullhouseProjectGui.con.prepareStatement(maxI);
+            
+            ModelItemTi ticode = (ModelItemTi) TiLijst.getSelectedValue();
+            hoog.setString(1, ticode.t_code);
+            Indeling.setString(3, ticode.t_code);
+            
+            ResultSet RS = hoog.executeQuery();
+            RS.first();
+            int max = RS.getInt("hoogste");
+            
+            
+            for (Table table : tables) {
+            Indeling.setInt(1, (table.number+max));
+            Indeling.setInt(2, table.aantalSpelers);
+            Indeling.execute();
+            }
+            
+            int nieuwnummer = Integer.parseInt(ticode.rondeNummer);
+            int nieuwinsert = nieuwnummer+1;
+            ronde.setInt(1, nieuwinsert);
+            ronde.setString(2, ticode.t_code);
+            ronde.execute();
+            JOptionPane.showMessageDialog(null, "Ingedeeld");
+        } catch (SQLException E) {
+            System.out.println(E);
+        }
+        
+        FullhouseProjectGui.WinnaarIndeling();
+    }//GEN-LAST:event_jButtonNextRoundMouseClicked
 
     /**
      * @param args the command line arguments
@@ -200,6 +264,7 @@ public class TafelIndeling extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonNextRound;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;

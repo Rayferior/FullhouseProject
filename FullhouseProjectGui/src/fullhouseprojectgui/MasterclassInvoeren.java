@@ -47,12 +47,6 @@ public class MasterclassInvoeren extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        MasterclassGeverT.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                MasterclassGeverTFocusGained(evt);
-            }
-        });
-
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText(" FullHouse Manager");
 
@@ -68,7 +62,6 @@ public class MasterclassInvoeren extends javax.swing.JFrame {
         jLabel6.setText("Masterclassgever");
 
         jButton1.setText("Voeg toe");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -76,7 +69,6 @@ public class MasterclassInvoeren extends javax.swing.JFrame {
         });
 
         jButton2.setText("Terug");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -117,16 +109,16 @@ public class MasterclassInvoeren extends javax.swing.JFrame {
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel6))
                                 .addGap(25, 25, 25)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(datumT, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                                     .addComponent(locatieT)
-                                    .addComponent(MasterclassGeverT, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(datumT, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)))
+                                    .addComponent(MasterclassGeverT, javax.swing.GroupLayout.Alignment.TRAILING)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(154, 154, 154)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                                         .addComponent(jButton2))
                                     .addComponent(jLabel2)))))
                     .addGroup(layout.createSequentialGroup()
@@ -153,8 +145,8 @@ public class MasterclassInvoeren extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(minimaleRatingT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(datumT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(datumT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inschrijfGeldT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -187,7 +179,11 @@ public class MasterclassInvoeren extends javax.swing.JFrame {
         int dagen = Integer.parseInt(datum.substring(8,10));
         
         if((masterclassgever.isEmpty()) || (aantalspelers.isEmpty()) || (datum.isEmpty()) || (inschrijfgeld.isEmpty()) 
-        || (locatie.isEmpty()) || (minimalerating.isEmpty()) || (maand > 12) || (dagen > 31) || (jaar < 2015)){
+        || (locatie.isEmpty()) || (minimalerating.isEmpty())){
+            
+        } 
+                
+        else if((maand > 12) || (dagen > 31) || (jaar < 2015)){
             
         }
         else{
@@ -218,9 +214,6 @@ public class MasterclassInvoeren extends javax.swing.JFrame {
         if(inschrijfgeld.isEmpty()){
             JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Inschrijfgeld", JOptionPane.CANCEL_OPTION);
         }
-        if(!inschrijfgeld.matches("[0-9]+")){
-            JOptionPane.showMessageDialog(rootPane, "Invoer mag geen letters bevatten", "Inschrijfgeld", JOptionPane.CANCEL_OPTION);
-        }
         if(locatie.isEmpty()){
             JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Locatie", JOptionPane.CANCEL_OPTION);
         }
@@ -229,10 +222,6 @@ public class MasterclassInvoeren extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void MasterclassGeverTFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_MasterclassGeverTFocusGained
-        
-    }//GEN-LAST:event_MasterclassGeverTFocusGained
 
     /**
      * @param args the command line arguments
@@ -278,7 +267,7 @@ public class MasterclassInvoeren extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTextField MasterclassGeverT;
     public static javax.swing.JTextField aantalSpelersT;
-    public static javax.swing.JFormattedTextField datumT;
+    public static javax.swing.JTextField datumT;
     public static javax.swing.JTextField inschrijfGeldT;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

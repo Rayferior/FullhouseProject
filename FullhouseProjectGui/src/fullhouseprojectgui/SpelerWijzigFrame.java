@@ -230,16 +230,20 @@ public class SpelerWijzigFrame extends javax.swing.JFrame {
         
         if((naam.isEmpty()) || (adres.isEmpty()) || (postcode.isEmpty()) || (woonplaats.isEmpty()) || (email.isEmpty())
         || (telefoonnummer.isEmpty()) || (masterclassleraar.isEmpty()) || (rating.isEmpty()) || (!email.contains("@")) || (!email.contains("."))
-        || (!telefoonnummer.matches("[0-9]+")) || (!rating.matches("[0-9]+")) || (postcodelengte > 6) || (mcleraarlengte > 1)){
+        || (!telefoonnummer.matches("[0-9]+")) || (!rating.matches("[0-9]+")) || (postcodelengte > 6) || (mcleraarlengte > 1)
+        || (naam.matches(("[0-9]+"))) || (woonplaats.matches(("[0-9]+")))){
             
         }
         else{
-            JOptionPane.showMessageDialog(rootPane, "Speler is succesvol toegevoegd");
-            //FullhouseProjectGui.SpelerToevoegen();
+            JOptionPane.showMessageDialog(rootPane, "Speler is succesvol gewijzigd");
+            //FullhouseProjectGui.spelerWijzigen();
         }
          
         if(naam.isEmpty()){
             JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Naam", JOptionPane.CANCEL_OPTION);
+        }
+        if(naam.matches(("[0-9]+"))){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag geen cijfers bevatten", "Naam", JOptionPane.CANCEL_OPTION);
         }
         if(adres.isEmpty()){
             JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Adres", JOptionPane.CANCEL_OPTION);
@@ -249,6 +253,9 @@ public class SpelerWijzigFrame extends javax.swing.JFrame {
         }
         if(woonplaats.isEmpty()){
             JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Woonplaats", JOptionPane.CANCEL_OPTION);
+        }
+        if(woonplaats.matches(("[0-9]+"))){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag geen cijfers bevatten", "Woonplaats", JOptionPane.CANCEL_OPTION);
         }
         if(email.isEmpty()){
             JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "E-mail", JOptionPane.CANCEL_OPTION);
@@ -278,9 +285,6 @@ public class SpelerWijzigFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Dit is geen valide postcode", "Postcode", JOptionPane.CANCEL_OPTION);
         }
         
-        
-
-        //FullhouseProjectGui.spelerWijzigen();
     }//GEN-LAST:event_jButtonWijzigCommitActionPerformed
 
     /**

@@ -214,7 +214,7 @@ public class InschrijvingFrame extends javax.swing.JFrame {
 
         String Query;
         ModelItem speler = (ModelItem) jListSpelers.getSelectedValue();
-
+        
 
         if (jRadioButtonT.isSelected()) {
             Query = "Insert into ToernooiInschrijving set s_code = ?, t_code = ?, heeftBetaald = 'j'";

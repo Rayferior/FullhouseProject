@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package fullhouseprojectgui;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.logging.Level;
@@ -18,7 +18,6 @@ import javax.swing.JOptionPane;
  * @author Joep
  */
 public class Toernooi extends javax.swing.JFrame {
-
 
     /**
      * Creates new form Toernooi
@@ -280,7 +279,7 @@ public class Toernooi extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-       FullhouseProjectGui.vulOpenBetalingen();
+        FullhouseProjectGui.vulOpenBetalingen();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -309,36 +308,64 @@ public class Toernooi extends javax.swing.JFrame {
 
     private void jButtonIndelingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonIndelingMouseClicked
         Table[] tables = FullhouseProjectGui.deelIn();
-        
+        String compareQuery = "Select t_code from ToernooiInschrijving";
         String IndelingQuery = "Insert into TafelIndeling SET i_code = ?, spelersAantal  = ?, toernooi = ?";
         String rondeNummer = "Insert into Ronde SET rondeNummer = 1, t_code = ?";
-        
+
         try {
             PreparedStatement Indeling = FullhouseProjectGui.con.prepareStatement(IndelingQuery);
             PreparedStatement ronde = FullhouseProjectGui.con.prepareStatement(rondeNummer);
             ModelItemToernooi toer = (ModelItemToernooi) ToernooiLijst.getSelectedValue();
-            Indeling.setString(3, toer.id);
-            for (Table table : tables) {
-            Indeling.setInt(1, table.number);
-            Indeling.setInt(2, table.aantalSpelers);
-            Indeling.execute();
+            if (toer == null) {
+                JOptionPane.showMessageDialog(null, "Selecteer een toernooi");
+            } else {
+                PreparedStatement comparestat = FullhouseProjectGui.con.prepareStatement(compareQuery);
+
+                ResultSet comparers = comparestat.executeQuery();
+                comparers.first();
+                String t_code;
+                boolean keuze = false;
+                while (comparers.next()) {
+                    t_code = comparers.getString("t_code");
+                    if (t_code.equals(toer.id)) {
+                        keuze = true;
+                    } else {
+                        keuze = false;
+                    }
+
+                }
+                if (keuze = true) {
+                    JOptionPane.showMessageDialog(null, "De eerste ronde van dit toernooi is al ingedeeld");
+                } else {
+                    Indeling.setString(3, toer.id);
+                    for (Table table : tables) {
+                        Indeling.setInt(1, table.number);
+                        Indeling.setInt(2, table.aantalSpelers);
+                        Indeling.execute();
+
+                    }
+
+                    ronde.setString(1, toer.id);
+                    ronde.execute();
+                    JOptionPane.showMessageDialog(null, "Ingedeeld");
+                }
+            }
+            }  catch (SQLException E) {
             
         }
-            
-            ronde.setString(1, toer.id);
-            ronde.execute();
-            JOptionPane.showMessageDialog(null, "Ingedeeld");
-        } catch (SQLException E) {
-            System.out.println(E);
-        }
-            FullhouseProjectGui.deelSpelerIn();
+        FullhouseProjectGui.deelSpelerIn();
+
     }//GEN-LAST:event_jButtonIndelingMouseClicked
 
     private void jButtonIndelingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIndelingActionPerformed
 
+
         FullhouseProjectGui.deelIn();        
 
     FullhouseProjectGui.deelIn();        
+
+
+        FullhouseProjectGui.deelIn();
 
     }//GEN-LAST:event_jButtonIndelingActionPerformed
 
@@ -351,17 +378,21 @@ public class Toernooi extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-   FullhouseProjectGui.verwijderToernooi();
+        FullhouseProjectGui.verwijderToernooi();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /*
+         * Set the Nimbus look and feel
+         */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the
+         * default look and feel. For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -381,14 +412,16 @@ public class Toernooi extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /*
+         * Create and display the form
+         */
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 new Toernooi().setVisible(true);
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTable OpenBet;
     private javax.swing.JButton ToernooiHomeButton;

@@ -201,7 +201,7 @@ public class FinaleTafel extends javax.swing.JFrame {
        
        
         String plaatsQuery = "Update Toernooi set 1e = ? where t_code =?";
-        String prijzenGeld = "select S.naam, sum(T.inschrijfGeld * T.aantalSpelers) as prijsgeld from Toernooi T JOIN ToernooiInschrijving I ON T.t_code = I.t_code JOIN Speler S ON I.s_code = S.s_code where T.t_code =?";
+        String prijzenGeld = "select S.naam, (T.inschrijfGeld * T.aantalSpelers) as prijsgeld from Toernooi T JOIN ToernooiInschrijving I ON T.t_code = I.t_code JOIN Speler S ON I.s_code = S.s_code where T.t_code =?";
         String prijzenGeld2 = "Update Toernooi set 2e = ? where t_code =?";
         String prijzenGeld3 = "Update Toernooi set 3e = ? where t_code =?";
         

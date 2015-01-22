@@ -208,7 +208,11 @@ public class ToernooiWijzigen extends javax.swing.JFrame {
         }
         else{
             JOptionPane.showMessageDialog(rootPane, "Toernooi is succesvol gewijzigd", "Succes", JOptionPane.CANCEL_OPTION);
-            //FullhouseProjectGui.toernooiWijzigen();
+            try {
+                FullhouseProjectGui.toernooiWijzigen();
+            } catch (ParseException ex) {
+                System.out.println(ex);
+            }
         }
         if(eerste.isEmpty()){
             JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Eerste Plaats", JOptionPane.CANCEL_OPTION);

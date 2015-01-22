@@ -10,6 +10,9 @@ import static fullhouseprojectgui.MasterclassInvoeren.datumT;
 import static fullhouseprojectgui.MasterclassInvoeren.inschrijfGeldT;
 import static fullhouseprojectgui.MasterclassInvoeren.locatieT;
 import static fullhouseprojectgui.MasterclassInvoeren.minimaleRatingT;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -204,7 +207,11 @@ public class MasterclassWijzigen extends javax.swing.JFrame {
         }
         else{
             JOptionPane.showMessageDialog(rootPane, "Masterclass is succesvol gewijzigd");
-            //FullhouseProjectGui.masterclassWijzigen();
+            try {
+                FullhouseProjectGui.masterclassWijzigen();
+            } catch (ParseException ex) {
+                System.out.println(ex);
+            }
         }
         
         if(masterclassgever.isEmpty()){

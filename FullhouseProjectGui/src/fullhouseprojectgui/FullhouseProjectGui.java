@@ -533,6 +533,10 @@ public class FullhouseProjectGui {
     public static Table[] deelIn() {
         String aantalQuery = "Select aantalSpelers from Toernooi where t_code = ?";
         int totaalSpelers = 0;
+
+        String tcode = null;
+
+
         try {
             PreparedStatement aantalStat = con.prepareStatement(aantalQuery);
             ModelItemToernooi toer = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
@@ -541,11 +545,12 @@ public class FullhouseProjectGui {
             ToerRS.first();
             String aantalS = ToerRS.getString("aantalSpelers");
             totaalSpelers = (int) Integer.parseInt(aantalS);
+            tcode = toer.id;
         } catch (SQLException ex) {
             System.out.println(ex);
         }
 
-
+       
         int aantalTafels = totaalSpelers / 4;
         int aantalRest = totaalSpelers % 4;
         Table[] tables = new Table[aantalTafels];
@@ -559,7 +564,8 @@ public class FullhouseProjectGui {
             if (i == aantalTafels - 1) {
                 aantalSpelersPerTafel += aantalRest;
             }
-            tables[i] = new Table(i + 1, aantalSpelersPerTafel);
+            int icode = (int) Integer.parseInt(tcode);
+            tables[i] = new Table(i + (icode * 100) + 1, aantalSpelersPerTafel);
         }
         return tables;
     }
@@ -741,14 +747,36 @@ public class FullhouseProjectGui {
             tafelmodel.clear();
             
             rs.beforeFirst();
-            
-            while (rs.next()) {
+            int Toerid = Integer.parseInt(toer.id);
+            if(Toerid == 1)
+            {
+                while (rs.next()) {
                 ModelItemTi test1 = new ModelItemTi();
                 test1.i_code = rs.getString("i_code");
                 test1.rondeNummer = rs.getString("rondeNummer");
                 test1.t_code = toer.id;
                 tafelmodel.addElement(test1);
             }
+            }
+             else
+            {
+                {
+                while (rs.next()) {
+                ModelItemTi test1 = new ModelItemTi();
+                String toerid = toer.id;
+                int toeridR = Integer.parseInt(toerid);
+                String icode = rs.getString("i_code");
+                int icode1 = Integer.parseInt(icode);
+                int icodeID = icode1 - (100 * toeridR);
+                test1.rondeNummer = rs.getString("rondeNummer");
+                test1.t_code = toer.id;
+                test1.i_code = ""+icodeID;
+                tafelmodel.addElement(test1);
+            }
+            }
+            }
+            
+
             TafelIndeling.TiLijst.setModel(tafelmodel);
         } catch (Exception e) {
             System.out.println(e);
@@ -1047,5 +1075,29 @@ public class FullhouseProjectGui {
                 System.out.println(e);
         }
     }
+    public static void verwijderToernooi()
+            {
+          ModelItemToernooi toernooi = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
+        String deleteQuery = "Delete from Toernooi where t_code = ?";
+        try {
+            PreparedStatement stat = con.prepareStatement(deleteQuery);
+            stat.setString(1, toernooi.id);
+            stat.execute();   
+           } catch (Exception e) {
+            System.out.println(e);
+        }
+            }
+        public static void verwijderMasterclass()
+            {
+          ModelItemMasterclass masterclass = (ModelItemMasterclass) Masterclass.masterclassLijst.getSelectedValue();
+        String deleteQuery = "Delete from Masterclass where datum = ?";
+        try {
+            PreparedStatement stat = con.prepareStatement(deleteQuery);
+            stat.setString(1, masterclass.datum);
+            stat.execute();   
+           } catch (Exception e) {
+            System.out.println(e);
+        }
+            }
 }
 

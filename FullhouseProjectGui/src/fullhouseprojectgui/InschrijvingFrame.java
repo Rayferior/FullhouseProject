@@ -5,6 +5,7 @@
 package fullhouseprojectgui;
 
 import com.mysql.jdbc.PreparedStatement;
+import java.awt.HeadlessException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.ButtonGroup;
@@ -231,32 +232,37 @@ public class InschrijvingFrame extends javax.swing.JFrame {
             compareQuery = "Select s_code from ToernooiInschrijving where t_code = ?";
             Query = "Insert into ToernooiInschrijving set s_code = ?, t_code = ?, heeftBetaald = 'j'";
             ModelItemToernooi toer = (ModelItemToernooi) jListTenM.getSelectedValue();
-            try {
+            
+                try {
                 PreparedStatement comparestat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(compareQuery);
                 comparestat.setString(1, toer.id);
                 ResultSet comparers = comparestat.executeQuery();
                 comparers.first();
                 String s_code;
                 boolean keuze = false;
-                while(comparers.next()){
+                while (comparers.next()) {
                     s_code = comparers.getString("s_code");
-                    if(s_code.equals(speler.s_code)){
+                    if (s_code.equals(speler.s_code)) {
                         keuze = true;
-                    } else{
+                    } else {
                         keuze = false;
                     }
-                        
-                }
-                if(keuze = true){
-                    JOptionPane.showMessageDialog(null, "Speler staat al ingeschreven.");
-                }else{
                     
-                PreparedStatement stat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(Query);
-                stat.setString(1, speler.s_code);
-                stat.setString(2, toer.id);
-                stat.execute();
-                JOptionPane.showMessageDialog(null, "Ingeschreven");
                 }
+                if (keuze = true) {
+                    JOptionPane.showMessageDialog(null, "Speler staat al ingeschreven.");
+                } else {
+                    
+                    PreparedStatement stat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(Query);
+                    stat.setString(1, speler.s_code);
+                    stat.setString(2, toer.id);
+                    stat.execute();
+                    JOptionPane.showMessageDialog(null, "Ingeschreven");
+                }
+            } catch (SQLException sQLException) {
+            } catch (HeadlessException headlessException) {
+            }
+                
             } else if (jRadioButtonM.isSelected()) {
                 
                 compareQuery = "Select Mi.s_code, S.rating, M.minimaleRating from MasterclassInschrijving Mi join Speler S on Mi.s_code = S.s_code"
@@ -304,21 +310,7 @@ public class InschrijvingFrame extends javax.swing.JFrame {
                     }
                         
                 }
-                if(keuze = true){
-                    JOptionPane.showMessageDialog(null, "Speler staat al ingeschreven.");
-                }else{
-                PreparedStatement stat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(Query);
-                stat.setString(1, speler.s_code);
-                stat.setString(2, mast.mcode);
-                stat.execute();
-                JOptionPane.showMessageDialog(null, "Ingeschreven");
-                }
-            } catch (SQLException Ex) {
-                JOptionPane.showMessageDialog(null, Ex);
             }
-        }
-
-
     }//GEN-LAST:event_jButtonInConfirmMouseClicked
 
     private void jButtonTotaalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonTotaalMouseClicked

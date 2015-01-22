@@ -381,7 +381,28 @@ public class Overzichten extends javax.swing.JFrame {
 
 
     private void jButtonOverzicht4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOverzicht4ActionPerformed
-        // TODO add your handling code here:
+        ModelItemMasterclass masterclass = (ModelItemMasterclass) Overzichten.jListOverzichtTenM.getSelectedValue();
+        DefaultListModel modelvier = new DefaultListModel();
+        String queryVier = "SELECT S.s_code, S.naam, I.m_code FROM MasterclassInschrijving I JOIN Speler S ON I.s_code = S.s_code WHERE I.heeftBetaald = 'j' AND m_code = ?";
+        try{
+            PreparedStatement vierstat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(queryVier);
+            vierstat.setString(1, masterclass.mcode);
+            vierstat.executeQuery();
+            ResultSet rsvier = vierstat.executeQuery();
+            rsvier.beforeFirst();
+            
+            while(rsvier.next()){
+                ModelItem speler = new ModelItem();
+                speler.s_code = rsvier.getString("s_code");
+                speler.naam = rsvier.getString("naam");
+                modelvier.addElement(speler);
+            }
+            jListResultaat.setModel(modelvier);
+        }
+        
+        catch (SQLException ex){
+            System.out.println(ex);
+        }
     }//GEN-LAST:event_jButtonOverzicht4ActionPerformed
 
 

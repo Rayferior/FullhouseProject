@@ -179,13 +179,9 @@ public class MasterclassInvoeren extends javax.swing.JFrame {
         int dagen = Integer.parseInt(datum.substring(8,10));
         
         if((masterclassgever.isEmpty()) || (aantalspelers.isEmpty()) || (datum.isEmpty()) || (inschrijfgeld.isEmpty()) 
-        || (locatie.isEmpty()) || (minimalerating.isEmpty())){
+        || (locatie.isEmpty()) || (minimalerating.isEmpty()) || ((maand > 12) || (dagen > 31) || (jaar < 2015)) ){
             
         } 
-                
-        else if((maand > 12) || (dagen > 31) || (jaar < 2015)){
-            
-        }
         else{
             JOptionPane.showMessageDialog(rootPane, "Masterclass is succesvol toegvoegd");
             //FullhouseProjectGui.MasterclassToevoegen();

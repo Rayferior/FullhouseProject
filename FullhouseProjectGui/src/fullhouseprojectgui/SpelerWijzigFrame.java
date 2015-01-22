@@ -229,9 +229,9 @@ public class SpelerWijzigFrame extends javax.swing.JFrame {
         int mcleraarlengte = masterclassleraar.length();
         
         if((naam.isEmpty()) || (adres.isEmpty()) || (postcode.isEmpty()) || (woonplaats.isEmpty()) || (email.isEmpty())
-        || (telefoonnummer.isEmpty()) || (masterclassleraar.isEmpty()) || (rating.isEmpty()) || (!email.contains("@")) || (!email.contains("."))
-        || (!telefoonnummer.matches("[0-9]+")) || (!rating.matches("[0-9]+")) || (postcodelengte > 6) || (mcleraarlengte > 1)
-        || (naam.matches(("[0-9]+"))) || (woonplaats.matches(("[0-9]+")))){
+        || (telefoonnummer.isEmpty()) || (masterclassleraar.isEmpty()) || (rating.isEmpty()) || (!email.contains("@")) 
+        || (!email.contains(".")) || (!telefoonnummer.matches("[0-9]+")) || (!rating.matches("[0-9]+")) || (postcodelengte > 6) 
+        || (mcleraarlengte > 1) || (naam.matches(("[0-9]+"))) || (woonplaats.matches(("[0-9]+")))){
             
         }
         else{

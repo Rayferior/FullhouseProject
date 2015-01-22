@@ -213,8 +213,9 @@ public class SpelerInvoerFrame extends javax.swing.JFrame {
         int mcleraarlengte = masterclassleraar.length();
         
         if((naam.isEmpty()) || (adres.isEmpty()) || (postcode.isEmpty()) || (woonplaats.isEmpty()) || (email.isEmpty())
-        || (telefoonnummer.isEmpty()) || (masterclassleraar.isEmpty()) || (rating.isEmpty()) || (!email.contains("@")) || (!email.contains("."))
-        || (!telefoonnummer.matches("[0-9]+")) || (!rating.matches("[0-9]+")) || (postcodelengte > 6) || (mcleraarlengte > 1)){
+        || (telefoonnummer.isEmpty()) || (masterclassleraar.isEmpty()) || (rating.isEmpty()) || (!email.contains("@")) 
+        || (!email.contains(".")) || (!telefoonnummer.matches("[0-9]+")) || (!rating.matches("[0-9]+")) || (postcodelengte > 6) 
+        || (mcleraarlengte > 1) || (naam.matches(("[0-9]+"))) || (woonplaats.matches(("[0-9]+")))){
             
         }
         else{
@@ -225,6 +226,9 @@ public class SpelerInvoerFrame extends javax.swing.JFrame {
         if(naam.isEmpty()){
             JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Naam", JOptionPane.CANCEL_OPTION);
         }
+        if(naam.matches(("[0-9]+"))){
+            JOptionPane.showMessageDialog(rootPane, "Ivoer mag geen cijfers bevatten", "Naam", JOptionPane.CANCEL_OPTION);
+        }
         if(adres.isEmpty()){
             JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Adres", JOptionPane.CANCEL_OPTION);
         }
@@ -233,6 +237,9 @@ public class SpelerInvoerFrame extends javax.swing.JFrame {
         }
         if(woonplaats.isEmpty()){
             JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Woonplaats", JOptionPane.CANCEL_OPTION);
+        }
+        if(woonplaats.matches(("[0-9]+"))){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag geen cijfers bevatten", "Woonplaats", JOptionPane.CANCEL_OPTION);
         }
         if(email.isEmpty()){
             JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "E-mail", JOptionPane.CANCEL_OPTION);

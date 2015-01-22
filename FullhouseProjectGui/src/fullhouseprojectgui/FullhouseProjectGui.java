@@ -797,7 +797,7 @@ public class FullhouseProjectGui {
             ResultSet rs = stat.executeQuery();
             TafelIndeling.TiLijst.removeAll();
             int Ccount = rs.getMetaData().getColumnCount();
-            for (int i = 1; i <= Ccount; i++) {
+            for (int i = 1; i < Ccount; i++) {
                 String name = rs.getMetaData().getColumnName(i);
                 kolomnamenM.add(name);
             }
@@ -805,7 +805,7 @@ public class FullhouseProjectGui {
             cnamen = kolomnamenM.toArray(cnamen);
             model.setColumnIdentifiers(cnamen);
             model.setRowCount(0);
-            model.setColumnCount(Ccount);
+            model.setColumnCount(Ccount-1);
             rs.first();
             do {
                 ModelItemTi test1 = new ModelItemTi();

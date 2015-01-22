@@ -125,6 +125,11 @@ public class Overzichten extends javax.swing.JFrame {
         );
 
         jButtonOverzicht1.setText("Overzicht 1");
+        jButtonOverzicht1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOverzicht1ActionPerformed(evt);
+            }
+        });
 
         jButtonOverzicht2.setText("Overzicht 2");
         jButtonOverzicht2.addActionListener(new java.awt.event.ActionListener() {
@@ -139,8 +144,18 @@ public class Overzichten extends javax.swing.JFrame {
                 jButtonOverzicht3MouseClicked(evt);
             }
         });
+        jButtonOverzicht3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOverzicht3ActionPerformed(evt);
+            }
+        });
 
         jButtonOverzicht4.setText("Overzicht 4");
+        jButtonOverzicht4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOverzicht4ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("De namen van alle spelers die zich nog nooit voor een masterclass hebben ingeschreven");
 
@@ -358,6 +373,38 @@ public class Overzichten extends javax.swing.JFrame {
     private void homeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeButtonMouseClicked
         this.dispose();
     }//GEN-LAST:event_homeButtonMouseClicked
+
+    private void jButtonOverzicht3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOverzicht3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonOverzicht3ActionPerformed
+
+    private void jButtonOverzicht4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOverzicht4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonOverzicht4ActionPerformed
+
+    private void jButtonOverzicht1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOverzicht1ActionPerformed
+        DefaultListModel modeleen = new DefaultListModel();
+        String queryEen = "SELECT s_code, naam FROM Speler WHERE s_code NOT IN(SELECT s_code FROM MasterclassInschrijving)";
+        try {
+            PreparedStatement eenstat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(queryEen);
+            
+            eenstat.executeQuery();
+            jListResultaat.removeAll();
+            ResultSet rseen = eenstat.executeQuery();
+            rseen.beforeFirst();
+            while(rseen.next()){
+                ModelItem speler = new ModelItem();   
+                speler.s_code = rseen.getString("s_code");
+                speler.naam = rseen.getString("naam");
+                modeleen.addElement(speler);
+            }
+            jListResultaat.setModel(modeleen);
+            
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        
+    }//GEN-LAST:event_jButtonOverzicht1ActionPerformed
 
     /**
      * @param args the command line arguments

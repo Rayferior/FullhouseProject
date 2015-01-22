@@ -27,6 +27,7 @@ public class FinaleTafel extends javax.swing.JFrame {
         initComponents();
         ModelItemToernooi toer = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
         t_code = toer.id;
+        
     }
 
     /**
@@ -200,18 +201,27 @@ public class FinaleTafel extends javax.swing.JFrame {
        ModelItem model = (ModelItem) FinaleTafel.finaleTafel.getSelectedValue();
        
        
-        String plaatsQuery = "Update Toernooi set 1e = ? where t_code =?";
-        String prijzenGeld = "select S.naam, (T.inschrijfGeld * T.aantalSpelers) as prijsgeld from Toernooi T JOIN ToernooiInschrijving I ON T.t_code = I.t_code JOIN Speler S ON I.s_code = S.s_code where T.t_code =?";
+        String winnaar = "select S.naam, S.s_code from Speler S join ToernooiInschrijving I on S.s_code = I.s_code "
+                + "JOIN Toernooi T ON I.t_code = T.t_code WHERE S.s_code = T.1e and T.t_code = ?";
+        String prijzenGeld = "select S.naam, (T.inschrijfGeld * T.aantalSpelers) as prijsgeld from Toernooi T "
+                + "JOIN ToernooiInschrijving I ON T.t_code = I.t_code JOIN Speler S ON I.s_code = S.s_code where T.t_code =?";
         String prijzenGeld2 = "Update Toernooi set 2e = ? where t_code =?";
         String prijzenGeld3 = "Update Toernooi set 3e = ? where t_code =?";
         
         try {
-            PreparedStatement stat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(plaatsQuery);
+            
             PreparedStatement prijsGeld = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(prijzenGeld);
             PreparedStatement prijs2stat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(prijzenGeld2);
             PreparedStatement prijs3stat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(prijzenGeld3);
+            PreparedStatement winstat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(winnaar);
+            winstat.setString(1, t_code);
             prijsGeld.setString(1, t_code);
+            
             ResultSet rs = prijsGeld.executeQuery();
+            
+            ResultSet winrs = winstat.executeQuery();
+            winrs.first();
+            String naam = winrs.getString("naam");
             
             int Ccount = rs.getMetaData().getColumnCount();
             for (int i = 1; i <= Ccount; i++) {
@@ -223,21 +233,16 @@ public class FinaleTafel extends javax.swing.JFrame {
             model2.setColumnIdentifiers(cnamen);
             model2.setRowCount(0);
             model2.setColumnCount(Ccount);
-            
-
             rs.first();
+            
             int Geld = rs.getInt("prijsgeld");
             
-            if (FinaleTafel.eerste.isSelected())
-                    {
-             stat.setString(1, model.s_code);
-             stat.setString(2, t_code);
-             int eersteGeld = (int) (Geld * 0.4);
-             eersteRow[0] = model.naam;
-             eersteRow[1] = eersteGeld;
-             stat.executeUpdate();
+            if (eerste.isSelected()){
+            int eersteGeld = (int) (Geld * 0.4);
+            eersteRow[0] = naam;
+            eersteRow[1] = eersteGeld;
             }
-            if (FinaleTafel.tweede.isSelected()){
+            if (tweede.isSelected()){
              prijs2stat.setString(1, model.s_code);
              prijs2stat.setString(2, t_code);
              int tweedeGeld= (int) (Geld * 0.25);
@@ -245,7 +250,7 @@ public class FinaleTafel extends javax.swing.JFrame {
              tweedeRow[1] = tweedeGeld;
              prijs2stat.executeUpdate();
             }
-            if (FinaleTafel.derde.isSelected()){
+            if (derde.isSelected()){
              prijs3stat.setString(1, model.s_code);
              prijs3stat.setString(2, t_code);
              int derdeGeld = (int) (Geld * 0.1);

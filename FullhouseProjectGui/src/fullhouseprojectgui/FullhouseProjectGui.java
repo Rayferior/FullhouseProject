@@ -32,7 +32,6 @@ public class FullhouseProjectGui {
     static ArrayList<String> kolomnamenT = new ArrayList<String>();
     static ArrayList<String> kolomnamenM = new ArrayList<String>();
     static ArrayList<String> IndelingGroep = new ArrayList<String>();
-
     /**
      * @param args the command line arguments
      */
@@ -915,21 +914,33 @@ public class FullhouseProjectGui {
         ModelItem ticode = (ModelItem) TafelIndeling.TsLijst.getSelectedValue();
         String Query = "UPDATE Tafel SET tafelWinnaar = ? WHERE i_code = ?";
         String spelerQuery = "UPDATE Tafel SET tafelWinnaar = ? WHERE s_code = ?";
-        String selectQuery = "Select I.spelersAantal, I.i_code from TafelIndeling I JOIN Tafel T on I.i_code = T.i_code where T.s_code = ?";
+        String selectQuery = "Select I.spelersAantal, I.i_code, I.toernooi from TafelIndeling I JOIN Tafel T on I.i_code = T.i_code where T.s_code = ?";
+        String maxQuery = "Select max(i_code) as hoogste from TafelIndeling where toernooi = ?";
+        String plaatsQuery = "Update Toernooi set 1e = ? where t_code =?";
 
         try {
             PreparedStatement stat = con.prepareStatement(Query);
             PreparedStatement spelerStat = con.prepareStatement(spelerQuery);
             PreparedStatement selectStat = con.prepareStatement(selectQuery);
-
+            PreparedStatement maxStat = con.prepareStatement(maxQuery);
+            PreparedStatement winstat = con.prepareStatement(plaatsQuery);
+            
             selectStat.setString(1, ticode.s_code);
             spelerStat.setString(2, ticode.s_code);
+            
 
             ResultSet Selectrs = selectStat.executeQuery();
             Selectrs.first();
             int i_code = Selectrs.getInt("i_code");
             int aantalSpelers = Selectrs.getInt("spelersAantal");
+            String tcode = Selectrs.getString("toernooi");
+            maxStat.setString(1, tcode);
             stat.setInt(2, i_code);
+            
+            ResultSet maxRs = maxStat.executeQuery();
+            maxRs.first(); 
+            int max = maxRs.getInt("hoogste");
+            
 
             for (int i = 0; i < aantalSpelers; i++) {
                 stat.setString(1, "n");
@@ -937,8 +948,16 @@ public class FullhouseProjectGui {
             }
             spelerStat.setString(1, "j");
             spelerStat.execute();
+            
+            if(max == i_code){
+                winstat.setString(1, ticode.s_code);
+                winstat.setString(2, tcode);
+                winstat.executeUpdate();
+                JOptionPane.showMessageDialog(null, "De winnaar van het toernooi is bekend");
+            }
+            else {
             JOptionPane.showMessageDialog(null, "Winnaar bevestigd");
-
+            }
         } catch (Exception e) {
             System.out.println(e);
         }

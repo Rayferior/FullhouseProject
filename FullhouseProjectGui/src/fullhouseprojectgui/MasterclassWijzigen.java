@@ -4,9 +4,13 @@
  */
 package fullhouseprojectgui;
 
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import static fullhouseprojectgui.MasterclassInvoeren.MasterclassGeverT;
+import static fullhouseprojectgui.MasterclassInvoeren.aantalSpelersT;
+import static fullhouseprojectgui.MasterclassInvoeren.datumT;
+import static fullhouseprojectgui.MasterclassInvoeren.inschrijfGeldT;
+import static fullhouseprojectgui.MasterclassInvoeren.locatieT;
+import static fullhouseprojectgui.MasterclassInvoeren.minimaleRatingT;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -46,7 +50,7 @@ public class MasterclassWijzigen extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         locatieT = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        datumT = new javax.swing.JFormattedTextField();
+        datumT = new javax.swing.JTextField();
 
         jLabel1.setText("jLabel1");
 
@@ -73,7 +77,6 @@ public class MasterclassWijzigen extends javax.swing.JFrame {
         jLabel7.setText("Masterclassgever");
 
         jButton1.setText("Wijzigen");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -81,7 +84,6 @@ public class MasterclassWijzigen extends javax.swing.JFrame {
         });
 
         jButton2.setText("Terug");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -102,6 +104,31 @@ public class MasterclassWijzigen extends javax.swing.JFrame {
                         .addGap(61, 61, 61)
                         .addComponent(jLabel3))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel8))
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(minimaleRatingT, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel9))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(masterclassGever, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                                    .addComponent(datumT)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(aantalSpelersT, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                                    .addComponent(inschrijfGeldT, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                                    .addComponent(locatieT))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(141, 141, 141)
                         .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -110,28 +137,6 @@ public class MasterclassWijzigen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel8))
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(minimaleRatingT, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(aantalSpelersT, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                        .addComponent(inschrijfGeldT, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                        .addComponent(locatieT)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel9))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(masterclassGever, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                    .addComponent(datumT)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,10 +184,69 @@ public class MasterclassWijzigen extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            FullhouseProjectGui.masterclassWijzigen();
-        } catch (ParseException ex) {
-            System.out.println(ex);
+     
+        String masterclassgever = masterclassGever.getText();
+        String aantalspelers = aantalSpelersT.getText();
+        String datum = datumT.getText();
+        String inschrijfgeld = inschrijfGeldT.getText();
+        String locatie = locatieT.getText();
+        String minimalerating = minimaleRatingT.getText();
+        
+        int jaar = Integer.parseInt(datum.substring(0,4));
+        int maand = Integer.parseInt(datum.substring(5,7));
+        int dagen = Integer.parseInt(datum.substring(8,10));
+        
+        if((masterclassgever.isEmpty()) || (aantalspelers.isEmpty()) || (datum.isEmpty()) || (inschrijfgeld.isEmpty()) 
+        || (locatie.isEmpty()) || (minimalerating.isEmpty()) || (jaar < 2015) || (maand > 13) || (dagen > 31)
+        || (!minimalerating.matches("[0-9]+")) || (locatie.matches("[0-9]+")) || (!aantalspelers.matches("[0-9]+")) 
+        || (!inschrijfgeld.matches("[0-9]+"))){
+            
+        }
+        else{
+            JOptionPane.showMessageDialog(rootPane, "Masterclass is succesvol gewijzigd");
+            //FullhouseProjectGui.masterclassWijzigen();
+        }
+        
+        if(masterclassgever.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Masterclassgever", JOptionPane.CANCEL_OPTION);
+        }
+        if(aantalspelers.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Aantal Spelers", JOptionPane.CANCEL_OPTION);
+        }
+        if(!aantalspelers.matches("[0-9]+")){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag geen letters bevatten");
+        }
+        if(datum.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Datum", JOptionPane.CANCEL_OPTION);
+        }
+        else{
+        if(jaar < 2015){
+        JOptionPane.showMessageDialog(rootPane, "Jaar mag niet eerder dan 2015 zijn", "Datum", JOptionPane.CANCEL_OPTION);
+        }
+        if(maand > 12){
+        JOptionPane.showMessageDialog(rootPane, "Maand mag niet hoger dan 12 zijn", "Datum", JOptionPane.CANCEL_OPTION);
+        }
+        if(dagen > 31){
+        JOptionPane.showMessageDialog(rootPane, "Dagen mag niet hoger zijn dan 31", "Datum", JOptionPane.CANCEL_OPTION);
+        }
+        }
+        if(inschrijfgeld.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Inschrijfgeld", JOptionPane.CANCEL_OPTION);
+        }
+        if(!inschrijfgeld.matches("[0-9]+")){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag geen letters bevatten");
+        }
+        if(locatie.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Locatie", JOptionPane.CANCEL_OPTION);
+        }
+        if(locatie.matches("[0-9]+")){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag geen cijers bevatten", "Locatie", JOptionPane.CANCEL_OPTION);
+        }
+        if(minimalerating.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Minimale Rating", JOptionPane.CANCEL_OPTION);
+        }
+        if(!minimalerating.matches("[0-9]+")){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag geen letters bevatten", "Minimale Rating", JOptionPane.CANCEL_OPTION);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -229,7 +293,7 @@ public class MasterclassWijzigen extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTextField aantalSpelersT;
-    public static javax.swing.JFormattedTextField datumT;
+    public static javax.swing.JTextField datumT;
     public static javax.swing.JTextField inschrijfGeldT;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

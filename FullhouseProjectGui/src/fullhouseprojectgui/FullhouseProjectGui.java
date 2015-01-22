@@ -1012,7 +1012,6 @@ public class FullhouseProjectGui {
                 test1.naam = spelerRS.getString("naam");
                 test1.s_code = spelerRS.getString("s_code");
                 model.addElement(test1);
-                
             } 
             FinaleTafel.finaleTafel.setModel(model);
         
@@ -1020,59 +1019,7 @@ public class FullhouseProjectGui {
             System.out.println(e);
         }
             }
-    public static void selecteerPlaats()
-    {
-        DefaultListModel model2 = new DefaultListModel();
-       ModelItem model = (ModelItem) FinaleTafel.finaleTafel.getSelectedValue();
-       
-       String plaatsQuery = "Update Toernooi set 1e = ?";
-       String prijzenGeld = "select sum(inschrijfGeld * aantalSpelers) as prijsgeld from Toernooi";
-        String prijzenGeld2 = "Update Toernooi set 2e = ?";
-        String prijzenGeld3 = "Update Toernooi set 3e = ?";
-        try {
-            PreparedStatement stat = con.prepareStatement(plaatsQuery);
-            PreparedStatement prijsGeld = con.prepareStatement(prijzenGeld);
-            PreparedStatement prijs2stat = con.prepareStatement(prijzenGeld2);
-            PreparedStatement prijs3stat = con.prepareStatement(prijzenGeld3);
-            
-            ResultSet rs = prijsGeld.executeQuery();
-            rs.first();
-            int Geld = rs.getInt("prijsgeld");
-            
-            if (FinaleTafel.eerste.isSelected())
-                    {
-            ModelItemPrijsgeld prijs = new ModelItemPrijsgeld();
-             stat.setString(1, model.s_code);
-             prijs.naam = model.naam;
-             int eersteGeld = (int) (Geld * 0.4);
-             prijs.prijsgeld = eersteGeld;
-             model2.addElement(prijs);
-             stat.executeUpdate();
-            }
-            if (FinaleTafel.tweede.isSelected()){
-                ModelItemPrijsgeld prijs2 = new ModelItemPrijsgeld();
-             prijs2stat.setString(1, model.s_code);
-             prijs2.naam = model.naam;
-             int tweedeGeld= (int) (Geld * 0.25);
-             prijs2.prijsgeld = tweedeGeld;
-             model2.addElement(prijs2);
-             prijs2stat.executeUpdate();
-            }
-            if (FinaleTafel.derde.isSelected()){
-                ModelItemPrijsgeld prijs3 = new ModelItemPrijsgeld();
-             prijs3stat.setString(1, model.s_code);
-             prijs3.naam = model.naam;
-             int derdeGeld = (int) (Geld * 0.1);
-              prijs3.prijsgeld = derdeGeld;
-             model2.addElement(prijs3);
-             prijs3stat.executeUpdate();
-            }
-            
-            FinaleTafel.prijzenGeld.setModel(model2);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
+    
     public static void totaalBetaaldInschrijfgeld()
     {
         ModelItemToernooi toernooi = (ModelItemToernooi) Overzichten.jListOverzichtTenM.getSelectedValue();
@@ -1084,7 +1031,7 @@ public class FullhouseProjectGui {
         ResultSet rs = stat.executeQuery();
             rs.first();
             String totaalTgeld = rs.getString("prijsgeld");
-            model.addElement(totaalTgeld);
+            model.addElement(totaalTgeld + " Euro");
             Overzichten.jListResultaat.setModel(model);
             } catch (Exception e) {
                 System.out.println(e);

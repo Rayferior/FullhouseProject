@@ -4,17 +4,23 @@
  */
 package fullhouseprojectgui;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author Menno
  */
 public class FinaleTafel extends javax.swing.JFrame {
-
+    String t_code;
     /**
      * Creates new form FinaleTafel
      */
     public FinaleTafel() {
         initComponents();
+        ModelItemToernooi toer = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
+        t_code = toer.id;
     }
 
     /**
@@ -40,6 +46,7 @@ public class FinaleTafel extends javax.swing.JFrame {
         prijzenGeld = new javax.swing.JList();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,14 +82,17 @@ public class FinaleTafel extends javax.swing.JFrame {
 
         jLabel4.setText("Prijzengeld");
 
+        jButton2.setText("Terug");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(182, 182, 182)
-                .addComponent(jLabel2)
-                .addGap(0, 266, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -105,11 +115,16 @@ public class FinaleTafel extends javax.swing.JFrame {
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel4))
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(225, 225, 225)
                         .addComponent(Finaletafel)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(182, 182, 182)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -117,12 +132,15 @@ public class FinaleTafel extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Finaletafel)
                         .addGap(31, 31, 31))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
@@ -141,15 +159,72 @@ public class FinaleTafel extends javax.swing.JFrame {
                             .addComponent(derde)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton1))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     FullhouseProjectGui.selecteerPlaats();
+     DefaultListModel model2 = new DefaultListModel();
+       ModelItem model = (ModelItem) FinaleTafel.finaleTafel.getSelectedValue();
+       
+        String plaatsQuery = "Update Toernooi set 1e = ? where t_code =?";
+        String prijzenGeld = "select sum(inschrijfGeld * aantalSpelers) as prijsgeld from Toernooi where t_code =?";
+        String prijzenGeld2 = "Update Toernooi set 2e = ? where t_code =?";
+        String prijzenGeld3 = "Update Toernooi set 3e = ? where t_code =?";
+        
+        try {
+            PreparedStatement stat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(plaatsQuery);
+            PreparedStatement prijsGeld = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(prijzenGeld);
+            PreparedStatement prijs2stat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(prijzenGeld2);
+            PreparedStatement prijs3stat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(prijzenGeld3);
+            prijsGeld.setString(1, t_code);
+            ResultSet rs = prijsGeld.executeQuery();
+            rs.first();
+            int Geld = rs.getInt("prijsgeld");
+            
+            if (FinaleTafel.eerste.isSelected())
+                    {
+            ModelItemPrijsgeld prijs = new ModelItemPrijsgeld();
+             stat.setString(1, model.s_code);
+             stat.setString(2, t_code);
+             prijs.naam = model.naam;
+             int eersteGeld = (int) (Geld * 0.4);
+             prijs.prijsgeld = eersteGeld;
+             model2.addElement(prijs);
+             stat.executeUpdate();
+            }
+            if (FinaleTafel.tweede.isSelected()){
+                ModelItemPrijsgeld prijs2 = new ModelItemPrijsgeld();
+             prijs2stat.setString(1, model.s_code);
+             prijs2stat.setString(2, t_code);
+             prijs2.naam = model.naam;
+             int tweedeGeld= (int) (Geld * 0.25);
+             prijs2.prijsgeld = tweedeGeld;
+             model2.addElement(prijs2);
+             prijs2stat.executeUpdate();
+            }
+            if (FinaleTafel.derde.isSelected()){
+                ModelItemPrijsgeld prijs3 = new ModelItemPrijsgeld();
+             prijs3stat.setString(1, model.s_code);
+             prijs3stat.setString(2, t_code);
+             prijs3.naam = model.naam;
+             int derdeGeld = (int) (Geld * 0.1);
+              prijs3.prijsgeld = derdeGeld;
+             model2.addElement(prijs3);
+             prijs3stat.executeUpdate();
+            }
+            
+            FinaleTafel.prijzenGeld.setModel(model2);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,6 +274,7 @@ public class FinaleTafel extends javax.swing.JFrame {
     public static javax.swing.JRadioButton eerste;
     public static javax.swing.JList finaleTafel;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

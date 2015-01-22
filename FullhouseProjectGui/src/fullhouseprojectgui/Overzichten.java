@@ -374,13 +374,16 @@ public class Overzichten extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_homeButtonMouseClicked
 
+
     private void jButtonOverzicht3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOverzicht3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonOverzicht3ActionPerformed
 
+
     private void jButtonOverzicht4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOverzicht4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonOverzicht4ActionPerformed
+
 
     private void jButtonOverzicht1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOverzicht1ActionPerformed
         DefaultListModel modeleen = new DefaultListModel();

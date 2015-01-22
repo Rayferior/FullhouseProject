@@ -4,6 +4,8 @@
  */
 package fullhouseprojectgui;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Menno
@@ -26,22 +28,22 @@ public class MasterclassInvoeren extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        aantalSpelersT = new javax.swing.JTextField();
+        minimaleRatingT = new javax.swing.JTextField();
+        datumT = new javax.swing.JTextField();
+        inschrijfGeldT = new javax.swing.JTextField();
+        MasterclassGeverT = new javax.swing.JTextField();
+        locatieT = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        aantalSpelersT = new javax.swing.JTextField();
-        minimaleRatingT = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        inschrijfGeldT = new javax.swing.JTextField();
-        MasterclassGeverT = new javax.swing.JTextField();
-        locatieT = new javax.swing.JTextField();
-        datumT = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,7 +62,6 @@ public class MasterclassInvoeren extends javax.swing.JFrame {
         jLabel6.setText("Masterclassgever");
 
         jButton1.setText("Voeg toe");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -68,7 +69,6 @@ public class MasterclassInvoeren extends javax.swing.JFrame {
         });
 
         jButton2.setText("Terug");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -109,16 +109,16 @@ public class MasterclassInvoeren extends javax.swing.JFrame {
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel6))
                                 .addGap(25, 25, 25)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(datumT, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                                     .addComponent(locatieT)
-                                    .addComponent(MasterclassGeverT, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(datumT, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)))
+                                    .addComponent(MasterclassGeverT, javax.swing.GroupLayout.Alignment.TRAILING)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(154, 154, 154)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                                         .addComponent(jButton2))
                                     .addComponent(jLabel2)))))
                     .addGroup(layout.createSequentialGroup()
@@ -145,8 +145,8 @@ public class MasterclassInvoeren extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(minimaleRatingT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(datumT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(datumT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inschrijfGeldT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -166,7 +166,57 @@ public class MasterclassInvoeren extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        FullhouseProjectGui.MasterclassToevoegen();
+        
+        String masterclassgever = MasterclassGeverT.getText();
+        String aantalspelers = aantalSpelersT.getText();
+        String datum = datumT.getText();
+        String inschrijfgeld = inschrijfGeldT.getText();
+        String locatie = locatieT.getText();
+        String minimalerating = minimaleRatingT.getText();
+        
+        int jaar = Integer.parseInt(datum.substring(0,4));
+        int maand = Integer.parseInt(datum.substring(5,7));
+        int dagen = Integer.parseInt(datum.substring(8,10));
+        
+        if((masterclassgever.isEmpty()) || (aantalspelers.isEmpty()) || (datum.isEmpty()) || (inschrijfgeld.isEmpty()) 
+        || (locatie.isEmpty()) || (minimalerating.isEmpty()) || ((maand > 12) || (dagen > 31) || (jaar < 2015)) ){
+            
+        } 
+        else{
+            JOptionPane.showMessageDialog(rootPane, "Masterclass is succesvol toegvoegd");
+            //FullhouseProjectGui.MasterclassToevoegen();
+        }
+        
+        if(masterclassgever.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Masterclassgever", JOptionPane.CANCEL_OPTION);
+        }
+        if(aantalspelers.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Aantal Spelers", JOptionPane.CANCEL_OPTION);
+        }
+        if(datum.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Datum", JOptionPane.CANCEL_OPTION);
+        }
+            else{
+                if(jaar < 2015){
+                JOptionPane.showMessageDialog(rootPane, "Jaar mag niet eerder dan 2015 zijn", "Datum", JOptionPane.CANCEL_OPTION);
+                }
+                if(maand > 12){
+                JOptionPane.showMessageDialog(rootPane, "Maand mag niet hoger dan 12 zijn", "Datum", JOptionPane.CANCEL_OPTION);
+                }
+                if(dagen > 31){
+                JOptionPane.showMessageDialog(rootPane, "Dagen mag niet hoger zijn dan 31", "Datum", JOptionPane.CANCEL_OPTION);
+                }
+                }
+        if(inschrijfgeld.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Inschrijfgeld", JOptionPane.CANCEL_OPTION);
+        }
+        if(locatie.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Locatie", JOptionPane.CANCEL_OPTION);
+        }
+        if(minimalerating.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Minimale Rating", JOptionPane.CANCEL_OPTION);
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -213,7 +263,7 @@ public class MasterclassInvoeren extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTextField MasterclassGeverT;
     public static javax.swing.JTextField aantalSpelersT;
-    public static javax.swing.JFormattedTextField datumT;
+    public static javax.swing.JTextField datumT;
     public static javax.swing.JTextField inschrijfGeldT;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

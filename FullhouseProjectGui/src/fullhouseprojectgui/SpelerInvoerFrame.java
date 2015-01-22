@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -76,6 +77,12 @@ public class SpelerInvoerFrame extends javax.swing.JFrame {
 
         jLabel8.setText("Telefoonnummer");
 
+        MasterclassLeraarT.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                MasterclassLeraarTFocusGained(evt);
+            }
+        });
+
         jLabel9.setText("Masterclass Leraar");
 
         jLabel10.setText("Rating");
@@ -106,21 +113,18 @@ public class SpelerInvoerFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                                        .addComponent(naamT, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel6)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jLabel4))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(WoonplaatsT, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
-                                            .addComponent(postcodeT)
-                                            .addComponent(adresT))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3))
+                                .addGap(18, 18, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(WoonplaatsT, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+                                        .addComponent(postcodeT)
+                                        .addComponent(adresT))
+                                    .addComponent(naamT, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(29, 29, 29)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel10)
@@ -142,7 +146,7 @@ public class SpelerInvoerFrame extends javax.swing.JFrame {
                                         .addComponent(jLabel1)
                                         .addGap(51, 51, 51)))
                                 .addComponent(jButton2)))
-                        .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 166, Short.MAX_VALUE)
                         .addComponent(invoerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -195,8 +199,84 @@ public class SpelerInvoerFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void invoerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invoerButtonActionPerformed
-      FullhouseProjectGui.SpelerToevoegen();
+        
+        String naam = naamT.getText();
+        String postcode = postcodeT.getText();
+        String rating = ratingT.getText();
+        String telefoonnummer = telefoonnummerT.getText();
+        String email = emailT.getText();
+        String adres = adresT.getText();
+        String woonplaats = WoonplaatsT.getText();
+        String masterclassleraar = MasterclassLeraarT.getText();
+        
+        int postcodelengte = postcode.length();
+        int mcleraarlengte = masterclassleraar.length();
+        
+        if((naam.isEmpty()) || (adres.isEmpty()) || (postcode.isEmpty()) || (woonplaats.isEmpty()) || (email.isEmpty())
+        || (telefoonnummer.isEmpty()) || (masterclassleraar.isEmpty()) || (rating.isEmpty()) || (!email.contains("@")) 
+        || (!email.contains(".")) || (!telefoonnummer.matches("[0-9]+")) || (!rating.matches("[0-9]+")) || (postcodelengte > 6) 
+        || (mcleraarlengte > 1) || (naam.matches(("[0-9]+"))) || (woonplaats.matches(("[0-9]+")))){
+            
+        }
+        else{
+            JOptionPane.showMessageDialog(rootPane, "Speler is succesvol toegevoegd");
+            //FullhouseProjectGui.SpelerToevoegen();
+        }
+         
+        if(naam.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Naam", JOptionPane.CANCEL_OPTION);
+        }
+        if(naam.matches(("[0-9]+"))){
+            JOptionPane.showMessageDialog(rootPane, "Ivoer mag geen cijfers bevatten", "Naam", JOptionPane.CANCEL_OPTION);
+        }
+        if(adres.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Adres", JOptionPane.CANCEL_OPTION);
+        }
+        if(postcode.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Postcode", JOptionPane.CANCEL_OPTION);
+        }
+        if(woonplaats.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Woonplaats", JOptionPane.CANCEL_OPTION);
+        }
+        if(woonplaats.matches(("[0-9]+"))){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag geen cijfers bevatten", "Woonplaats", JOptionPane.CANCEL_OPTION);
+        }
+        if(email.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "E-mail", JOptionPane.CANCEL_OPTION);
+        }
+        if((!email.contains("@")) || (!email.contains("."))){
+            JOptionPane.showMessageDialog(rootPane, "Dit is geen valide e-mail", "E-mail" , JOptionPane.CANCEL_OPTION);
+        }
+        if(telefoonnummer.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Telefoonnummer", JOptionPane.CANCEL_OPTION);
+        }
+        if(!telefoonnummer.matches("[0-9]+")){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag geen letters bevatten", "Telefoonnummer", JOptionPane.CANCEL_OPTION);
+        }
+        if(masterclassleraar.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Masterclass Leraar", JOptionPane.CANCEL_OPTION);
+        }
+        if(mcleraarlengte > 1){
+            JOptionPane.showMessageDialog(rootPane, "Dit is geen valide invoer", "Masterclass Leraar", JOptionPane.CANCEL_OPTION);
+        }
+        if(rating.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Rating", JOptionPane.CANCEL_OPTION);
+        }
+        if(!rating.matches("[0-9]+")){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag geen letters bevatten", "Rating", JOptionPane.CANCEL_OPTION);
+        }
+        if(postcodelengte > 6){
+            JOptionPane.showMessageDialog(rootPane, "Dit is geen valide postcode", "Postcode", JOptionPane.CANCEL_OPTION);
+        }
+        
+        
+
+        
     }//GEN-LAST:event_invoerButtonActionPerformed
+
+    private void MasterclassLeraarTFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_MasterclassLeraarTFocusGained
+        //JOptionPane.showMessageDialog(rootPane, "j = ja, n = nee", "Masterclass Leraar", JOptionPane.CANCEL_OPTION);
+    }//GEN-LAST:event_MasterclassLeraarTFocusGained
 
     /**
      * @param args the command line arguments

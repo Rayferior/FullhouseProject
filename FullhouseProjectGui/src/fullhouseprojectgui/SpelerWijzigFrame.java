@@ -4,6 +4,16 @@
  */
 package fullhouseprojectgui;
 
+import static fullhouseprojectgui.SpelerInvoerFrame.MasterclassLeraarT;
+import static fullhouseprojectgui.SpelerInvoerFrame.WoonplaatsT;
+import static fullhouseprojectgui.SpelerInvoerFrame.adresT;
+import static fullhouseprojectgui.SpelerInvoerFrame.emailT;
+import static fullhouseprojectgui.SpelerInvoerFrame.naamT;
+import static fullhouseprojectgui.SpelerInvoerFrame.postcodeT;
+import static fullhouseprojectgui.SpelerInvoerFrame.ratingT;
+import static fullhouseprojectgui.SpelerInvoerFrame.telefoonnummerT;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Roy
@@ -205,7 +215,76 @@ public class SpelerWijzigFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_swHomeActionPerformed
 
     private void jButtonWijzigCommitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWijzigCommitActionPerformed
-        FullhouseProjectGui.spelerWijzigen();
+        
+        String naam = jTextFieldWijzigSpelerNaam.getText();
+        String postcode = jTextFieldSpelersPostcode.getText();
+        String rating = jTextFieldRating.getText();
+        String telefoonnummer = jTextFieldTelefoon.getText();
+        String email = jTextFieldSpelersEmail.getText();
+        String adres = jTextFieldSpelersAdres.getText();
+        String woonplaats = jTextFieldSpelersWoonplaats.getText();
+        String masterclassleraar = jTextFieldMasterclass.getText();
+        
+        int postcodelengte = postcode.length();
+        int mcleraarlengte = masterclassleraar.length();
+        
+        if((naam.isEmpty()) || (adres.isEmpty()) || (postcode.isEmpty()) || (woonplaats.isEmpty()) || (email.isEmpty())
+        || (telefoonnummer.isEmpty()) || (masterclassleraar.isEmpty()) || (rating.isEmpty()) || (!email.contains("@")) 
+        || (!email.contains(".")) || (!telefoonnummer.matches("[0-9]+")) || (!rating.matches("[0-9]+")) || (postcodelengte > 6) 
+        || (mcleraarlengte > 1) || (naam.matches(("[0-9]+"))) || (woonplaats.matches(("[0-9]+")))){
+            
+        }
+        else{
+            JOptionPane.showMessageDialog(rootPane, "Speler is succesvol gewijzigd");
+            //FullhouseProjectGui.spelerWijzigen();
+        }
+         
+        if(naam.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Naam", JOptionPane.CANCEL_OPTION);
+        }
+        if(naam.matches(("[0-9]+"))){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag geen cijfers bevatten", "Naam", JOptionPane.CANCEL_OPTION);
+        }
+        if(adres.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Adres", JOptionPane.CANCEL_OPTION);
+        }
+        if(postcode.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Postcode", JOptionPane.CANCEL_OPTION);
+        }
+        if(woonplaats.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Woonplaats", JOptionPane.CANCEL_OPTION);
+        }
+        if(woonplaats.matches(("[0-9]+"))){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag geen cijfers bevatten", "Woonplaats", JOptionPane.CANCEL_OPTION);
+        }
+        if(email.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "E-mail", JOptionPane.CANCEL_OPTION);
+        }
+        if((!email.contains("@")) || (!email.contains("."))){
+            JOptionPane.showMessageDialog(rootPane, "Dit is geen valide e-mail", "E-mail" , JOptionPane.CANCEL_OPTION);
+        }
+        if(telefoonnummer.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Telefoonnummer", JOptionPane.CANCEL_OPTION);
+        }
+        if(!telefoonnummer.matches("[0-9]+")){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag geen letters bevatten", "Telefoonnummer", JOptionPane.CANCEL_OPTION);
+        }
+        if(masterclassleraar.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Masterclass Leraar", JOptionPane.CANCEL_OPTION);
+        }
+        if(mcleraarlengte > 1){
+            JOptionPane.showMessageDialog(rootPane, "Dit is geen valide invoer", "Masterclass Leraar", JOptionPane.CANCEL_OPTION);
+        }
+        if(rating.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Rating", JOptionPane.CANCEL_OPTION);
+        }
+        if(!rating.matches("[0-9]+")){
+            JOptionPane.showMessageDialog(rootPane, "Invoer mag geen letters bevatten", "Rating", JOptionPane.CANCEL_OPTION);
+        }
+        if(postcodelengte > 6){
+            JOptionPane.showMessageDialog(rootPane, "Dit is geen valide postcode", "Postcode", JOptionPane.CANCEL_OPTION);
+        }
+        
     }//GEN-LAST:event_jButtonWijzigCommitActionPerformed
 
     /**

@@ -158,17 +158,11 @@ public class ToernooiToevoegen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-this.dispose();      
+this.dispose();         
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-    float num1;
-
-    try {
-        num1 = Float.parseFloat(inschrijfGeldT.getText());
-        
-    
+           
     String inschrijfGeld = inschrijfGeldT.getText();
     String locatie = locatieT.getText();
     String datum = datumT.getText();
@@ -177,19 +171,27 @@ this.dispose();
     int maand = Integer.parseInt(datum.substring(5,7));
     int dagen = Integer.parseInt(datum.substring(8,10));
         
-    
-    if(inschrijfGeld == null) {
+    if((inschrijfGeld.isEmpty()) || (locatie.matches("[0-9]+")) || (locatie.isEmpty()) || (datum.isEmpty()) || (jaar < 2015) 
+    || (maand > 12) || (dagen > 31) || (!inschrijfGeld.matches("[0-9]+"))){
+        
+    }
+    else{
+        //FullhouseProjectGui.ToernooiToevoegen();
+        JOptionPane.showMessageDialog(rootPane, "Toernooi is succesvol toegevoegd");
+    }
+    if(inschrijfGeld.isEmpty()) {
         JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Inschrijfgeld", JOptionPane.CANCEL_OPTION);
         }
-    if(locatie.matches(".*\\d.*")) {
+    if(locatie.matches("[0-9]+")) {
         JOptionPane.showMessageDialog(rootPane, "Invoer mag geen getallen bevatten", "Locatie", JOptionPane.CANCEL_OPTION);
         }
-    if(locatie == null) {
+    if(locatie.isEmpty()) {
         JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Locatie", JOptionPane.CANCEL_OPTION);
         }
-    if(datum == null) {
+    if(datum.isEmpty()) {
         JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Datum", JOptionPane.CANCEL_OPTION);
     }
+    else{
     if(jaar < 2015){
         JOptionPane.showMessageDialog(rootPane, "Jaar mag niet eerder dan 2015 zijn", "Datum", JOptionPane.CANCEL_OPTION);
     }
@@ -199,19 +201,10 @@ this.dispose();
     if(dagen > 31){
         JOptionPane.showMessageDialog(rootPane, "Dagen mag niet hoger zijn dan 31", "Datum", JOptionPane.CANCEL_OPTION);
     }
-    /*if((dagen > 30) && (maand == 04) || (maand == 06) || (maand == 02) || (maand == 08) || (maand == 02)){
-        System.out.println("error");
-        JOptionPane.showMessageDialog(rootPane, "Maand heeft maar 30 dagen", "Datum", JOptionPane.CANCEL_OPTION);
     }
-   */
- 
-    } 
-    catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(rootPane, "De invoer mag alleen uit nummers bestaan", "Inschrijfgeld", JOptionPane.CANCEL_OPTION);
-        }
-    /*else {    
-        FullhouseProjectGui.ToernooiToevoegen();
-        }*/
+    if(!inschrijfGeld.matches("[0-9]+")){
+        JOptionPane.showMessageDialog(rootPane, "Invoer mag geen letters bevatten", "Inschrijfgeld", JOptionPane.CANCEL_OPTION);
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

@@ -16,6 +16,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FinaleTafel extends javax.swing.JFrame {
     String t_code;
+    Object[] eersteRow = new Object[2];
+    Object[] tweedeRow = new Object[2];
+    Object[] derdeRow = new Object[2];
      static ArrayList<String> kolomnamenS = new ArrayList<String>();
     /**
      * Creates new form FinaleTafel
@@ -102,10 +105,7 @@ public class FinaleTafel extends javax.swing.JFrame {
 
         prijzenGeld.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Naam", "Gewonnen geld"
@@ -196,12 +196,12 @@ public class FinaleTafel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     DefaultTableModel model2 = new DefaultTableModel();
+        DefaultTableModel model2 = new DefaultTableModel();
        ModelItem model = (ModelItem) FinaleTafel.finaleTafel.getSelectedValue();
        
        
         String plaatsQuery = "Update Toernooi set 1e = ? where t_code =?";
-        String prijzenGeld = "select S.s_code as naam, sum(T.inschrijfGeld * T.aantalSpelers) as prijsgeld from Toernooi T JOIN ToernooiInschrijving S ON T.t_code = S.t_code where T.t_code =?";
+        String prijzenGeld = "select S.naam, sum(T.inschrijfGeld * T.aantalSpelers) as prijsgeld from Toernooi T JOIN ToernooiInschrijving I ON T.t_code = I.t_code JOIN Speler S ON I.s_code = S.s_code where T.t_code =?";
         String prijzenGeld2 = "Update Toernooi set 2e = ? where t_code =?";
         String prijzenGeld3 = "Update Toernooi set 3e = ? where t_code =?";
         
@@ -233,27 +233,29 @@ public class FinaleTafel extends javax.swing.JFrame {
              stat.setString(1, model.s_code);
              stat.setString(2, t_code);
              int eersteGeld = (int) (Geld * 0.4);
-             Object rowData[] = {model.naam, eersteGeld};
-             model2.addRow(rowData);
+             eersteRow[0] = model.naam;
+             eersteRow[1] = eersteGeld;
              stat.executeUpdate();
             }
             if (FinaleTafel.tweede.isSelected()){
              prijs2stat.setString(1, model.s_code);
              prijs2stat.setString(2, t_code);
              int tweedeGeld= (int) (Geld * 0.25);
-             Object rowData[] = {model.naam, tweedeGeld};
-             model2.addRow(rowData);
+             tweedeRow[0] = model.naam;
+             tweedeRow[1] = tweedeGeld;
              prijs2stat.executeUpdate();
             }
             if (FinaleTafel.derde.isSelected()){
              prijs3stat.setString(1, model.s_code);
              prijs3stat.setString(2, t_code);
              int derdeGeld = (int) (Geld * 0.1);
-             Object rowData[] = {model.naam, derdeGeld};
-             model2.addRow(rowData);
+             derdeRow[0] = model.naam;
+             derdeRow[1] = derdeGeld;
              prijs3stat.executeUpdate();
             }
-            
+            model2.addRow(eersteRow);
+            model2.addRow(tweedeRow);
+            model2.addRow(derdeRow);
             FinaleTafel.prijzenGeld.setModel(model2);
         } catch (Exception e) {
             System.out.println(e);

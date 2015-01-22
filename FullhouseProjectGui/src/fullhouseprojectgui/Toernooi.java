@@ -113,7 +113,9 @@ public class Toernooi extends javax.swing.JFrame {
             }
         ));
         jScrollPane3.setViewportView(OpenBet);
-        OpenBet.getColumnModel().getColumn(0).setResizable(false);
+        if (OpenBet.getColumnModel().getColumnCount() > 0) {
+            OpenBet.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         jLabel2.setText("Openstaande betalingen -->");
 
@@ -154,6 +156,11 @@ public class Toernooi extends javax.swing.JFrame {
         jButtonIndeling.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonIndelingMouseClicked(evt);
+            }
+        });
+        jButtonIndeling.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonIndelingActionPerformed(evt);
             }
         });
 
@@ -240,7 +247,7 @@ public class Toernooi extends javax.swing.JFrame {
                             .addComponent(jButton1))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 72, Short.MAX_VALUE)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -318,7 +325,7 @@ public class Toernooi extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonIndelingMouseClicked
 
     private void jButtonIndelingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIndelingActionPerformed
-FullhouseProjectGui.deelIn();        
+        FullhouseProjectGui.deelIn();        
     }//GEN-LAST:event_jButtonIndelingActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

@@ -19,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
  *
@@ -372,6 +373,9 @@ public class FullhouseProjectGui {
     public static void spelerWijzigen() {
         ModelItem s_code = (ModelItem) SpelersFrame.SpelerLijst.getSelectedValue();
         String updateQuery = "update Speler set naam = ?, adres = ?, postcode = ?, plaats = ?, telefoonnummer = ?, email = ?, rating = ?, kanMasterclassGeven = ? WHERE s_code = ?";
+        
+        if(SpelersFrame.SpelerLijst.getSelectedValue() == null){
+           JOptionPane.showMessageDialog(null, "Selecteer eerst een speler uit de lijst");   }
         try {
             PreparedStatement stat = con.prepareStatement(updateQuery);
             String naam = SpelerWijzigFrame.jTextFieldWijzigSpelerNaam.getText();
@@ -402,6 +406,9 @@ public class FullhouseProjectGui {
         ModelItemToernooi toernooi = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
         String selectQuery = "select * from Toernooi where datum = ?";
 
+        if(Toernooi.ToernooiLijst.getSelectedValue() == null){
+           JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");   }
+        
         try {
             PreparedStatement stat = con.prepareStatement(selectQuery);
             stat.setString(1, toernooi.datum);
@@ -463,7 +470,10 @@ public class FullhouseProjectGui {
         ModelItemMasterclass masterclass = (ModelItemMasterclass) Masterclass.masterclassLijst.getSelectedValue();
         String selectQuery = "select * from Masterclass where datum = ?";
 
-        try {
+       if(Masterclass.masterclassLijst.getSelectedValue() == null){
+           JOptionPane.showMessageDialog(null, "Selecteer eerst een masterclass uit de lijst");   }
+          
+           try {
             PreparedStatement stat = con.prepareStatement(selectQuery);
             stat.setString(1, masterclass.datum);
             ResultSet rs = stat.executeQuery();
@@ -491,6 +501,7 @@ public class FullhouseProjectGui {
             Logger.getLogger(FullhouseProjectGui.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
 
     public static void masterclassWijzigen() throws ParseException {
         ModelItemMasterclass mcode = (ModelItemMasterclass) Masterclass.masterclassLijst.getSelectedValue();
@@ -522,7 +533,6 @@ public class FullhouseProjectGui {
     public static Table[] deelIn() {
         String aantalQuery = "Select aantalSpelers from Toernooi where t_code = ?";
         int totaalSpelers = 0;
-
         try {
             PreparedStatement aantalStat = con.prepareStatement(aantalQuery);
             ModelItemToernooi toer = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();

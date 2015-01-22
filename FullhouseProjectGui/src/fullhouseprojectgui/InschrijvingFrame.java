@@ -132,6 +132,11 @@ public class InschrijvingFrame extends javax.swing.JFrame {
                 jButtonInConfirmMouseClicked(evt);
             }
         });
+        jButtonInConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInConfirmActionPerformed(evt);
+            }
+        });
 
         jButtonTotaal.setText("Aantal deelnemers updaten");
         jButtonTotaal.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -216,6 +221,10 @@ public class InschrijvingFrame extends javax.swing.JFrame {
         ModelItem speler = (ModelItem) jListSpelers.getSelectedValue();
         String compareQuery;
 
+        if((!jRadioButtonT.isSelected()) && (!jRadioButtonM.isSelected())){
+            JOptionPane.showMessageDialog(rootPane, "Selecteer eerst Toernooi of Masterclass");
+        }
+        
         if (jRadioButtonT.isSelected()) {
             
             compareQuery = "Select s_code from ToernooiInschrijving where t_code = ?";
@@ -341,6 +350,10 @@ public class InschrijvingFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButtonInConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInConfirmActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonInConfirmActionPerformed
 
     /**
      * @param args the command line arguments

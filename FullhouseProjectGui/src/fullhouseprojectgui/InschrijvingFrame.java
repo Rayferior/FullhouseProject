@@ -221,46 +221,41 @@ public class InschrijvingFrame extends javax.swing.JFrame {
         String Query;
         ModelItem speler = (ModelItem) jListSpelers.getSelectedValue();
         String compareQuery;
-        if (speler == null) {
-            JOptionPane.showMessageDialog(null, "Selecteer een speler");
-        } else {
-            if (jRadioButtonT.isSelected()) {
 
-                compareQuery = "Select s_code from ToernooiInschrijving where t_code = ?";
-                Query = "Insert into ToernooiInschrijving set s_code = ?, t_code = ?, heeftBetaald = 'j'";
-                ModelItemToernooi toer = (ModelItemToernooi) jListTenM.getSelectedValue();
-                if (toer == null) {
-                    JOptionPane.showMessageDialog(null, "Selecteer een toernooi");
-                } else {
-                    try {
-                        PreparedStatement comparestat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(compareQuery);
-                        comparestat.setString(1, toer.id);
-                        ResultSet comparers = comparestat.executeQuery();
-                        comparers.first();
-                        String s_code;
-                        boolean keuze = false;
-                        while (comparers.next()) {
-                            s_code = comparers.getString("s_code");
-                            if (s_code.equals(speler.s_code)) {
-                                keuze = true;
-                            } else {
-                                keuze = false;
-                            }
-
-                        }
-                        if (keuze = true) {
-                            JOptionPane.showMessageDialog(null, "Speler staat al ingeschreven");
-                        } else {
-
-                            PreparedStatement stat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(Query);
-                            stat.setString(1, speler.s_code);
-                            stat.setString(2, toer.id);
-                            stat.execute();
-                            JOptionPane.showMessageDialog(null, "Ingeschreven");
-                        }
-                    } catch (SQLException Ex) {
-                        JOptionPane.showMessageDialog(null, Ex);
+        if((!jRadioButtonT.isSelected()) && (!jRadioButtonM.isSelected())){
+            JOptionPane.showMessageDialog(rootPane, "Selecteer eerst Toernooi of Masterclass");
+        }
+        
+        if (jRadioButtonT.isSelected()) {
+            
+            compareQuery = "Select s_code from ToernooiInschrijving where t_code = ?";
+            Query = "Insert into ToernooiInschrijving set s_code = ?, t_code = ?, heeftBetaald = 'j'";
+            ModelItemToernooi toer = (ModelItemToernooi) jListTenM.getSelectedValue();
+            try {
+                PreparedStatement comparestat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(compareQuery);
+                comparestat.setString(1, toer.id);
+                ResultSet comparers = comparestat.executeQuery();
+                comparers.first();
+                String s_code;
+                boolean keuze = false;
+                while(comparers.next()){
+                    s_code = comparers.getString("s_code");
+                    if(s_code.equals(speler.s_code)){
+                        keuze = true;
+                    } else{
+                        keuze = false;
                     }
+                        
+                }
+                if(keuze = true){
+                    JOptionPane.showMessageDialog(null, "Speler staat al ingeschreven.");
+                }else{
+                    
+                PreparedStatement stat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(Query);
+                stat.setString(1, speler.s_code);
+                stat.setString(2, toer.id);
+                stat.execute();
+                JOptionPane.showMessageDialog(null, "Ingeschreven");
                 }
             } else if (jRadioButtonM.isSelected()) {
                 
@@ -307,16 +302,30 @@ public class InschrijvingFrame extends javax.swing.JFrame {
                     } catch (SQLException Ex) {
                         JOptionPane.showMessageDialog(null, Ex);
                     }
+                        
                 }
+                if(keuze = true){
+                    JOptionPane.showMessageDialog(null, "Speler staat al ingeschreven.");
+                }else{
+                PreparedStatement stat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(Query);
+                stat.setString(1, speler.s_code);
+                stat.setString(2, mast.mcode);
+                stat.execute();
+                JOptionPane.showMessageDialog(null, "Ingeschreven");
+                }
+            } catch (SQLException Ex) {
+                JOptionPane.showMessageDialog(null, Ex);
             }
         }
+
+
     }//GEN-LAST:event_jButtonInConfirmMouseClicked
 
     private void jButtonTotaalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonTotaalMouseClicked
         String UQuery;
-
+        
         String SQuery;
-
+        
         if (jRadioButtonT.isSelected()) {
             SQuery = "Select count(s_code) as aantal from ToernooiInschrijving WHERE t_code = ? AND heeftBetaald = 'j'";
             UQuery = "Update Toernooi set aantalSpelers = ? WHERE t_code = ?";
@@ -324,41 +333,41 @@ public class InschrijvingFrame extends javax.swing.JFrame {
             try {
                 PreparedStatement countstat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(SQuery);
                 PreparedStatement updatestat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(UQuery);
-
+                
                 countstat.setString(1, toer.id);
                 updatestat.setString(2, toer.id);
                 ResultSet RS = countstat.executeQuery();
                 RS.first();
                 String aantal = RS.getString("aantal");
-                updatestat.setString(1, aantal);
+                updatestat.setString(1,aantal);
                 updatestat.execute();
                 JOptionPane.showMessageDialog(null, "Update voltooid");
-
+                
             } catch (SQLException sQLException) {
                 System.out.println(sQLException);
             }
-
-        } else if (jRadioButtonM.isSelected()) {
+        
+        }else if (jRadioButtonM.isSelected()) {
             SQuery = "Select count(s_code) as aantal from MasterclassInschrijving WHERE m_code = ? AND heeftBetaald = 'j'";
             UQuery = "Update Masterclass set aantalSpelers = ? WHERE m_code = ?";
             ModelItemMasterclass mast = (ModelItemMasterclass) jListTenM.getSelectedValue();
             try {
                 PreparedStatement countstat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(SQuery);
                 PreparedStatement updatestat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(UQuery);
-
+                
                 countstat.setString(1, mast.mcode);
                 updatestat.setString(2, mast.mcode);
                 ResultSet RS = countstat.executeQuery();
                 RS.first();
                 String aantal = RS.getString("aantal");
-                updatestat.setString(1, aantal);
+                updatestat.setString(1,aantal);
                 updatestat.execute();
                 JOptionPane.showMessageDialog(null, "Update voltooid");
             } catch (SQLException sQLException) {
                 System.out.println(sQLException);
             }
         }
-
+        
     }//GEN-LAST:event_jButtonTotaalMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

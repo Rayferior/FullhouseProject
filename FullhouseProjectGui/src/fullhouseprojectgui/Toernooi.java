@@ -157,6 +157,11 @@ public class Toernooi extends javax.swing.JFrame {
                 jButtonIndelingMouseClicked(evt);
             }
         });
+        jButtonIndeling.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonIndelingActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Finaletafel tonen");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -304,7 +309,7 @@ public class Toernooi extends javax.swing.JFrame {
         Table[] tables = FullhouseProjectGui.deelIn();
         
         String IndelingQuery = "Insert into TafelIndeling SET i_code = ?, spelersAantal  = ?, toernooi = ?";
-        String rondeNummer = "Insert into Ronde SET rondeNummer = ?, t_code = ?";
+        String rondeNummer = "Insert into Ronde SET rondeNummer = 1, t_code = ?";
         
         try {
             PreparedStatement Indeling = FullhouseProjectGui.con.prepareStatement(IndelingQuery);
@@ -328,7 +333,7 @@ public class Toernooi extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonIndelingMouseClicked
 
     private void jButtonIndelingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIndelingActionPerformed
-FullhouseProjectGui.deelIn();        
+    FullhouseProjectGui.deelIn();        
     }//GEN-LAST:event_jButtonIndelingActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

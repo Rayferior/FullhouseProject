@@ -141,6 +141,11 @@ public class Overzichten extends javax.swing.JFrame {
         });
 
         jButtonOverzicht4.setText("Overzicht 4");
+        jButtonOverzicht4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOverzicht4ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("De namen van alle spelers die zich nog nooit voor een masterclass hebben ingeschreven");
 
@@ -358,6 +363,10 @@ public class Overzichten extends javax.swing.JFrame {
     private void homeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeButtonMouseClicked
         this.dispose();
     }//GEN-LAST:event_homeButtonMouseClicked
+
+    private void jButtonOverzicht4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOverzicht4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonOverzicht4ActionPerformed
 
     /**
      * @param args the command line arguments

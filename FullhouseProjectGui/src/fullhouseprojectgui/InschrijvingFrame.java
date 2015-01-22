@@ -132,6 +132,11 @@ public class InschrijvingFrame extends javax.swing.JFrame {
                 jButtonInConfirmMouseClicked(evt);
             }
         });
+        jButtonInConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInConfirmActionPerformed(evt);
+            }
+        });
 
         jButtonTotaal.setText("Aantal deelnemers updaten");
         jButtonTotaal.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -211,7 +216,8 @@ public class InschrijvingFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonLijstTonenMouseClicked
 
     private void jButtonInConfirmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonInConfirmMouseClicked
-
+        int rating = 0;
+        int minRating = 0;
         String Query;
         ModelItem speler = (ModelItem) jListSpelers.getSelectedValue();
         String compareQuery;
@@ -257,7 +263,9 @@ public class InschrijvingFrame extends javax.swing.JFrame {
                     }
                 }
             } else if (jRadioButtonM.isSelected()) {
-                compareQuery = "Select s_code from MasterclassInschrijving where t_code = ?";
+                
+                compareQuery = "Select Mi.s_code, S.rating, M.minimaleRating from MasterclassInschrijving Mi join Speler S on Mi.s_code = S.s_code"
+                        + " join Masterclass M on Mi.m_code = M.m_code where Mi.m_code = ?";
                 Query = "Insert into MasterclassInschrijving set s_code = ?, m_code = ?, heeftBetaald = 'j'";
                 ModelItemMasterclass mast = (ModelItemMasterclass) jListTenM.getSelectedValue();
                 if (mast == null) {
@@ -272,6 +280,8 @@ public class InschrijvingFrame extends javax.swing.JFrame {
                         boolean keuze = false;
                         while (comparers.next()) {
                             s_code = comparers.getString("s_code");
+                            rating = comparers.getInt("rating");
+                            minRating = comparers.getInt("minimaleRating");
                             if (s_code.equals(speler.s_code)) {
                                 keuze = true;
                             } else {
@@ -281,7 +291,13 @@ public class InschrijvingFrame extends javax.swing.JFrame {
                         }
                         if (keuze = true) {
                             JOptionPane.showMessageDialog(null, "Speler staat al ingeschreven");
-                        } else {
+                        } 
+                        else if(rating < minRating)
+                        {
+                            JOptionPane.showMessageDialog(null, "De rating van de gekozen speler is te laag");
+                        }
+                        
+                        else {
                             PreparedStatement stat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(Query);
                             stat.setString(1, speler.s_code);
                             stat.setString(2, mast.mcode);
@@ -348,6 +364,10 @@ public class InschrijvingFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButtonInConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInConfirmActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonInConfirmActionPerformed
 
     /**
      * @param args the command line arguments

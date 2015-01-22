@@ -173,12 +173,12 @@ public class FullhouseProjectGui {
                 ModelItemMasterclass test1 = new ModelItemMasterclass();
                 test1.mcode = rs.getString("m_code");
                 test1.aantal_spelers = rs.getString("aantalSpelers");
-                test1.minimale_rating = rs.getString("minimaleRating");
+                test1.minimaleRating = rs.getString("minimaleRating");
                 test1.inschrijfgeld = rs.getString("inschrijfGeld");
                 test1.locatie = rs.getString("locatie");
                 test1.datum = rs.getString("datum");
                 test1.masterclassGever = rs.getString("masterclassGever");
-                Object rowData[] = {test1.mcode, test1.aantal_spelers, test1.minimale_rating, test1.inschrijfgeld, test1.locatie, test1.datum, test1.masterclassGever};
+                Object rowData[] = {test1.mcode, test1.aantal_spelers, test1.minimaleRating, test1.inschrijfgeld, test1.locatie, test1.datum, test1.masterclassGever};
                 model.addRow(rowData);
             } while (rs.next());
             Masterclass.MasterclassTabel.setModel(model);

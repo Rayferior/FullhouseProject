@@ -14,7 +14,7 @@ public class ModelItemMasterclass {
     }
      public String mcode;
     public String aantal_spelers;
-    public String minimale_rating;
+    public String minimaleRating;
     public String inschrijfgeld;
     public String masterclassGever;
     public String locatie;

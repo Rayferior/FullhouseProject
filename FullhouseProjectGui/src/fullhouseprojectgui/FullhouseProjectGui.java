@@ -1037,5 +1037,29 @@ public class FullhouseProjectGui {
                 System.out.println(e);
         }
     }
+    public static void verwijderToernooi()
+            {
+          ModelItemToernooi toernooi = (ModelItemToernooi) Overzichten.jListOverzichtTenM.getSelectedValue();
+        String deleteQuery = "Delete from Toernooi where t_code = ?";
+        try {
+            PreparedStatement stat = con.prepareStatement(deleteQuery);
+            stat.setString(1, toernooi.id);
+            stat.executeQuery();   
+           } catch (Exception e) {
+            System.out.println(e);
+        }
+            }
+        public static void verwijderMasterclass()
+            {
+          ModelItemMasterclass masterclass = (ModelItemMasterclass) Overzichten.jListOverzichtTenM.getSelectedValue();
+        String deleteQuery = "Delete from Masterclass where datum = ?";
+        try {
+            PreparedStatement stat = con.prepareStatement(deleteQuery);
+            stat.setString(1, masterclass.datum);
+            stat.executeQuery();   
+           } catch (Exception e) {
+            System.out.println(e);
+        }
+            }
 }
 

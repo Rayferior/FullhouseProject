@@ -174,9 +174,9 @@ public class MasterclassInvoeren extends javax.swing.JFrame {
         String locatie = locatieT.getText();
         String minimalerating = minimaleRatingT.getText();
         
-        int jaar = Integer.parseInt(datum.substring(0,4));
-        int maand = Integer.parseInt(datum.substring(5,7));
-        int dagen = Integer.parseInt(datum.substring(8,10));
+        int dagen = Integer.parseInt(datum.substring(0,2));
+        int maand = Integer.parseInt(datum.substring(3,5));
+        int jaar = Integer.parseInt(datum.substring(6,10));
         
         if((masterclassgever.isEmpty()) || (aantalspelers.isEmpty()) || (datum.isEmpty()) || (inschrijfgeld.isEmpty()) 
         || (locatie.isEmpty()) || (minimalerating.isEmpty()) || ((maand > 12) || (dagen > 31) || (jaar < 2015)) ){

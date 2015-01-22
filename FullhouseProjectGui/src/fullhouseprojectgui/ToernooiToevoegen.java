@@ -40,7 +40,6 @@ public class ToernooiToevoegen extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         locatieT = new javax.swing.JTextField();
         inschrijfGeldT = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
         datumT = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -88,9 +87,6 @@ public class ToernooiToevoegen extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel4.setText("jjjj-mm-dd");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -117,8 +113,6 @@ public class ToernooiToevoegen extends javax.swing.JFrame {
                                     .addComponent(locatieT, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
                                     .addComponent(inschrijfGeldT)
                                     .addComponent(datumT))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel4)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
@@ -137,9 +131,7 @@ public class ToernooiToevoegen extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabel4))
+                    .addComponent(jLabel1)
                     .addComponent(datumT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -167,9 +159,9 @@ this.dispose();
     String locatie = locatieT.getText();
     String datum = datumT.getText();
     
-    int jaar = Integer.parseInt(datum.substring(0,4));
-    int maand = Integer.parseInt(datum.substring(5,7));
-    int dagen = Integer.parseInt(datum.substring(8,10));
+    int dagen = Integer.parseInt(datum.substring(0,2));
+    int maand = Integer.parseInt(datum.substring(3,5));
+    int jaar = Integer.parseInt(datum.substring(6,10));
         
     if((inschrijfGeld.isEmpty()) || (locatie.matches("[0-9]+")) || (locatie.isEmpty()) || (datum.isEmpty()) || (jaar < 2015) 
     || (maand > 12) || (dagen > 31) || (!inschrijfGeld.matches("[0-9]+"))){
@@ -274,7 +266,6 @@ this.dispose();
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     public static javax.swing.JTextField locatieT;

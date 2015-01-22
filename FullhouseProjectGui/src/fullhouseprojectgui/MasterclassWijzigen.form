@@ -59,13 +59,10 @@
                                   <Component id="datumT" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="aantalSpelersT" pref="113" max="32767" attributes="0"/>
-                                  <Component id="inschrijfGeldT" alignment="0" pref="113" max="32767" attributes="0"/>
-                                  <Component id="locatieT" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="aantalSpelersT" pref="113" max="32767" attributes="0"/>
+                              <Component id="inschrijfGeldT" alignment="0" pref="113" max="32767" attributes="0"/>
+                              <Component id="locatieT" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>

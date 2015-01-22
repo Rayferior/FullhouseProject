@@ -214,7 +214,7 @@ public class SpelerInvoerFrame extends javax.swing.JFrame {
         
         if((naam.isEmpty()) || (adres.isEmpty()) || (postcode.isEmpty()) || (woonplaats.isEmpty()) || (email.isEmpty())
         || (telefoonnummer.isEmpty()) || (masterclassleraar.isEmpty()) || (rating.isEmpty()) || (!email.contains("@")) 
-        || (!email.contains(".")) || (!telefoonnummer.matches("[0-9]+")) || (!rating.matches("[0-9]+")) || (postcodelengte > 8) 
+        || (!email.contains(".")) || (!telefoonnummer.matches("[0-9]+")) || (!rating.matches("[0-9]+")) || (postcodelengte > 7) 
         || (mcleraarlengte > 1) || (naam.matches(("[0-9]+"))) || (woonplaats.matches(("[0-9]+")))){
             
         }
@@ -265,7 +265,7 @@ public class SpelerInvoerFrame extends javax.swing.JFrame {
         if(!rating.matches("[0-9]+")){
             JOptionPane.showMessageDialog(rootPane, "Invoer mag geen letters bevatten", "Rating", JOptionPane.CANCEL_OPTION);
         }
-        if(postcodelengte > 8){
+        if(postcodelengte > 7){
             JOptionPane.showMessageDialog(rootPane, "Dit is geen valide postcode", "Postcode", JOptionPane.CANCEL_OPTION);
         }
         

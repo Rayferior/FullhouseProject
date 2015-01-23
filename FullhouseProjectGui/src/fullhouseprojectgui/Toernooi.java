@@ -5,6 +5,7 @@
  */
 package fullhouseprojectgui;
 
+import java.awt.HeadlessException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -381,6 +382,7 @@ public class Toernooi extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonIndelingActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
          if(Toernooi.ToernooiLijst.getSelectedValue() == null){
            JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");   }
        else
@@ -391,6 +393,38 @@ public class Toernooi extends javax.swing.JFrame {
         Gui.centreWindow(tFrame);
         IndelingMethods.finaleTafelVullen();
        }
+
+        String rondequery = "Select * from Ronde where t_code = ?";
+        ModelItemToernooi toer = (ModelItemToernooi) ToernooiLijst.getSelectedValue();
+        try {
+            PreparedStatement stat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(rondequery);
+            stat.setString(1, toer.id);
+            ResultSet rs = stat.executeQuery();
+            rs.first();
+            int ronde = 0;
+            while(rs.next()){
+              ronde = rs.getInt("rondeNummer");
+                
+            }
+            if(ronde <= 1){
+                    JOptionPane.showMessageDialog(null, "Er is nog geen finaletafel bekend.");
+                    
+                }
+            else{
+            if (Toernooi.ToernooiLijst.getSelectedValue() == null) {
+                JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");
+            } else {
+                FinaleTafel tFrame = new FinaleTafel();
+                tFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                tFrame.setVisible(true);
+                Gui.centreWindow(tFrame);
+                IndelingMethods.finaleTafelVullen();
+            }
+            }
+        } catch (SQLException sQLException) {
+        } catch (HeadlessException headlessException) {
+        }
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed

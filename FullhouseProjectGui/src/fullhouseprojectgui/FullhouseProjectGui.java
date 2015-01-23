@@ -28,9 +28,7 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 public class FullhouseProjectGui {
 
     static Connection con = null;
-    /**
-     * @param args the command line arguments
-     */
+   
     public static void main(String[] args) {
         JFrame frame = new Gui();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -72,6 +73,11 @@ public class Overzichten extends javax.swing.JFrame {
         jButtonOverzichtLijstTonen.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonOverzichtLijstTonenMouseClicked(evt);
+            }
+        });
+        jButtonOverzichtLijstTonen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOverzichtLijstTonenActionPerformed(evt);
             }
         });
 
@@ -298,7 +304,9 @@ public class Overzichten extends javax.swing.JFrame {
 
     private void jButtonOverzichtLijstTonenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonOverzichtLijstTonenMouseClicked
           DefaultListModel model = new DefaultListModel();
-        
+        if((!jRadioButtonTOverzicht.isSelected()) && (!jRadioButtonMOverzicht.isSelected())){
+            JOptionPane.showMessageDialog(rootPane, "Selecteer eerst Toernooi of Masterclass");
+        }
         
         if (jRadioButtonTOverzicht.isSelected()) {
             String TQuery = "select * from Toernooi";
@@ -342,6 +350,10 @@ public class Overzichten extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonOverzichtLijstTonenMouseClicked
 
     private void jButtonOverzicht3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonOverzicht3MouseClicked
+  if(Overzichten.jListOverzichtTenM.getSelectedValue() == null){
+           JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");   }
+       else
+  {
         DefaultListModel modeldrie = new DefaultListModel();
         String queryDrie = "SELECT I.s_code, S.naam FROM ToernooiInschrijving I JOIN Speler S ON I.s_code = S.s_code WHERE I.t_code = ?";
         ModelItemToernooi toer = (ModelItemToernooi) jListOverzichtTenM.getSelectedValue();
@@ -363,11 +375,16 @@ public class Overzichten extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-        
+  }
     }//GEN-LAST:event_jButtonOverzicht3MouseClicked
 
     private void jButtonOverzicht2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOverzicht2ActionPerformed
-    FullhouseProjectGui.totaalBetaaldInschrijfgeld();
+  if(Overzichten.jListOverzichtTenM.getSelectedValue() == null){
+           JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");   }
+       else
+  {
+        FullhouseProjectGui.totaalBetaaldInschrijfgeld();
+                }
     }//GEN-LAST:event_jButtonOverzicht2ActionPerformed
 
     private void homeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeButtonMouseClicked
@@ -381,6 +398,10 @@ public class Overzichten extends javax.swing.JFrame {
 
 
     private void jButtonOverzicht4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOverzicht4ActionPerformed
+  if(Overzichten.jListOverzichtTenM.getSelectedValue() == null){
+           JOptionPane.showMessageDialog(null, "Selecteer eerst een masterclass uit de lijst");   }
+       else
+  {
         ModelItemMasterclass masterclass = (ModelItemMasterclass) Overzichten.jListOverzichtTenM.getSelectedValue();
         DefaultListModel modelvier = new DefaultListModel();
         String queryVier = "SELECT S.s_code, S.naam, I.m_code FROM MasterclassInschrijving I JOIN Speler S ON I.s_code = S.s_code WHERE I.heeftBetaald = 'j' AND m_code = ?";
@@ -403,10 +424,15 @@ public class Overzichten extends javax.swing.JFrame {
         catch (SQLException ex){
             System.out.println(ex);
         }
+  }
     }//GEN-LAST:event_jButtonOverzicht4ActionPerformed
 
 
     private void jButtonOverzicht1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOverzicht1ActionPerformed
+  if(Overzichten.jListOverzichtTenM.getSelectedValue() == null){
+           JOptionPane.showMessageDialog(null, "Selecteer eerst een masterclass uit de lijst");   }
+       else
+  {
         DefaultListModel modeleen = new DefaultListModel();
         String queryEen = "SELECT s_code, naam FROM Speler WHERE s_code NOT IN(SELECT s_code FROM MasterclassInschrijving)";
         try {
@@ -427,8 +453,13 @@ public class Overzichten extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
+  }
         
     }//GEN-LAST:event_jButtonOverzicht1ActionPerformed
+
+    private void jButtonOverzichtLijstTonenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOverzichtLijstTonenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonOverzichtLijstTonenActionPerformed
 
     /**
      * @param args the command line arguments

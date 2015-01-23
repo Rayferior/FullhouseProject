@@ -72,6 +72,11 @@ public class InschrijvingFrame extends javax.swing.JFrame {
                 jButtonLijstTonenMouseClicked(evt);
             }
         });
+        jButtonLijstTonen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLijstTonenActionPerformed(evt);
+            }
+        });
 
         jRadioButtonM.setText("Masterclass");
 
@@ -213,6 +218,9 @@ public class InschrijvingFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonLijstTonenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonLijstTonenMouseClicked
+        if((!jRadioButtonT.isSelected()) && (!jRadioButtonM.isSelected())){
+            JOptionPane.showMessageDialog(rootPane, "Selecteer eerst Toernooi of Masterclass");
+        }
         FullhouseProjectGui.TInschrijvingLijstTonen();
     }//GEN-LAST:event_jButtonLijstTonenMouseClicked
 
@@ -325,8 +333,8 @@ public class InschrijvingFrame extends javax.swing.JFrame {
         String UQuery;
         
         String SQuery;
-        
-        if (jRadioButtonT.isSelected()) {
+         
+       if (jRadioButtonT.isSelected()) {
             SQuery = "Select count(s_code) as aantal from ToernooiInschrijving WHERE t_code = ? AND heeftBetaald = 'j'";
             UQuery = "Update Toernooi set aantalSpelers = ? WHERE t_code = ?";
             ModelItemToernooi toer = (ModelItemToernooi) jListTenM.getSelectedValue();
@@ -367,7 +375,8 @@ public class InschrijvingFrame extends javax.swing.JFrame {
                 System.out.println(sQLException);
             }
         }
-        
+       
+      
     }//GEN-LAST:event_jButtonTotaalMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -377,6 +386,10 @@ public class InschrijvingFrame extends javax.swing.JFrame {
     private void jButtonInConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInConfirmActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonInConfirmActionPerformed
+
+    private void jButtonLijstTonenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLijstTonenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonLijstTonenActionPerformed
 
     /**
      * @param args the command line arguments

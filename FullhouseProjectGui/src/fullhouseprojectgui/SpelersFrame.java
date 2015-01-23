@@ -165,8 +165,8 @@ public class SpelersFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonToonSpelerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonToonSpelerMouseClicked
-       FullhouseProjectGui.SpelerTonen();
-       FullhouseProjectGui.SpelerLijstTonen();
+       Speler.SpelerTonen();
+       Speler.SpelerLijstTonen();
     }//GEN-LAST:event_jButtonToonSpelerMouseClicked
 
     private void jButtonUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonUpdateMouseClicked
@@ -174,7 +174,7 @@ public class SpelersFrame extends javax.swing.JFrame {
         swFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         swFrame.setVisible(true);
         Gui.centreWindow(swFrame);
-        FullhouseProjectGui.tekstVullen();   
+        Speler.tekstVullen();   
     }//GEN-LAST:event_jButtonUpdateMouseClicked
 
     private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed

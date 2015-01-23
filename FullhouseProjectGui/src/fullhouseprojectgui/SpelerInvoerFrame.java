@@ -220,7 +220,7 @@ public class SpelerInvoerFrame extends javax.swing.JFrame {
         }
         else{
             JOptionPane.showMessageDialog(rootPane, "Speler is succesvol toegevoegd");
-            FullhouseProjectGui.SpelerToevoegen();
+            Speler.SpelerToevoegen();
         }
          
         if(naam.isEmpty()){

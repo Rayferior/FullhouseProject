@@ -174,16 +174,16 @@ public class TafelIndeling extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        FullhouseProjectGui.vulTiTabel();
+        ToernooiMethods.vulTiTabel();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        FullhouseProjectGui.selecteerWinaar();
-        FullhouseProjectGui.veranderRating();
+        ToernooiMethods.selecteerWinaar();
+        ToernooiMethods.veranderRating();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButtonNextRoundMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonNextRoundMouseClicked
-        Table[] tables = FullhouseProjectGui.deelWinnaars();
+        Table[] tables = IndelingMethods.deelWinnaars();
         
         String IndelingQuery = "Insert into TafelIndeling SET i_code = ?, spelersAantal  = ?, toernooi = ?";
         String rondeNummer = "Insert into Ronde SET rondeNummer = ?, t_code = ?";
@@ -219,7 +219,7 @@ public class TafelIndeling extends javax.swing.JFrame {
             System.out.println(E);
         }
         
-        FullhouseProjectGui.WinnaarIndeling();
+        IndelingMethods.WinnaarIndeling();
     }//GEN-LAST:event_jButtonNextRoundMouseClicked
 
     /**

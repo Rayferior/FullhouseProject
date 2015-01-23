@@ -236,7 +236,7 @@ public class SpelerWijzigFrame extends javax.swing.JFrame {
         }
         else{
             JOptionPane.showMessageDialog(rootPane, "Speler is succesvol gewijzigd");
-            FullhouseProjectGui.spelerWijzigen();
+            Speler.spelerWijzigen();
         }
          
         if(naam.isEmpty()){

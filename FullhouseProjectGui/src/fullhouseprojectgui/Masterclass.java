@@ -184,7 +184,7 @@ public class Masterclass extends javax.swing.JFrame {
             MWijzigFrame.setVisible(true);
             Gui.centreWindow(MWijzigFrame);
         try {
-            FullhouseProjectGui.tekstVullenMasterclass();
+            MasterclassMethods.tekstVullenMasterclass();
         } catch (ParseException ex) {
 
             System.out.println(ex);
@@ -203,8 +203,8 @@ public class Masterclass extends javax.swing.JFrame {
     }//GEN-LAST:event_MhomeButtonActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        FullhouseProjectGui.MasterclassTonen();
-        FullhouseProjectGui.MasterclassLijstTonen();
+         MasterclassMethods.MasterclassTonen();
+         MasterclassMethods.MasterclassLijstTonen();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -215,7 +215,7 @@ public class Masterclass extends javax.swing.JFrame {
            int dialogButton = JOptionPane.YES_NO_OPTION;
             JOptionPane.showConfirmDialog (null, "Weet u zeker dat u deze masterclass wilt verwijderen?","WARNING", dialogButton);
             if(dialogButton == JOptionPane.YES_OPTION) {
-                FullhouseProjectGui.verwijderMasterclass();
+                 MasterclassMethods.verwijderMasterclass();
                 JOptionPane.showMessageDialog(null, "De masterclass is succesvol verwijderd");
             }
             if(dialogButton == JOptionPane.NO_OPTION) {

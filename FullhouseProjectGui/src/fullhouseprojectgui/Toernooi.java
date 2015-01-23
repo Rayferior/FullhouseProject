@@ -275,7 +275,7 @@ public class Toernooi extends javax.swing.JFrame {
         TWframe.setVisible(true);
         Gui.centreWindow(TWframe);
         try {
-            FullhouseProjectGui.tekstVullenToernooi();
+            ToernooiMethods.tekstVullenToernooi();
         } catch (ParseException ex) {
             System.out.println(ex);
         }
@@ -287,7 +287,7 @@ public class Toernooi extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");   }
        else
        {
-        FullhouseProjectGui.vulOpenBetalingen();
+        ToernooiMethods.vulOpenBetalingen();
        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -303,8 +303,8 @@ public class Toernooi extends javax.swing.JFrame {
     }//GEN-LAST:event_ToernooiHomeButtonActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        FullhouseProjectGui.ToernooiTonen();
-        FullhouseProjectGui.ToernooiLijstTonen();
+        ToernooiMethods.ToernooiTonen();
+        ToernooiMethods.ToernooiLijstTonen();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButtonIndelingSchermActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIndelingSchermActionPerformed
@@ -316,12 +316,12 @@ public class Toernooi extends javax.swing.JFrame {
         tiFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         tiFrame.setVisible(true);
         Gui.centreWindow(tiFrame);
-        FullhouseProjectGui.toonTafelLijst();
+        IndelingMethods.toonTafelLijst();
        }
     }//GEN-LAST:event_jButtonIndelingSchermActionPerformed
 
     private void jButtonIndelingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonIndelingMouseClicked
-        Table[] tables = FullhouseProjectGui.deelIn();
+        Table[] tables = IndelingMethods.deelIn();
         String compareQuery = "Select t_code from ToernooiInschrijving";
         String IndelingQuery = "Insert into TafelIndeling SET i_code = ?, spelersAantal  = ?, toernooi = ?";
         String rondeNummer = "Insert into Ronde SET rondeNummer = 1, t_code = ?";
@@ -367,7 +367,7 @@ public class Toernooi extends javax.swing.JFrame {
             }  catch (SQLException E) {
             
         }
-        FullhouseProjectGui.deelSpelerIn();
+        IndelingMethods.deelSpelerIn();
 
     }//GEN-LAST:event_jButtonIndelingMouseClicked
 
@@ -376,7 +376,7 @@ public class Toernooi extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");   }
        else
        {
-        FullhouseProjectGui.deelIn();
+        IndelingMethods.deelIn();
        }
     }//GEN-LAST:event_jButtonIndelingActionPerformed
 
@@ -389,7 +389,7 @@ public class Toernooi extends javax.swing.JFrame {
         tFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         tFrame.setVisible(true);
         Gui.centreWindow(tFrame);
-        FullhouseProjectGui.finaleTafelVullen();
+        IndelingMethods.finaleTafelVullen();
        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -401,7 +401,7 @@ public class Toernooi extends javax.swing.JFrame {
            int dialogButton = JOptionPane.YES_NO_OPTION;
             JOptionPane.showConfirmDialog (null, "Weet u zeker dat u dit toernooi wilt verwijderen?","WARNING", dialogButton);
             if(dialogButton == JOptionPane.YES_OPTION) {
-                FullhouseProjectGui.verwijderToernooi();
+                ToernooiMethods.verwijderToernooi();
                 JOptionPane.showMessageDialog(null, "Het toernooi is succesvol verwijderd");
             }
             if(dialogButton == JOptionPane.NO_OPTION) {

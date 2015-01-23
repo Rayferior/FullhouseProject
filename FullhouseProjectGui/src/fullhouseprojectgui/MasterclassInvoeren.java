@@ -184,7 +184,7 @@ public class MasterclassInvoeren extends javax.swing.JFrame {
         } 
         else{
             JOptionPane.showMessageDialog(rootPane, "Masterclass is succesvol toegvoegd");
-            FullhouseProjectGui.MasterclassToevoegen();
+             MasterclassMethods.MasterclassToevoegen();
         }
         
         if(masterclassgever.isEmpty()){

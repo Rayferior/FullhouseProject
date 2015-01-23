@@ -207,7 +207,7 @@ public class MasterclassWijzigen extends javax.swing.JFrame {
         }
         else{
             try {
-                FullhouseProjectGui.masterclassWijzigen();
+                MasterclassMethods.masterclassWijzigen();
             } catch (ParseException ex) {
                 System.out.println(ex);
             }

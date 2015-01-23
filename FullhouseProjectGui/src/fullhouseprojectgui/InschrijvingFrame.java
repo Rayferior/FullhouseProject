@@ -22,7 +22,7 @@ public class InschrijvingFrame extends javax.swing.JFrame {
      */
     public InschrijvingFrame() {
         initComponents();
-        FullhouseProjectGui.InschrijvingLijst();
+        Inschrijving.InschrijvingLijst();
         ButtonGroup group = new ButtonGroup();
         group.add(InschrijvingFrame.jRadioButtonM);
         group.add(InschrijvingFrame.jRadioButtonT);
@@ -221,7 +221,7 @@ public class InschrijvingFrame extends javax.swing.JFrame {
         if((!jRadioButtonT.isSelected()) && (!jRadioButtonM.isSelected())){
             JOptionPane.showMessageDialog(rootPane, "Selecteer eerst Toernooi of Masterclass");
         }
-        FullhouseProjectGui.TInschrijvingLijstTonen();
+        Inschrijving.TInschrijvingLijstTonen();
     }//GEN-LAST:event_jButtonLijstTonenMouseClicked
 
     private void jButtonInConfirmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonInConfirmMouseClicked

@@ -174,7 +174,7 @@ public class ToernooiWijzigen extends javax.swing.JFrame {
         else{
             JOptionPane.showMessageDialog(rootPane, "Toernooi is succesvol gewijzigd", "Succes", JOptionPane.CANCEL_OPTION);
             try {
-                FullhouseProjectGui.toernooiWijzigen();
+                ToernooiMethods.toernooiWijzigen();
             } catch (ParseException ex) {
                 System.out.println(ex);
             }

@@ -168,7 +168,7 @@ this.dispose();
         
     }
     else{
-        FullhouseProjectGui.ToernooiToevoegen();
+        ToernooiMethods.ToernooiToevoegen();
         JOptionPane.showMessageDialog(rootPane, "Toernooi is succesvol toegevoegd");
     }
     if(inschrijfGeld.isEmpty()) {

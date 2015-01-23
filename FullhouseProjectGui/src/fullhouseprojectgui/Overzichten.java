@@ -383,7 +383,21 @@ public class Overzichten extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");   }
        else
   {
-        FullhouseProjectGui.totaalBetaaldInschrijfgeld();
+        ModelItemToernooi toernooi = (ModelItemToernooi) Overzichten.jListOverzichtTenM.getSelectedValue();
+        DefaultListModel model = new DefaultListModel();
+        String totaalGeld = "select sum(inschrijfGeld * aantalSpelers) as prijsgeld from Toernooi where t_code = ?";
+        try {
+            PreparedStatement stat = FullhouseProjectGui.con.prepareStatement(totaalGeld);
+            stat.setString(1, toernooi.id);
+            ResultSet rs = stat.executeQuery();
+            rs.first();
+            String totaalTgeld = rs.getString("prijsgeld");
+            model.addElement(totaalTgeld + " Euro");
+            Overzichten.jListResultaat.setModel(model);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    
                 }
     }//GEN-LAST:event_jButtonOverzicht2ActionPerformed
 

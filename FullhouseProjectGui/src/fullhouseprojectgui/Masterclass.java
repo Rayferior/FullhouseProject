@@ -74,7 +74,7 @@ public class Masterclass extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(MasterclassTabel);
 
-        jButton2.setText("Masterclass Wijzigen");
+        jButton2.setText("Masterclass wijzigen");
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -213,10 +213,10 @@ public class Masterclass extends javax.swing.JFrame {
        else
        {
            int dialogButton = JOptionPane.YES_NO_OPTION;
-            JOptionPane.showConfirmDialog (null, "Weet u zeker dat u dit toernooi wilt verwijderen?","WARNING", dialogButton);
+            JOptionPane.showConfirmDialog (null, "Weet u zeker dat u deze masterclass wilt verwijderen?","WARNING", dialogButton);
             if(dialogButton == JOptionPane.YES_OPTION) {
                 FullhouseProjectGui.verwijderMasterclass();
-                JOptionPane.showMessageDialog(null, "Het toernooi is succesvol verwijderd");
+                JOptionPane.showMessageDialog(null, "De masterclass is succesvol verwijderd");
             }
             if(dialogButton == JOptionPane.NO_OPTION) {
                   remove(dialogButton);

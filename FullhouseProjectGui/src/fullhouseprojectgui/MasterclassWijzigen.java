@@ -206,12 +206,12 @@ public class MasterclassWijzigen extends javax.swing.JFrame {
             
         }
         else{
-            JOptionPane.showMessageDialog(rootPane, "Masterclass is succesvol gewijzigd");
             try {
                 FullhouseProjectGui.masterclassWijzigen();
             } catch (ParseException ex) {
                 System.out.println(ex);
             }
+            JOptionPane.showMessageDialog(rootPane, "Masterclass is succesvol gewijzigd");
         }
         
         if(masterclassgever.isEmpty()){

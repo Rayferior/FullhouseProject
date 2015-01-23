@@ -248,6 +248,7 @@ public class FullhouseProjectGui {
             rs.first();
             do {
                 ModelItemMasterclass test1 = new ModelItemMasterclass();
+                test1.mcode = rs.getString("m_code");
                 test1.datum = rs.getString("datum");
                 test1.locatie = rs.getString("locatie");
                 model.addElement(test1);
@@ -494,7 +495,7 @@ public class FullhouseProjectGui {
 
     public static void masterclassWijzigen() throws ParseException {
         ModelItemMasterclass mcode = (ModelItemMasterclass) Masterclass.masterclassLijst.getSelectedValue();
-        String updateQuery = "update Masterclass set aantalSpelers = ?, minimaleRating = ?, inschrijfGeld = ?, locatie = ?, datum = ?, masterclassGever = ? WHERE datum = ?";
+        String updateQuery = "update Masterclass set aantalSpelers = ?, minimaleRating = ?, inschrijfGeld = ?, locatie = ?, datum = ?, masterclassGever = ? WHERE m_code = ?";
         try {
             PreparedStatement stat = con.prepareStatement(updateQuery);
             String aantalSpelers = MasterclassWijzigen.aantalSpelersT.getText();
@@ -502,7 +503,7 @@ public class FullhouseProjectGui {
             String inschrijfGeld = MasterclassWijzigen.inschrijfGeldT.getText();
             String locatie = MasterclassWijzigen.locatieT.getText();
             String masterclassGever = MasterclassWijzigen.masterclassGever.getText();
-            java.sql.Date sqlDate = dateStringToMySqlDate(MasterclassInvoeren.datumT.getText());
+            java.sql.Date sqlDate = dateStringToMySqlDate(MasterclassWijzigen.datumT.getText());
 
 
 
@@ -512,7 +513,7 @@ public class FullhouseProjectGui {
             stat.setString(4, locatie);
             stat.setDate(5, sqlDate);
             stat.setString(6, masterclassGever);
-            stat.setString(7, mcode.datum);
+            stat.setString(7, mcode.mcode);
             stat.execute();
         } catch (SQLException ex) {
             Logger.getLogger(FullhouseProjectGui.class.getName()).log(Level.SEVERE, null, ex);

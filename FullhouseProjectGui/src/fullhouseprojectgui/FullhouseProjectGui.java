@@ -379,6 +379,8 @@ public class FullhouseProjectGui {
         
         if(SpelersFrame.SpelerLijst.getSelectedValue() == null){
            JOptionPane.showMessageDialog(null, "Selecteer eerst een speler uit de lijst");   }
+        else
+        {
         try {
             PreparedStatement stat = con.prepareStatement(updateQuery);
             String naam = SpelerWijzigFrame.jTextFieldWijzigSpelerNaam.getText();
@@ -400,17 +402,18 @@ public class FullhouseProjectGui {
             stat.setString(8, text3);
             stat.setString(9, s_code.s_code);
             stat.execute();
+        
         } catch (SQLException ex) {
             Logger.getLogger(FullhouseProjectGui.class.getName()).log(Level.SEVERE, null, ex);
         }
+        }
     }
+        
+    
 
     public static void tekstVullenToernooi() throws ParseException {
         ModelItemToernooi toernooi = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
         String selectQuery = "select * from Toernooi where datum = ?";
-
-        if(Toernooi.ToernooiLijst.getSelectedValue() == null){
-           JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");   }
         
         try {
             PreparedStatement stat = con.prepareStatement(selectQuery);
@@ -442,6 +445,7 @@ public class FullhouseProjectGui {
         }
     }
 
+
     public static void toernooiWijzigen() throws ParseException {
         ModelItemToernooi tcode = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
         String updateQuery = "update Toernooi set datum = ?, locatie = ?, aantalSpelers = ?,inschrijfGeld = ?, 1e = ?, 2e = ?, 3e = ? WHERE datum = ?";
@@ -471,11 +475,7 @@ public class FullhouseProjectGui {
 
     public static void tekstVullenMasterclass() throws ParseException {
         ModelItemMasterclass masterclass = (ModelItemMasterclass) Masterclass.masterclassLijst.getSelectedValue();
-        String selectQuery = "select * from Masterclass where datum = ?";
-
-       if(Masterclass.masterclassLijst.getSelectedValue() == null){
-           JOptionPane.showMessageDialog(null, "Selecteer eerst een masterclass uit de lijst");   }
-          
+        String selectQuery = "select * from Masterclass where datum = ?";  
            try {
             PreparedStatement stat = con.prepareStatement(selectQuery);
             stat.setString(1, masterclass.datum);

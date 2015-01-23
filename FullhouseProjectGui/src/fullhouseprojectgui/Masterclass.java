@@ -7,6 +7,7 @@ package fullhouseprojectgui;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -173,6 +174,11 @@ public class Masterclass extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+           
+       if(Masterclass.masterclassLijst.getSelectedValue() == null){
+           JOptionPane.showMessageDialog(null, "Selecteer eerst een masterclass uit de lijst");   }
+       else
+       {
             MasterclassWijzigen MWijzigFrame = new MasterclassWijzigen();
             MWijzigFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             MWijzigFrame.setVisible(true);
@@ -182,7 +188,7 @@ public class Masterclass extends javax.swing.JFrame {
         } catch (ParseException ex) {
 
             System.out.println(ex);
-        } 
+        }} 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

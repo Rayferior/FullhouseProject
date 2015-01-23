@@ -113,9 +113,7 @@ public class Toernooi extends javax.swing.JFrame {
             }
         ));
         jScrollPane3.setViewportView(OpenBet);
-        if (OpenBet.getColumnModel().getColumnCount() > 0) {
-            OpenBet.getColumnModel().getColumn(0).setResizable(false);
-        }
+        OpenBet.getColumnModel().getColumn(0).setResizable(false);
 
         jLabel2.setText("Openstaande betalingen -->");
 
@@ -250,13 +248,14 @@ public class Toernooi extends javax.swing.JFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
-                            .addComponent(jButton1)
-                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jButton2)
+                                .addComponent(jButton1)))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 72, Short.MAX_VALUE)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -267,6 +266,10 @@ public class Toernooi extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       if(Toernooi.ToernooiLijst.getSelectedValue() == null){
+           JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");   }
+       else
+       {
         ToernooiWijzigen TWframe = new ToernooiWijzigen();
         TWframe.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         TWframe.setVisible(true);
@@ -276,6 +279,7 @@ public class Toernooi extends javax.swing.JFrame {
         } catch (ParseException ex) {
             System.out.println(ex);
         }
+       }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed

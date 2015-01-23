@@ -240,6 +240,9 @@ public class InschrijvingFrame extends javax.swing.JFrame {
                 comparers.first();
                 String s_code;
                 boolean keuze = false;
+                if (speler == null){
+                    JOptionPane.showMessageDialog(null, "Selecteer een speler uit de lijst");
+                } else {
                 while (comparers.next()) {
                     s_code = comparers.getString("s_code");
                     if (s_code.equals(speler.s_code)) {
@@ -259,10 +262,11 @@ public class InschrijvingFrame extends javax.swing.JFrame {
                     stat.execute();
                     JOptionPane.showMessageDialog(null, "Ingeschreven");
                 }
+                }
             } catch (SQLException sQLException) {
             } catch (HeadlessException headlessException) {
             }
-                
+           
             } else if (jRadioButtonM.isSelected()) {
                 
                 compareQuery = "Select Mi.s_code, S.rating, M.minimaleRating from MasterclassInschrijving Mi join Speler S on Mi.s_code = S.s_code"
@@ -279,6 +283,9 @@ public class InschrijvingFrame extends javax.swing.JFrame {
                         comparers.first();
                         String s_code;
                         boolean keuze = false;
+                       if (speler == null){
+                        JOptionPane.showMessageDialog(null, "Selecteer een speler uit de lijst");
+                        } else {
                         while (comparers.next()) {
                             s_code = comparers.getString("s_code");
                             rating = comparers.getInt("rating");
@@ -305,6 +312,7 @@ public class InschrijvingFrame extends javax.swing.JFrame {
                             stat.execute();
                             JOptionPane.showMessageDialog(null, "Ingeschreven");
                         }
+                       }
                     } catch (SQLException Ex) {
                         JOptionPane.showMessageDialog(null, Ex);
                     }

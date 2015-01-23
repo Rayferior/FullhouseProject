@@ -213,7 +213,7 @@ public class SpelerInvoerFrame extends javax.swing.JFrame {
         int mcleraarlengte = masterclassleraar.length();
         
         if((naam.isEmpty()) || (adres.isEmpty()) || (postcode.isEmpty()) || (woonplaats.isEmpty()) || (email.isEmpty())
-        || (telefoonnummer.isEmpty()) || (masterclassleraar.isEmpty()) || (rating.isEmpty()) || (!email.contains("@")) 
+        || (telefoonnummer.isEmpty()) || (rating.isEmpty()) || (!email.contains("@")) 
         || (!email.contains(".")) || (!telefoonnummer.matches("[0-9]+")) || (!rating.matches("[0-9]+")) || (postcodelengte > 7) 
         || (mcleraarlengte > 1) || (naam.matches(("[0-9]+"))) || (woonplaats.matches(("[0-9]+")))){
             
@@ -253,9 +253,6 @@ public class SpelerInvoerFrame extends javax.swing.JFrame {
         if(!telefoonnummer.matches("[0-9]+")){
             JOptionPane.showMessageDialog(rootPane, "Invoer mag geen letters bevatten", "Telefoonnummer", JOptionPane.CANCEL_OPTION);
         }
-        if(masterclassleraar.isEmpty()){
-            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Masterclass Leraar", JOptionPane.CANCEL_OPTION);
-        }
         if(mcleraarlengte > 1){
             JOptionPane.showMessageDialog(rootPane, "Dit is geen valide invoer", "Masterclass Leraar", JOptionPane.CANCEL_OPTION);
         }
@@ -275,7 +272,7 @@ public class SpelerInvoerFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_invoerButtonActionPerformed
 
     private void MasterclassLeraarTFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_MasterclassLeraarTFocusGained
-        //JOptionPane.showMessageDialog(rootPane, "j = ja, n = nee", "Masterclass Leraar", JOptionPane.CANCEL_OPTION);
+        
     }//GEN-LAST:event_MasterclassLeraarTFocusGained
 
     /**

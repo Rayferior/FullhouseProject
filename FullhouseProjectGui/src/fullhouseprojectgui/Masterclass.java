@@ -208,7 +208,21 @@ public class Masterclass extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       FullhouseProjectGui.verwijderMasterclass();
+  if(Masterclass.masterclassLijst.getSelectedValue() == null){
+           JOptionPane.showMessageDialog(null, "Selecteer eerst een masterclass uit de lijst");   }
+       else
+       {
+           int dialogButton = JOptionPane.YES_NO_OPTION;
+            JOptionPane.showConfirmDialog (null, "Weet u zeker dat u dit toernooi wilt verwijderen?","WARNING", dialogButton);
+            if(dialogButton == JOptionPane.YES_OPTION) {
+                FullhouseProjectGui.verwijderMasterclass();
+                JOptionPane.showMessageDialog(null, "Het toernooi is succesvol verwijderd");
+            }
+            if(dialogButton == JOptionPane.NO_OPTION) {
+                  remove(dialogButton);
+       }
+       
+       }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

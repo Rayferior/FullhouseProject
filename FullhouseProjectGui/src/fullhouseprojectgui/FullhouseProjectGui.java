@@ -49,7 +49,6 @@ public class FullhouseProjectGui {
         String password = "roowiePieC";
         try {
             con = DriverManager.getConnection(cs, user, password);
-            JOptionPane.showMessageDialog(null, "Connected");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -377,10 +376,7 @@ public class FullhouseProjectGui {
         ModelItem s_code = (ModelItem) SpelersFrame.SpelerLijst.getSelectedValue();
         String updateQuery = "update Speler set naam = ?, adres = ?, postcode = ?, plaats = ?, telefoonnummer = ?, email = ?, rating = ?, kanMasterclassGeven = ? WHERE s_code = ?";
         
-        if(SpelersFrame.SpelerLijst.getSelectedValue() == null){
-           JOptionPane.showMessageDialog(null, "Selecteer eerst een speler uit de lijst");   }
-        else
-        {
+      
         try {
             PreparedStatement stat = con.prepareStatement(updateQuery);
             String naam = SpelerWijzigFrame.jTextFieldWijzigSpelerNaam.getText();
@@ -396,8 +392,8 @@ public class FullhouseProjectGui {
             stat.setString(2, adres);
             stat.setString(3, postcode);
             stat.setString(4, plaats);
-            stat.setString(5, text2);
-            stat.setString(6, text1);
+            stat.setString(5, text1);
+            stat.setString(6, text2);
             stat.setString(7, rating);
             stat.setString(8, text3);
             stat.setString(9, s_code.s_code);
@@ -406,7 +402,7 @@ public class FullhouseProjectGui {
         } catch (SQLException ex) {
             Logger.getLogger(FullhouseProjectGui.class.getName()).log(Level.SEVERE, null, ex);
         }
-        }
+        
     }
         
     
@@ -425,18 +421,14 @@ public class FullhouseProjectGui {
                 String locatie = rs.getString("locatie");
                 String inschrijfGeld = rs.getString("inschrijfGeld");
                 String aantalSpelers = rs.getString("aantalSpelers");
-                String eerste = rs.getString("1e");
-                String tweede = rs.getString("2e");
-                String derde = rs.getString("3e");
+
                 String datumT = mySqlDateToString(datum);
 
                 ToernooiWijzigen.datumT.setText(datumT);
                 ToernooiWijzigen.locatieT.setText(locatie);
                 ToernooiWijzigen.inschrijfGeldT.setText(inschrijfGeld);
                 ToernooiWijzigen.aantalSpelersT.setText(aantalSpelers);
-                ToernooiWijzigen.eersteT.setText(eerste);
-                ToernooiWijzigen.tweedeT.setText(tweede);
-                ToernooiWijzigen.derdeT.setText(derde);
+                
             } while (rs.next());
 
 
@@ -448,25 +440,19 @@ public class FullhouseProjectGui {
 
     public static void toernooiWijzigen() throws ParseException {
         ModelItemToernooi tcode = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
-        String updateQuery = "update Toernooi set datum = ?, locatie = ?, aantalSpelers = ?,inschrijfGeld = ?, 1e = ?, 2e = ?, 3e = ? WHERE datum = ?";
+        String updateQuery = "update Toernooi set datum = ?, locatie = ?, aantalSpelers = ?,inschrijfGeld = ? WHERE datum = ?";
         try {
             PreparedStatement stat = con.prepareStatement(updateQuery);
             String locatie = ToernooiWijzigen.locatieT.getText();
             String inschrijfGeld = ToernooiWijzigen.inschrijfGeldT.getText();
             String aantalSpelers = ToernooiWijzigen.aantalSpelersT.getText();
-            String eerste = ToernooiWijzigen.eersteT.getText();
-            String tweede = ToernooiWijzigen.tweedeT.getText();
-            String derde = ToernooiWijzigen.derdeT.getText();
             java.sql.Date sqlDate = dateStringToMySqlDate(ToernooiWijzigen.datumT.getText());
 
             stat.setDate(1, sqlDate);
             stat.setString(2, locatie);
             stat.setString(3, aantalSpelers);
             stat.setString(4, inschrijfGeld);
-            stat.setString(5, eerste);
-            stat.setString(6, tweede);
-            stat.setString(7, derde);
-            stat.setString(8, tcode.datum);
+            stat.setString(5, tcode.datum);
             stat.execute();
         } catch (SQLException ex) {
             Logger.getLogger(FullhouseProjectGui.class.getName()).log(Level.SEVERE, null, ex);

@@ -283,7 +283,12 @@ public class Toernooi extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+         if(Toernooi.ToernooiLijst.getSelectedValue() == null){
+           JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");   }
+       else
+       {
         FullhouseProjectGui.vulOpenBetalingen();
+       }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -303,11 +308,16 @@ public class Toernooi extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButtonIndelingSchermActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIndelingSchermActionPerformed
+ if(Toernooi.ToernooiLijst.getSelectedValue() == null){
+           JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");   }
+       else
+       {
         TafelIndeling tiFrame = new TafelIndeling();
         tiFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         tiFrame.setVisible(true);
         Gui.centreWindow(tiFrame);
         FullhouseProjectGui.toonTafelLijst();
+       }
     }//GEN-LAST:event_jButtonIndelingSchermActionPerformed
 
     private void jButtonIndelingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonIndelingMouseClicked
@@ -362,27 +372,43 @@ public class Toernooi extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonIndelingMouseClicked
 
     private void jButtonIndelingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIndelingActionPerformed
-
-
-        FullhouseProjectGui.deelIn();        
-
-    FullhouseProjectGui.deelIn();        
-
-
+ if(Toernooi.ToernooiLijst.getSelectedValue() == null){
+           JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");   }
+       else
+       {
         FullhouseProjectGui.deelIn();
-
+       }
     }//GEN-LAST:event_jButtonIndelingActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+         if(Toernooi.ToernooiLijst.getSelectedValue() == null){
+           JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");   }
+       else
+       {
         FinaleTafel tFrame = new FinaleTafel();
         tFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         tFrame.setVisible(true);
         Gui.centreWindow(tFrame);
         FullhouseProjectGui.finaleTafelVullen();
+       }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        FullhouseProjectGui.verwijderToernooi();
+       if(Toernooi.ToernooiLijst.getSelectedValue() == null){
+           JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");   }
+       else
+       {
+           int dialogButton = JOptionPane.YES_NO_OPTION;
+            JOptionPane.showConfirmDialog (null, "Weet u zeker dat u dit toernooi wilt verwijderen?","WARNING", dialogButton);
+            if(dialogButton == JOptionPane.YES_OPTION) {
+                FullhouseProjectGui.verwijderToernooi();
+                JOptionPane.showMessageDialog(null, "Het toernooi is succesvol verwijderd");
+            }
+            if(dialogButton == JOptionPane.NO_OPTION) {
+                  remove(dialogButton);
+       }
+       
+       }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     /**

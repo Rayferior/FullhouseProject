@@ -178,7 +178,7 @@ public class SpelersFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonUpdateMouseClicked
 
     private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
-        FullhouseProjectGui.spelerWijzigen();     
+   
     }//GEN-LAST:event_jButtonUpdateActionPerformed
 
     private void jButtonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertActionPerformed

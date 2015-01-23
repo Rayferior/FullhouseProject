@@ -34,18 +34,12 @@ public class ToernooiWijzigen extends javax.swing.JFrame {
     private void initComponents() {
 
         jTextField8 = new javax.swing.JTextField();
-        eersteT = new javax.swing.JTextField();
         inschrijfGeldT = new javax.swing.JTextField();
         locatieT = new javax.swing.JTextField();
-        tweedeT = new javax.swing.JTextField();
-        derdeT = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
@@ -64,12 +58,6 @@ public class ToernooiWijzigen extends javax.swing.JFrame {
         jLabel3.setText("Inschrijfgeld");
 
         jLabel4.setText("Aantal Spelers");
-
-        jLabel5.setText("Eerste Plaats");
-
-        jLabel6.setText("Tweede Plaats");
-
-        jLabel7.setText("Derde Plaats");
 
         jButton1.setText("Wijzigingen Opslaan");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -102,45 +90,32 @@ public class ToernooiWijzigen extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(eersteT, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(aantalSpelersT, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGap(10, 10, 10)
-                                                        .addComponent(jLabel9))
-                                                    .addComponent(jLabel8))
-                                                .addGap(31, 31, 31))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(28, 28, 28)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(locatieT, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
-                                                    .addComponent(inschrijfGeldT, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
-                                                    .addComponent(datumT))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel5)
-                                                    .addComponent(jLabel7)
-                                                    .addComponent(jLabel6))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tweedeT, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(derdeT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(aantalSpelersT, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addGap(10, 10, 10)
+                                                    .addComponent(jLabel9))
+                                                .addComponent(jLabel8))
+                                            .addGap(220, 220, 220))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(28, 28, 28)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(locatieT, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                                                .addComponent(inschrijfGeldT, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                                                .addComponent(datumT))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(550, 550, 550)
                                 .addComponent(jButton2))))
@@ -164,21 +139,15 @@ public class ToernooiWijzigen extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel5)
-                    .addComponent(eersteT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(datumT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(locatieT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel6)
-                    .addComponent(tweedeT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inschrijfGeldT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel7)
-                    .addComponent(derdeT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -198,12 +167,8 @@ public class ToernooiWijzigen extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         String aantalSpelers = aantalSpelersT.getText();
-        String eerste = eersteT.getText();
-        String tweede = tweedeT.getText();
-        String derde = derdeT.getText();
-        
-        if((eerste.isEmpty()) || (tweede.isEmpty()) || (derde.isEmpty()) || (aantalSpelers.isEmpty())
-        || (eerste.matches("[0-9]+")) || (tweede.matches("[0-9]+")) || (derde.matches("[0-9]+")) || (!aantalSpelers.matches("[0-9]+"))){
+       
+        if((!aantalSpelers.matches("[0-9]+"))){
             
         }
         else{
@@ -214,27 +179,7 @@ public class ToernooiWijzigen extends javax.swing.JFrame {
                 System.out.println(ex);
             }
         }
-        if(eerste.isEmpty()){
-            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Eerste Plaats", JOptionPane.CANCEL_OPTION);
-        }
-        if(tweede.isEmpty()){
-            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Tweede Plaats", JOptionPane.CANCEL_OPTION);
-        }
-        if(derde.isEmpty()){
-            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Derde Plaats", JOptionPane.CANCEL_OPTION);
-        }
-        if(aantalSpelers.isEmpty()){
-            JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Aantal Spelers", JOptionPane.CANCEL_OPTION);
-        }
-        if(eerste.matches("[0-9]+")){
-            JOptionPane.showMessageDialog(rootPane, "Invoer mag geen getallen bevatten", "Eerste", JOptionPane.CANCEL_OPTION);
-        }
-        if(tweede.matches("[0-9]+")){
-            JOptionPane.showMessageDialog(rootPane, "Invoer mag geen getallen bevatten", "Tweede", JOptionPane.CANCEL_OPTION);
-        }
-        if(derde.matches("[0-9]+")){
-            JOptionPane.showMessageDialog(rootPane, "Invoer mag geen getallen bevatten", "Derde", JOptionPane.CANCEL_OPTION);
-        }
+    
         if(!aantalSpelers.matches("[0-9]+")){
             JOptionPane.showMessageDialog(rootPane, "Invoer mag geen letters bevatten", "Aantal Spelers", JOptionPane.CANCEL_OPTION);
         } 
@@ -278,8 +223,6 @@ public class ToernooiWijzigen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTextField aantalSpelersT;
     public static javax.swing.JFormattedTextField datumT;
-    public static javax.swing.JTextField derdeT;
-    public static javax.swing.JTextField eersteT;
     public static javax.swing.JTextField inschrijfGeldT;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -287,13 +230,9 @@ public class ToernooiWijzigen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField jTextField8;
     public static javax.swing.JTextField locatieT;
-    public static javax.swing.JTextField tweedeT;
     // End of variables declaration//GEN-END:variables
 }

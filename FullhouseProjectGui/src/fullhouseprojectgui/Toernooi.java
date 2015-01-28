@@ -381,12 +381,12 @@ public class Toernooi extends javax.swing.JFrame {
         if (Toernooi.ToernooiLijst.getSelectedValue() == null) {
             JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");
         } else {
-            FinaleTafel tFrame = new FinaleTafel();
+            /*FinaleTafel tFrame = new FinaleTafel();
             tFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             tFrame.setVisible(true);
             Gui.centreWindow(tFrame);
-            IndelingMethods.finaleTafelVullen();
-        }
+            IndelingMethods.finaleTafelVullen();*/
+        
 
         String rondequery = "Select * from Ronde where t_code = ?";
         ModelItemToernooi toer = (ModelItemToernooi) ToernooiLijst.getSelectedValue();
@@ -417,7 +417,7 @@ public class Toernooi extends javax.swing.JFrame {
         } catch (SQLException sQLException) {
         } catch (HeadlessException headlessException) {
         }
-
+    }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed

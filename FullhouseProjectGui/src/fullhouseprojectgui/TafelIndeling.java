@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package fullhouseprojectgui;
 
 import java.sql.PreparedStatement;
@@ -22,7 +21,7 @@ public class TafelIndeling extends javax.swing.JFrame {
      */
     public TafelIndeling() {
         initComponents();
-        
+
     }
 
     /**
@@ -184,33 +183,33 @@ public class TafelIndeling extends javax.swing.JFrame {
 
     private void jButtonNextRoundMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonNextRoundMouseClicked
         Table[] tables = IndelingMethods.deelWinnaars();
-        
+
         String IndelingQuery = "Insert into TafelIndeling SET i_code = ?, spelersAantal  = ?, toernooi = ?";
         String rondeNummer = "Insert into Ronde SET rondeNummer = ?, t_code = ?";
         String maxI = "Select max(i_code) as hoogste from TafelIndeling where toernooi = ?";
-        
+
         try {
             PreparedStatement Indeling = FullhouseProjectGui.con.prepareStatement(IndelingQuery);
             PreparedStatement ronde = FullhouseProjectGui.con.prepareStatement(rondeNummer);
             PreparedStatement hoog = FullhouseProjectGui.con.prepareStatement(maxI);
-            
+
             ModelItemTi ticode = (ModelItemTi) TiLijst.getSelectedValue();
             hoog.setString(1, ticode.t_code);
             Indeling.setString(3, ticode.t_code);
-            
+
             ResultSet RS = hoog.executeQuery();
             RS.first();
             int max = RS.getInt("hoogste");
-            
-            
+
+
             for (Table table : tables) {
-            Indeling.setInt(1, (table.number+max));
-            Indeling.setInt(2, table.aantalSpelers);
-            Indeling.execute();
+                Indeling.setInt(1, (table.number + max));
+                Indeling.setInt(2, table.aantalSpelers);
+                Indeling.execute();
             }
-            
+
             int nieuwnummer = Integer.parseInt(ticode.rondeNummer);
-            int nieuwinsert = nieuwnummer+1;
+            int nieuwinsert = nieuwnummer + 1;
             ronde.setInt(1, nieuwinsert);
             ronde.setString(2, ticode.t_code);
             ronde.execute();
@@ -218,7 +217,7 @@ public class TafelIndeling extends javax.swing.JFrame {
         } catch (SQLException E) {
             System.out.println(E);
         }
-        
+
         IndelingMethods.WinnaarIndeling();
     }//GEN-LAST:event_jButtonNextRoundMouseClicked
 
@@ -226,10 +225,14 @@ public class TafelIndeling extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /*
+         * Set the Nimbus look and feel
+         */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the
+         * default look and feel. For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -249,14 +252,16 @@ public class TafelIndeling extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /*
+         * Create and display the form
+         */
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 new TafelIndeling().setVisible(true);
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JList TiLijst;
     public static javax.swing.JTable TiTabel;

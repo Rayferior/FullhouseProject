@@ -267,29 +267,27 @@ public class Toernooi extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       if(Toernooi.ToernooiLijst.getSelectedValue() == null){
-           JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");   }
-       else
-       {
-        ToernooiWijzigen TWframe = new ToernooiWijzigen();
-        TWframe.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        TWframe.setVisible(true);
-        Gui.centreWindow(TWframe);
-        try {
-            ToernooiMethods.tekstVullenToernooi();
-        } catch (ParseException ex) {
-            System.out.println(ex);
+        if (Toernooi.ToernooiLijst.getSelectedValue() == null) {
+            JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");
+        } else {
+            ToernooiWijzigen TWframe = new ToernooiWijzigen();
+            TWframe.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            TWframe.setVisible(true);
+            Gui.centreWindow(TWframe);
+            try {
+                ToernooiMethods.tekstVullenToernooi();
+            } catch (ParseException ex) {
+                System.out.println(ex);
+            }
         }
-       }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-         if(Toernooi.ToernooiLijst.getSelectedValue() == null){
-           JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");   }
-       else
-       {
-        ToernooiMethods.vulOpenBetalingen();
-       }
+        if (Toernooi.ToernooiLijst.getSelectedValue() == null) {
+            JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");
+        } else {
+            ToernooiMethods.vulOpenBetalingen();
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -309,16 +307,15 @@ public class Toernooi extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButtonIndelingSchermActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIndelingSchermActionPerformed
- if(Toernooi.ToernooiLijst.getSelectedValue() == null){
-           JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");   }
-       else
-       {
-        TafelIndeling tiFrame = new TafelIndeling();
-        tiFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        tiFrame.setVisible(true);
-        Gui.centreWindow(tiFrame);
-        IndelingMethods.toonTafelLijst();
-       }
+        if (Toernooi.ToernooiLijst.getSelectedValue() == null) {
+            JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");
+        } else {
+            TafelIndeling tiFrame = new TafelIndeling();
+            tiFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            tiFrame.setVisible(true);
+            Gui.centreWindow(tiFrame);
+            IndelingMethods.toonTafelLijst();
+        }
     }//GEN-LAST:event_jButtonIndelingSchermActionPerformed
 
     private void jButtonIndelingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonIndelingMouseClicked
@@ -365,34 +362,31 @@ public class Toernooi extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Ingedeeld");
                 }
             }
-            }  catch (SQLException E) {
-            
+        } catch (SQLException E) {
         }
         IndelingMethods.deelSpelerIn();
 
     }//GEN-LAST:event_jButtonIndelingMouseClicked
 
     private void jButtonIndelingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIndelingActionPerformed
- if(Toernooi.ToernooiLijst.getSelectedValue() == null){
-           JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");   }
-       else
-       {
-        IndelingMethods.deelIn();
-       }
+        if (Toernooi.ToernooiLijst.getSelectedValue() == null) {
+            JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");
+        } else {
+            IndelingMethods.deelIn();
+        }
     }//GEN-LAST:event_jButtonIndelingActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-         if(Toernooi.ToernooiLijst.getSelectedValue() == null){
-           JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");   }
-       else
-       {
-        FinaleTafel tFrame = new FinaleTafel();
-        tFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        tFrame.setVisible(true);
-        Gui.centreWindow(tFrame);
-        IndelingMethods.finaleTafelVullen();
-       }
+        if (Toernooi.ToernooiLijst.getSelectedValue() == null) {
+            JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");
+        } else {
+            FinaleTafel tFrame = new FinaleTafel();
+            tFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            tFrame.setVisible(true);
+            Gui.centreWindow(tFrame);
+            IndelingMethods.finaleTafelVullen();
+        }
 
         String rondequery = "Select * from Ronde where t_code = ?";
         ModelItemToernooi toer = (ModelItemToernooi) ToernooiLijst.getSelectedValue();
@@ -402,24 +396,23 @@ public class Toernooi extends javax.swing.JFrame {
             ResultSet rs = stat.executeQuery();
             rs.first();
             int ronde = 0;
-            while(rs.next()){
-              ronde = rs.getInt("rondeNummer");
-                
+            while (rs.next()) {
+                ronde = rs.getInt("rondeNummer");
+
             }
-            if(ronde <= 1){
-                    JOptionPane.showMessageDialog(null, "Er is nog geen finaletafel bekend.");
-                    
-                }
-            else{
-            if (Toernooi.ToernooiLijst.getSelectedValue() == null) {
-                JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");
+            if (ronde <= 1) {
+                JOptionPane.showMessageDialog(null, "Er is nog geen finaletafel bekend.");
+
             } else {
-                FinaleTafel tFrame = new FinaleTafel();
-                tFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                tFrame.setVisible(true);
-                Gui.centreWindow(tFrame);
-                IndelingMethods.finaleTafelVullen();
-            }
+                if (Toernooi.ToernooiLijst.getSelectedValue() == null) {
+                    JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");
+                } else {
+                    FinaleTafel tFrame = new FinaleTafel();
+                    tFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                    tFrame.setVisible(true);
+                    Gui.centreWindow(tFrame);
+                    IndelingMethods.finaleTafelVullen();
+                }
             }
         } catch (SQLException sQLException) {
         } catch (HeadlessException headlessException) {
@@ -428,21 +421,20 @@ public class Toernooi extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-       if(Toernooi.ToernooiLijst.getSelectedValue() == null){
-           JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");   }
-       else
-       {
-           int dialogButton = JOptionPane.YES_NO_OPTION;
-            JOptionPane.showConfirmDialog (null, "Weet u zeker dat u dit toernooi wilt verwijderen?","WARNING", dialogButton);
-            if(dialogButton == JOptionPane.YES_OPTION) {
+        if (Toernooi.ToernooiLijst.getSelectedValue() == null) {
+            JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");
+        } else {
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            JOptionPane.showConfirmDialog(null, "Weet u zeker dat u dit toernooi wilt verwijderen?", "WARNING", dialogButton);
+            if (dialogButton == JOptionPane.YES_OPTION) {
                 ToernooiMethods.verwijderToernooi();
                 JOptionPane.showMessageDialog(null, "Het toernooi is succesvol verwijderd");
             }
-            if(dialogButton == JOptionPane.NO_OPTION) {
-                  remove(dialogButton);
-       }
-       
-       }
+            if (dialogButton == JOptionPane.NO_OPTION) {
+                remove(dialogButton);
+            }
+
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     /**

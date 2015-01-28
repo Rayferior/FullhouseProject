@@ -10,16 +10,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ButtonGroup;
-import javax.swing.DefaultListModel;
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
  *
@@ -28,7 +18,7 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 public class FullhouseProjectGui {
 
     static Connection con = null;
-   
+
     public static void main(String[] args) {
         JFrame frame = new Gui();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

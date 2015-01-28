@@ -14,7 +14,8 @@ import javax.swing.DefaultListModel;
  * @author Menno
  */
 public class Inschrijving {
-     public static void InschrijvingLijst() {
+
+    public static void InschrijvingLijst() {
 
         DefaultListModel model = new DefaultListModel();
 
@@ -80,5 +81,4 @@ public class Inschrijving {
 
         }
     }
-
 }

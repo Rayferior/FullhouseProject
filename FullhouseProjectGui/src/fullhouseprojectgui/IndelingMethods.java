@@ -17,8 +17,9 @@ import javax.swing.JOptionPane;
  * @author Menno
  */
 public class IndelingMethods {
+
     static ArrayList<String> IndelingGroep = new ArrayList<String>();
-    
+
     public static Table[] deelIn() {
         String aantalQuery = "Select aantalSpelers from Toernooi where t_code = ?";
         int totaalSpelers = 0;
@@ -81,7 +82,7 @@ public class IndelingMethods {
 
         try {
             PreparedStatement stat = FullhouseProjectGui.con.prepareStatement(winnaarQuery);
-            
+
             ResultSet ToerRS = stat.executeQuery();
             ToerRS.first();
             String aantalS = ToerRS.getString("totaal");
@@ -257,7 +258,8 @@ public class IndelingMethods {
             }
         }
     }
-     public static void toonTafelLijst() {
+
+    public static void toonTafelLijst() {
         DefaultListModel tafelmodel = new DefaultListModel();
         ModelItemToernooi toer = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
         String toonQuery = "select distinct I.i_code, T.rondeNummer from TafelIndeling I join Tafel T ON I.i_code = T.i_code where toernooi = ? order by i_code";
@@ -305,7 +307,8 @@ public class IndelingMethods {
 
         }
     }
-     public static void finaleTafelVullen() {
+
+    public static void finaleTafelVullen() {
         DefaultListModel model = new DefaultListModel();
         ModelItemToernooi toernooi = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
         String maxRonde = "select max(rondeNummer) as finaleRonde from Ronde where t_code = ?";

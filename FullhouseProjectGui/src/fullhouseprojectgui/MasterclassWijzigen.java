@@ -187,25 +187,23 @@ public class MasterclassWijzigen extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     
+
         String masterclassgever = masterclassGever.getText();
         String aantalspelers = aantalSpelersT.getText();
         String datum = datumT.getText();
         String inschrijfgeld = inschrijfGeldT.getText();
         String locatie = locatieT.getText();
         String minimalerating = minimaleRatingT.getText();
-        
-        int dagen = Integer.parseInt(datum.substring(0,2));
-        int maand = Integer.parseInt(datum.substring(3,5));
-        int jaar = Integer.parseInt(datum.substring(6,10));
-        
-        if((masterclassgever.isEmpty()) || (aantalspelers.isEmpty()) || (datum.isEmpty()) || (inschrijfgeld.isEmpty()) 
-        || (locatie.isEmpty()) || (minimalerating.isEmpty()) || (jaar < 2015) || (maand > 13) || (dagen > 31)
-        || (!minimalerating.matches("[0-9]+")) || (locatie.matches("[0-9]+")) || (!aantalspelers.matches("[0-9]+")) 
-        || (!inschrijfgeld.matches("[0-9]+"))){
-            
-        }
-        else{
+
+        int dagen = Integer.parseInt(datum.substring(0, 2));
+        int maand = Integer.parseInt(datum.substring(3, 5));
+        int jaar = Integer.parseInt(datum.substring(6, 10));
+
+        if ((masterclassgever.isEmpty()) || (aantalspelers.isEmpty()) || (datum.isEmpty()) || (inschrijfgeld.isEmpty())
+                || (locatie.isEmpty()) || (minimalerating.isEmpty()) || (jaar < 2015) || (maand > 13) || (dagen > 31)
+                || (!minimalerating.matches("[0-9]+")) || (locatie.matches("[0-9]+")) || (!aantalspelers.matches("[0-9]+"))
+                || (!inschrijfgeld.matches("[0-9]+"))) {
+        } else {
             try {
                 MasterclassMethods.masterclassWijzigen();
             } catch (ParseException ex) {
@@ -213,46 +211,45 @@ public class MasterclassWijzigen extends javax.swing.JFrame {
             }
             JOptionPane.showMessageDialog(rootPane, "Masterclass is succesvol gewijzigd");
         }
-        
-        if(masterclassgever.isEmpty()){
+
+        if (masterclassgever.isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Masterclassgever", JOptionPane.CANCEL_OPTION);
         }
-        if(aantalspelers.isEmpty()){
+        if (aantalspelers.isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Aantal Spelers", JOptionPane.CANCEL_OPTION);
         }
-        if(!aantalspelers.matches("[0-9]+")){
+        if (!aantalspelers.matches("[0-9]+")) {
             JOptionPane.showMessageDialog(rootPane, "Invoer mag geen letters bevatten");
         }
-        if(datum.isEmpty()){
+        if (datum.isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Datum", JOptionPane.CANCEL_OPTION);
+        } else {
+            if (jaar < 2015) {
+                JOptionPane.showMessageDialog(rootPane, "Jaar mag niet eerder dan 2015 zijn", "Datum", JOptionPane.CANCEL_OPTION);
+            }
+            if (maand > 12) {
+                JOptionPane.showMessageDialog(rootPane, "Maand mag niet hoger dan 12 zijn", "Datum", JOptionPane.CANCEL_OPTION);
+            }
+            if (dagen > 31) {
+                JOptionPane.showMessageDialog(rootPane, "Dagen mag niet hoger zijn dan 31", "Datum", JOptionPane.CANCEL_OPTION);
+            }
         }
-        else{
-        if(jaar < 2015){
-        JOptionPane.showMessageDialog(rootPane, "Jaar mag niet eerder dan 2015 zijn", "Datum", JOptionPane.CANCEL_OPTION);
-        }
-        if(maand > 12){
-        JOptionPane.showMessageDialog(rootPane, "Maand mag niet hoger dan 12 zijn", "Datum", JOptionPane.CANCEL_OPTION);
-        }
-        if(dagen > 31){
-        JOptionPane.showMessageDialog(rootPane, "Dagen mag niet hoger zijn dan 31", "Datum", JOptionPane.CANCEL_OPTION);
-        }
-        }
-        if(inschrijfgeld.isEmpty()){
+        if (inschrijfgeld.isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Inschrijfgeld", JOptionPane.CANCEL_OPTION);
         }
-        if(!inschrijfgeld.matches("[0-9]+")){
+        if (!inschrijfgeld.matches("[0-9]+")) {
             JOptionPane.showMessageDialog(rootPane, "Invoer mag geen letters bevatten");
         }
-        if(locatie.isEmpty()){
+        if (locatie.isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Locatie", JOptionPane.CANCEL_OPTION);
         }
-        if(locatie.matches("[0-9]+")){
+        if (locatie.matches("[0-9]+")) {
             JOptionPane.showMessageDialog(rootPane, "Invoer mag geen cijers bevatten", "Locatie", JOptionPane.CANCEL_OPTION);
         }
-        if(minimalerating.isEmpty()){
+        if (minimalerating.isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Invoer mag niet leeg zijn", "Minimale Rating", JOptionPane.CANCEL_OPTION);
         }
-        if(!minimalerating.matches("[0-9]+")){
+        if (!minimalerating.matches("[0-9]+")) {
             JOptionPane.showMessageDialog(rootPane, "Invoer mag geen letters bevatten", "Minimale Rating", JOptionPane.CANCEL_OPTION);
         }
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -303,11 +303,11 @@ public class Overzichten extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonOverzichtLijstTonenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonOverzichtLijstTonenMouseClicked
-          DefaultListModel model = new DefaultListModel();
-        if((!jRadioButtonTOverzicht.isSelected()) && (!jRadioButtonMOverzicht.isSelected())){
+        DefaultListModel model = new DefaultListModel();
+        if ((!jRadioButtonTOverzicht.isSelected()) && (!jRadioButtonMOverzicht.isSelected())) {
             JOptionPane.showMessageDialog(rootPane, "Selecteer eerst Toernooi of Masterclass");
         }
-        
+
         if (jRadioButtonTOverzicht.isSelected()) {
             String TQuery = "select * from Toernooi";
             try {
@@ -350,125 +350,116 @@ public class Overzichten extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonOverzichtLijstTonenMouseClicked
 
     private void jButtonOverzicht3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonOverzicht3MouseClicked
-  if(Overzichten.jListOverzichtTenM.getSelectedValue() == null){
-           JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");   }
-       else
-  {
-        DefaultListModel modeldrie = new DefaultListModel();
-        String queryDrie = "SELECT I.s_code, S.naam FROM ToernooiInschrijving I JOIN Speler S ON I.s_code = S.s_code WHERE I.t_code = ?";
-        ModelItemToernooi toer = (ModelItemToernooi) jListOverzichtTenM.getSelectedValue();
-        try {
-            PreparedStatement driestat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(queryDrie);
-            driestat.setString(1, toer.id);
-            driestat.executeQuery();
-            jListResultaat.removeAll();
-            ResultSet rsdrie = driestat.executeQuery();
-            rsdrie.beforeFirst();
-            while(rsdrie.next()){
-                ModelItem speler = new ModelItem();
-                speler.s_code = rsdrie.getString("s_code");
-                speler.naam = rsdrie.getString("naam");
-                modeldrie.addElement(speler);
+        if (Overzichten.jListOverzichtTenM.getSelectedValue() == null) {
+            JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");
+        } else {
+            DefaultListModel modeldrie = new DefaultListModel();
+            String queryDrie = "SELECT I.s_code, S.naam FROM ToernooiInschrijving I JOIN Speler S ON I.s_code = S.s_code WHERE I.t_code = ?";
+            ModelItemToernooi toer = (ModelItemToernooi) jListOverzichtTenM.getSelectedValue();
+            try {
+                PreparedStatement driestat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(queryDrie);
+                driestat.setString(1, toer.id);
+                driestat.executeQuery();
+                jListResultaat.removeAll();
+                ResultSet rsdrie = driestat.executeQuery();
+                rsdrie.beforeFirst();
+                while (rsdrie.next()) {
+                    ModelItem speler = new ModelItem();
+                    speler.s_code = rsdrie.getString("s_code");
+                    speler.naam = rsdrie.getString("naam");
+                    modeldrie.addElement(speler);
+                }
+                jListResultaat.setModel(modeldrie);
+
+            } catch (SQLException ex) {
+                System.out.println(ex);
             }
-            jListResultaat.setModel(modeldrie);
-            
-        } catch (SQLException ex) {
-            System.out.println(ex);
         }
-  }
     }//GEN-LAST:event_jButtonOverzicht3MouseClicked
 
     private void jButtonOverzicht2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOverzicht2ActionPerformed
-  if(Overzichten.jListOverzichtTenM.getSelectedValue() == null){
-           JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");   }
-       else
-  {
-        ModelItemToernooi toernooi = (ModelItemToernooi) Overzichten.jListOverzichtTenM.getSelectedValue();
-        DefaultListModel model = new DefaultListModel();
-        String totaalGeld = "select sum(inschrijfGeld * aantalSpelers) as prijsgeld from Toernooi where t_code = ?";
-        try {
-            PreparedStatement stat = FullhouseProjectGui.con.prepareStatement(totaalGeld);
-            stat.setString(1, toernooi.id);
-            ResultSet rs = stat.executeQuery();
-            rs.first();
-            String totaalTgeld = rs.getString("prijsgeld");
-            model.addElement(totaalTgeld + " Euro");
-            Overzichten.jListResultaat.setModel(model);
-        } catch (Exception e) {
-            System.out.println(e);
+        if (Overzichten.jListOverzichtTenM.getSelectedValue() == null) {
+            JOptionPane.showMessageDialog(null, "Selecteer eerst een toernooi uit de lijst");
+        } else {
+            ModelItemToernooi toernooi = (ModelItemToernooi) Overzichten.jListOverzichtTenM.getSelectedValue();
+            DefaultListModel model = new DefaultListModel();
+            String totaalGeld = "select sum(inschrijfGeld * aantalSpelers) as prijsgeld from Toernooi where t_code = ?";
+            try {
+                PreparedStatement stat = FullhouseProjectGui.con.prepareStatement(totaalGeld);
+                stat.setString(1, toernooi.id);
+                ResultSet rs = stat.executeQuery();
+                rs.first();
+                String totaalTgeld = rs.getString("prijsgeld");
+                model.addElement(totaalTgeld + " Euro");
+                Overzichten.jListResultaat.setModel(model);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
         }
-    
-                }
     }//GEN-LAST:event_jButtonOverzicht2ActionPerformed
 
     private void homeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeButtonMouseClicked
         this.dispose();
     }//GEN-LAST:event_homeButtonMouseClicked
 
-
     private void jButtonOverzicht3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOverzicht3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonOverzicht3ActionPerformed
 
-
     private void jButtonOverzicht4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOverzicht4ActionPerformed
-  if(Overzichten.jListOverzichtTenM.getSelectedValue() == null){
-           JOptionPane.showMessageDialog(null, "Selecteer eerst een masterclass uit de lijst");   }
-       else
-  {
-        ModelItemMasterclass masterclass = (ModelItemMasterclass) Overzichten.jListOverzichtTenM.getSelectedValue();
-        DefaultListModel modelvier = new DefaultListModel();
-        String queryVier = "SELECT S.s_code, S.naam, I.m_code FROM MasterclassInschrijving I JOIN Speler S ON I.s_code = S.s_code WHERE I.heeftBetaald = 'j' AND m_code = ?";
-        try{
-            PreparedStatement vierstat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(queryVier);
-            vierstat.setString(1, masterclass.mcode);
-            vierstat.executeQuery();
-            ResultSet rsvier = vierstat.executeQuery();
-            rsvier.beforeFirst();
-            
-            while(rsvier.next()){
-                ModelItem speler = new ModelItem();
-                speler.s_code = rsvier.getString("s_code");
-                speler.naam = rsvier.getString("naam");
-                modelvier.addElement(speler);
+        if (Overzichten.jListOverzichtTenM.getSelectedValue() == null) {
+            JOptionPane.showMessageDialog(null, "Selecteer eerst een masterclass uit de lijst");
+        } else {
+            ModelItemMasterclass masterclass = (ModelItemMasterclass) Overzichten.jListOverzichtTenM.getSelectedValue();
+            DefaultListModel modelvier = new DefaultListModel();
+            String queryVier = "SELECT S.s_code, S.naam, I.m_code FROM MasterclassInschrijving I JOIN Speler S ON I.s_code = S.s_code WHERE I.heeftBetaald = 'j' AND m_code = ?";
+            try {
+                PreparedStatement vierstat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(queryVier);
+                vierstat.setString(1, masterclass.mcode);
+                vierstat.executeQuery();
+                ResultSet rsvier = vierstat.executeQuery();
+                rsvier.beforeFirst();
+
+                while (rsvier.next()) {
+                    ModelItem speler = new ModelItem();
+                    speler.s_code = rsvier.getString("s_code");
+                    speler.naam = rsvier.getString("naam");
+                    modelvier.addElement(speler);
+                }
+                jListResultaat.setModel(modelvier);
+            } catch (SQLException ex) {
+                System.out.println(ex);
             }
-            jListResultaat.setModel(modelvier);
         }
-        
-        catch (SQLException ex){
-            System.out.println(ex);
-        }
-  }
     }//GEN-LAST:event_jButtonOverzicht4ActionPerformed
 
-
     private void jButtonOverzicht1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOverzicht1ActionPerformed
-  if(Overzichten.jListOverzichtTenM.getSelectedValue() == null){
-           JOptionPane.showMessageDialog(null, "Selecteer eerst een masterclass uit de lijst");   }
-       else
-  {
-        DefaultListModel modeleen = new DefaultListModel();
-        String queryEen = "SELECT s_code, naam FROM Speler WHERE s_code NOT IN(SELECT s_code FROM MasterclassInschrijving)";
-        try {
-            PreparedStatement eenstat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(queryEen);
-            
-            eenstat.executeQuery();
-            jListResultaat.removeAll();
-            ResultSet rseen = eenstat.executeQuery();
-            rseen.beforeFirst();
-            while(rseen.next()){
-                ModelItem speler = new ModelItem();   
-                speler.s_code = rseen.getString("s_code");
-                speler.naam = rseen.getString("naam");
-                modeleen.addElement(speler);
+        if (Overzichten.jListOverzichtTenM.getSelectedValue() == null) {
+            JOptionPane.showMessageDialog(null, "Selecteer eerst een masterclass uit de lijst");
+        } else {
+            DefaultListModel modeleen = new DefaultListModel();
+            String queryEen = "SELECT s_code, naam FROM Speler WHERE s_code NOT IN(SELECT s_code FROM MasterclassInschrijving)";
+            try {
+                PreparedStatement eenstat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(queryEen);
+
+                eenstat.executeQuery();
+                jListResultaat.removeAll();
+                ResultSet rseen = eenstat.executeQuery();
+                rseen.beforeFirst();
+                while (rseen.next()) {
+                    ModelItem speler = new ModelItem();
+                    speler.s_code = rseen.getString("s_code");
+                    speler.naam = rseen.getString("naam");
+                    modeleen.addElement(speler);
+                }
+                jListResultaat.setModel(modeleen);
+
+            } catch (SQLException ex) {
+                System.out.println(ex);
             }
-            jListResultaat.setModel(modeleen);
-            
-        } catch (SQLException ex) {
-            System.out.println(ex);
         }
-  }
-        
+
     }//GEN-LAST:event_jButtonOverzicht1ActionPerformed
 
     private void jButtonOverzichtLijstTonenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOverzichtLijstTonenActionPerformed

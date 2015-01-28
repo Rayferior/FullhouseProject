@@ -18,8 +18,10 @@ import javax.swing.table.DefaultTableModel;
  * @author Menno
  */
 public class ToernooiMethods {
+
     static ArrayList<String> kolomnamenT = new ArrayList<String>();
     static ArrayList<String> kolomnamenM = new ArrayList<String>();
+
     public static void ToernooiTonen() {
         DefaultTableModel model = new DefaultTableModel();
         String Query = "select * from Toernooi;";
@@ -59,7 +61,8 @@ public class ToernooiMethods {
             System.out.println(e);
         }
     }
-     public static void ToernooiLijstTonen() {
+
+    public static void ToernooiLijstTonen() {
         DefaultListModel model = new DefaultListModel();
 
 
@@ -82,7 +85,8 @@ public class ToernooiMethods {
             System.out.println(e);
         }
     }
-     public static void ToernooiToevoegen() {
+
+    public static void ToernooiToevoegen() {
         String insertQuery = "insert into Toernooi(t_code, datum, locatie, inschrijfGeld) values( ?,?,?,?)";
         String toonHoogste = "select max(t_code) as hoogste from Toernooi";
 
@@ -106,10 +110,11 @@ public class ToernooiMethods {
             System.out.println(e);
         }
     }
-      public static void tekstVullenToernooi() throws ParseException {
+
+    public static void tekstVullenToernooi() throws ParseException {
         ModelItemToernooi toernooi = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
         String selectQuery = "select * from Toernooi where datum = ?";
-        
+
         try {
             PreparedStatement stat = FullhouseProjectGui.con.prepareStatement(selectQuery);
             stat.setString(1, toernooi.datum);
@@ -127,7 +132,7 @@ public class ToernooiMethods {
                 ToernooiWijzigen.locatieT.setText(locatie);
                 ToernooiWijzigen.inschrijfGeldT.setText(inschrijfGeld);
                 ToernooiWijzigen.aantalSpelersT.setText(aantalSpelers);
-                
+
             } while (rs.next());
 
 
@@ -135,7 +140,8 @@ public class ToernooiMethods {
             Logger.getLogger(FullhouseProjectGui.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-       public static void toernooiWijzigen() throws ParseException {
+
+    public static void toernooiWijzigen() throws ParseException {
         ModelItemToernooi tcode = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
         String updateQuery = "update Toernooi set datum = ?, locatie = ?, aantalSpelers = ?,inschrijfGeld = ? WHERE datum = ?";
         try {
@@ -155,7 +161,8 @@ public class ToernooiMethods {
             Logger.getLogger(FullhouseProjectGui.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-       public static void vulOpenBetalingen() {
+
+    public static void vulOpenBetalingen() {
         ModelItemToernooi tcode = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
         DefaultTableModel model = new DefaultTableModel();
         String Query = "select S.naam,Toer.inschrijfGeld, Toer.datum, S.email from Speler S join ToernooiInschrijving T ON S.s_code = T.S_code join Toernooi Toer on T.t_code = Toer.t_code"
@@ -189,12 +196,13 @@ public class ToernooiMethods {
             Toernooi.OpenBet.setModel(model);
 
         } catch (Exception e) {
-            System.out.println(e);
+            JOptionPane.showMessageDialog(null, e);
 
         }
 
     }
-       public static void vulTiTabel() {
+
+    public static void vulTiTabel() {
         ModelItemTi ticode = (ModelItemTi) TafelIndeling.TiLijst.getSelectedValue();
         DefaultTableModel model = new DefaultTableModel();
         DefaultListModel model1 = new DefaultListModel();
@@ -250,10 +258,10 @@ public class ToernooiMethods {
             PreparedStatement selectStat = FullhouseProjectGui.con.prepareStatement(selectQuery);
             PreparedStatement maxStat = FullhouseProjectGui.con.prepareStatement(maxQuery);
             PreparedStatement winstat = FullhouseProjectGui.con.prepareStatement(plaatsQuery);
-            
+
             selectStat.setString(1, ticode.s_code);
             spelerStat.setString(2, ticode.s_code);
-            
+
 
             ResultSet Selectrs = selectStat.executeQuery();
             Selectrs.first();
@@ -262,11 +270,11 @@ public class ToernooiMethods {
             String tcode = Selectrs.getString("toernooi");
             maxStat.setString(1, tcode);
             stat.setInt(2, i_code);
-            
+
             ResultSet maxRs = maxStat.executeQuery();
-            maxRs.first(); 
+            maxRs.first();
             int max = maxRs.getInt("hoogste");
-            
+
 
             for (int i = 0; i < aantalSpelers; i++) {
                 stat.setString(1, "n");
@@ -274,21 +282,21 @@ public class ToernooiMethods {
             }
             spelerStat.setString(1, "j");
             spelerStat.execute();
-            
-            if(max == i_code){
+
+            if (max == i_code) {
                 winstat.setString(1, ticode.s_code);
                 winstat.setString(2, tcode);
                 winstat.executeUpdate();
                 JOptionPane.showMessageDialog(null, "De winnaar van het toernooi is bekend");
-            }
-            else {
-            JOptionPane.showMessageDialog(null, "Winnaar bevestigd");
+            } else {
+                JOptionPane.showMessageDialog(null, "Winnaar bevestigd");
             }
         } catch (Exception e) {
             System.out.println(e);
         }
     }
-     public static void veranderRating() {
+
+    public static void veranderRating() {
         int verschilRating;
         int nieuwRating = 0;
         int somRating = 0;
@@ -346,7 +354,8 @@ public class ToernooiMethods {
             System.out.println(e);
         }
     }
-     public static void verwijderToernooi() {
+
+    public static void verwijderToernooi() {
         ModelItemToernooi toernooi = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
         String deleteQuery = "Delete from Toernooi where t_code = ?";
         try {

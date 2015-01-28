@@ -19,9 +19,10 @@ import javax.swing.table.DefaultTableModel;
  * @author Menno
  */
 public class Speler {
+
     static ArrayList<String> kolomnamenS = new ArrayList<String>();
-    
-     public static void SpelerTonen() {
+
+    public static void SpelerTonen() {
         DefaultTableModel model = new DefaultTableModel();
         String Query = "select * from Speler;";
         try {
@@ -60,7 +61,8 @@ public class Speler {
             System.out.println(e);
         }
     }
-      public static void SpelerLijstTonen() {
+
+    public static void SpelerLijstTonen() {
         DefaultListModel model = new DefaultListModel();
 
         String Query = "select * from Speler";
@@ -80,7 +82,8 @@ public class Speler {
             System.out.println(e);
         }
     }
-       public static void SpelerToevoegen() {
+
+    public static void SpelerToevoegen() {
         String insertQuery = "insert into Speler(s_code, naam, adres, postcode,plaats, telefoonnummer, email, rating, kanMasterclassGeven) values( ?,?,?,?,?,?,?,?,?)";
         String toonHoogste = "select max(s_code) as hoogste from Speler";
         try {
@@ -105,7 +108,8 @@ public class Speler {
             System.out.println(e);
         }
     }
-       public static void tekstVullen() {
+
+    public static void tekstVullen() {
         ModelItem speler = (ModelItem) SpelersFrame.SpelerLijst.getSelectedValue();
         String selectQuery = "select * from Speler where s_code = ?";
 
@@ -140,11 +144,12 @@ public class Speler {
             Logger.getLogger(FullhouseProjectGui.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-        public static void spelerWijzigen() {
+
+    public static void spelerWijzigen() {
         ModelItem s_code = (ModelItem) SpelersFrame.SpelerLijst.getSelectedValue();
         String updateQuery = "update Speler set naam = ?, adres = ?, postcode = ?, plaats = ?, telefoonnummer = ?, email = ?, rating = ?, kanMasterclassGeven = ? WHERE s_code = ?";
-        
-      
+
+
         try {
             PreparedStatement stat = FullhouseProjectGui.con.prepareStatement(updateQuery);
             String naam = SpelerWijzigFrame.jTextFieldWijzigSpelerNaam.getText();
@@ -166,11 +171,10 @@ public class Speler {
             stat.setString(8, text3);
             stat.setString(9, s_code.s_code);
             stat.execute();
-        
+
         } catch (SQLException ex) {
             Logger.getLogger(FullhouseProjectGui.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    
 }

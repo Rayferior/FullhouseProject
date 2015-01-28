@@ -15,11 +15,13 @@ import javax.swing.table.DefaultTableModel;
  * @author Menno
  */
 public class FinaleTafel extends javax.swing.JFrame {
+
     String t_code;
     Object[] eersteRow = new Object[2];
     Object[] tweedeRow = new Object[2];
     Object[] derdeRow = new Object[2];
-     static ArrayList<String> kolomnamenS = new ArrayList<String>();
+    static ArrayList<String> kolomnamenS = new ArrayList<String>();
+
     /**
      * Creates new form FinaleTafel
      */
@@ -27,7 +29,7 @@ public class FinaleTafel extends javax.swing.JFrame {
         initComponents();
         ModelItemToernooi toer = (ModelItemToernooi) Toernooi.ToernooiLijst.getSelectedValue();
         t_code = toer.id;
-        
+
     }
 
     /**
@@ -198,31 +200,31 @@ public class FinaleTafel extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         DefaultTableModel model2 = new DefaultTableModel();
-       ModelItem model = (ModelItem) FinaleTafel.finaleTafel.getSelectedValue();
-       
-       
+        ModelItem model = (ModelItem) FinaleTafel.finaleTafel.getSelectedValue();
+
+
         String winnaar = "select S.naam, S.s_code from Speler S join ToernooiInschrijving I on S.s_code = I.s_code "
                 + "JOIN Toernooi T ON I.t_code = T.t_code WHERE S.s_code = T.1e and T.t_code = ?";
         String prijzenGeld = "select S.naam, (T.inschrijfGeld * T.aantalSpelers) as prijsgeld from Toernooi T "
                 + "JOIN ToernooiInschrijving I ON T.t_code = I.t_code JOIN Speler S ON I.s_code = S.s_code where T.t_code =?";
         String prijzenGeld2 = "Update Toernooi set 2e = ? where t_code =?";
         String prijzenGeld3 = "Update Toernooi set 3e = ? where t_code =?";
-        
+
         try {
-            
+
             PreparedStatement prijsGeld = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(prijzenGeld);
             PreparedStatement prijs2stat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(prijzenGeld2);
             PreparedStatement prijs3stat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(prijzenGeld3);
             PreparedStatement winstat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(winnaar);
             winstat.setString(1, t_code);
             prijsGeld.setString(1, t_code);
-            
+
             ResultSet rs = prijsGeld.executeQuery();
-            
+
             ResultSet winrs = winstat.executeQuery();
             winrs.first();
             String naam = winrs.getString("naam");
-            
+
             int Ccount = rs.getMetaData().getColumnCount();
             for (int i = 1; i <= Ccount; i++) {
                 String name = rs.getMetaData().getColumnName(i);
@@ -234,29 +236,29 @@ public class FinaleTafel extends javax.swing.JFrame {
             model2.setRowCount(0);
             model2.setColumnCount(Ccount);
             rs.first();
-            
+
             int Geld = rs.getInt("prijsgeld");
-            
-            if (eerste.isSelected()){
-            int eersteGeld = (int) (Geld * 0.4);
-            eersteRow[0] = naam;
-            eersteRow[1] = eersteGeld;
+
+            if (eerste.isSelected()) {
+                int eersteGeld = (int) (Geld * 0.4);
+                eersteRow[0] = naam;
+                eersteRow[1] = eersteGeld;
             }
-            if (tweede.isSelected()){
-             prijs2stat.setString(1, model.s_code);
-             prijs2stat.setString(2, t_code);
-             int tweedeGeld= (int) (Geld * 0.25);
-             tweedeRow[0] = model.naam;
-             tweedeRow[1] = tweedeGeld;
-             prijs2stat.executeUpdate();
+            if (tweede.isSelected()) {
+                prijs2stat.setString(1, model.s_code);
+                prijs2stat.setString(2, t_code);
+                int tweedeGeld = (int) (Geld * 0.25);
+                tweedeRow[0] = model.naam;
+                tweedeRow[1] = tweedeGeld;
+                prijs2stat.executeUpdate();
             }
-            if (derde.isSelected()){
-             prijs3stat.setString(1, model.s_code);
-             prijs3stat.setString(2, t_code);
-             int derdeGeld = (int) (Geld * 0.1);
-             derdeRow[0] = model.naam;
-             derdeRow[1] = derdeGeld;
-             prijs3stat.executeUpdate();
+            if (derde.isSelected()) {
+                prijs3stat.setString(1, model.s_code);
+                prijs3stat.setString(2, t_code);
+                int derdeGeld = (int) (Geld * 0.1);
+                derdeRow[0] = model.naam;
+                derdeRow[1] = derdeGeld;
+                prijs3stat.executeUpdate();
             }
             model2.addRow(eersteRow);
             model2.addRow(tweedeRow);

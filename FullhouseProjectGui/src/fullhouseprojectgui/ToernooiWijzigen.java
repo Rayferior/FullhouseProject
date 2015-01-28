@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package fullhouseprojectgui;
 
 import java.text.ParseException;
@@ -161,17 +160,15 @@ public class ToernooiWijzigen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    this.dispose();       
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
         String aantalSpelers = aantalSpelersT.getText();
-       
-        if((!aantalSpelers.matches("[0-9]+"))){
-            
-        }
-        else{
+
+        if ((!aantalSpelers.matches("[0-9]+"))) {
+        } else {
             JOptionPane.showMessageDialog(rootPane, "Toernooi is succesvol gewijzigd", "Succes", JOptionPane.CANCEL_OPTION);
             try {
                 ToernooiMethods.toernooiWijzigen();
@@ -179,20 +176,24 @@ public class ToernooiWijzigen extends javax.swing.JFrame {
                 System.out.println(ex);
             }
         }
-    
-        if(!aantalSpelers.matches("[0-9]+")){
+
+        if (!aantalSpelers.matches("[0-9]+")) {
             JOptionPane.showMessageDialog(rootPane, "Invoer mag geen letters bevatten", "Aantal Spelers", JOptionPane.CANCEL_OPTION);
-        } 
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /*
+         * Set the Nimbus look and feel
+         */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the
+         * default look and feel. For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -212,14 +213,16 @@ public class ToernooiWijzigen extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /*
+         * Create and display the form
+         */
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 new ToernooiWijzigen().setVisible(true);
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTextField aantalSpelersT;
     public static javax.swing.JFormattedTextField datumT;

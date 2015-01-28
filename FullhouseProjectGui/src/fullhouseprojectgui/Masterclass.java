@@ -14,8 +14,6 @@ import javax.swing.JOptionPane;
  * @author Menno
  */
 public class Masterclass extends javax.swing.JFrame {
-   
-   
 
     /**
      * Creates new form Masterclass
@@ -174,55 +172,54 @@ public class Masterclass extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-           
-       if(Masterclass.masterclassLijst.getSelectedValue() == null){
-           JOptionPane.showMessageDialog(null, "Selecteer eerst een masterclass uit de lijst");   }
-       else
-       {
+
+        if (Masterclass.masterclassLijst.getSelectedValue() == null) {
+            JOptionPane.showMessageDialog(null, "Selecteer eerst een masterclass uit de lijst");
+        } else {
             MasterclassWijzigen MWijzigFrame = new MasterclassWijzigen();
             MWijzigFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             MWijzigFrame.setVisible(true);
             Gui.centreWindow(MWijzigFrame);
-        try {
-            MasterclassMethods.tekstVullenMasterclass();
-        } catch (ParseException ex) {
+            try {
+                MasterclassMethods.tekstVullenMasterclass();
+            } catch (ParseException ex) {
 
-            System.out.println(ex);
-        }} 
+                System.out.println(ex);
+            }
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       MasterclassInvoeren MInvoerFrame = new MasterclassInvoeren();
-       MInvoerFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-       MInvoerFrame.setVisible(true);
-       Gui.centreWindow(MInvoerFrame);
+        MasterclassInvoeren MInvoerFrame = new MasterclassInvoeren();
+        MInvoerFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        MInvoerFrame.setVisible(true);
+        Gui.centreWindow(MInvoerFrame);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void MhomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MhomeButtonActionPerformed
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_MhomeButtonActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-         MasterclassMethods.MasterclassTonen();
-         MasterclassMethods.MasterclassLijstTonen();
+        MasterclassMethods.MasterclassTonen();
+        MasterclassMethods.MasterclassLijstTonen();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-  if(Masterclass.masterclassLijst.getSelectedValue() == null){
-           JOptionPane.showMessageDialog(null, "Selecteer eerst een masterclass uit de lijst");   }
-       else
-       {
-           int dialogButton = JOptionPane.YES_NO_OPTION;
-            JOptionPane.showConfirmDialog (null, "Weet u zeker dat u deze masterclass wilt verwijderen?","WARNING", dialogButton);
-            if(dialogButton == JOptionPane.YES_OPTION) {
-                 MasterclassMethods.verwijderMasterclass();
+        if (Masterclass.masterclassLijst.getSelectedValue() == null) {
+            JOptionPane.showMessageDialog(null, "Selecteer eerst een masterclass uit de lijst");
+        } else {
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            JOptionPane.showConfirmDialog(null, "Weet u zeker dat u deze masterclass wilt verwijderen?", "WARNING", dialogButton);
+            if (dialogButton == JOptionPane.YES_OPTION) {
+                MasterclassMethods.verwijderMasterclass();
                 JOptionPane.showMessageDialog(null, "De masterclass is succesvol verwijderd");
             }
-            if(dialogButton == JOptionPane.NO_OPTION) {
-                  remove(dialogButton);
-       }
-       
-       }
+            if (dialogButton == JOptionPane.NO_OPTION) {
+                remove(dialogButton);
+            }
+
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

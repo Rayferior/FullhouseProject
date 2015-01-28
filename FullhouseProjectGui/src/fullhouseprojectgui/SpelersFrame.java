@@ -165,8 +165,8 @@ public class SpelersFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonToonSpelerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonToonSpelerMouseClicked
-       Speler.SpelerTonen();
-       Speler.SpelerLijstTonen();
+        Speler.SpelerTonen();
+        Speler.SpelerLijstTonen();
     }//GEN-LAST:event_jButtonToonSpelerMouseClicked
 
     private void jButtonUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonUpdateMouseClicked
@@ -174,26 +174,24 @@ public class SpelersFrame extends javax.swing.JFrame {
         swFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         swFrame.setVisible(true);
         Gui.centreWindow(swFrame);
-        Speler.tekstVullen();   
+        Speler.tekstVullen();
     }//GEN-LAST:event_jButtonUpdateMouseClicked
 
     private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
-   
     }//GEN-LAST:event_jButtonUpdateActionPerformed
 
     private void jButtonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertActionPerformed
-       SpelerInvoerFrame siFrame = new SpelerInvoerFrame();
+        SpelerInvoerFrame siFrame = new SpelerInvoerFrame();
         siFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         siFrame.setVisible(true);
         Gui.centreWindow(siFrame);
     }//GEN-LAST:event_jButtonInsertActionPerformed
 
     private void TerugButtonSpelerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TerugButtonSpelerActionPerformed
-    this.dispose();
+        this.dispose();
     }//GEN-LAST:event_TerugButtonSpelerActionPerformed
 
     private void jButtonToonSpelerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonToonSpelerActionPerformed
-        
     }//GEN-LAST:event_jButtonToonSpelerActionPerformed
 
     /**

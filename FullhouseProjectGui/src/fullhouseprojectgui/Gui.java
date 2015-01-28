@@ -13,23 +13,22 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import javax.swing.*;
 
-
 /**
  *
  * @author Guus
  */
 public class Gui extends javax.swing.JFrame {
- 
-  Connection con;
-  FullhouseProjectGui verbinding = new FullhouseProjectGui();
- 
+
+    Connection con;
+    FullhouseProjectGui verbinding = new FullhouseProjectGui();
+
     /**
      * Creates new form Gui
      */
     public Gui() {
         initComponents();
         con = verbinding.maakVerbinding();
-       
+
     }
 
     /**
@@ -229,8 +228,9 @@ public class Gui extends javax.swing.JFrame {
         masterclassFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         masterclassFrame.setVisible(true);
         centreWindow(masterclassFrame);
-        }
-        {
+    }
+
+    {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -246,16 +246,13 @@ public class Gui extends javax.swing.JFrame {
         sframe.setVisible(true);
         centreWindow(sframe);
     }//GEN-LAST:event_jButtonSpelersMouseClicked
-   
-    public static void centreWindow(Window frame)
-    {
+
+    public static void centreWindow(Window frame) {
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (int) ((dimension.getWidth()- frame.getWidth())/2);
-        int y = (int) ((dimension.getHeight()- frame.getHeight())/2);
+        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
         frame.setLocation(x, y);
     }
-                                  
-
 
     /**
      * @param args the command line arguments

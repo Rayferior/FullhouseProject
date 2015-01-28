@@ -218,7 +218,7 @@ public class InschrijvingFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonLijstTonenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonLijstTonenMouseClicked
-        if((!jRadioButtonT.isSelected()) && (!jRadioButtonM.isSelected())){
+        if ((!jRadioButtonT.isSelected()) && (!jRadioButtonM.isSelected())) {
             JOptionPane.showMessageDialog(rootPane, "Selecteer eerst Toernooi of Masterclass");
         }
         Inschrijving.TInschrijvingLijstTonen();
@@ -231,69 +231,69 @@ public class InschrijvingFrame extends javax.swing.JFrame {
         ModelItem speler = (ModelItem) jListSpelers.getSelectedValue();
         String compareQuery;
 
-        if((!jRadioButtonT.isSelected()) && (!jRadioButtonM.isSelected())){
+        if ((!jRadioButtonT.isSelected()) && (!jRadioButtonM.isSelected())) {
             JOptionPane.showMessageDialog(rootPane, "Selecteer eerst Toernooi of Masterclass");
         }
-        
+
         if (jRadioButtonT.isSelected()) {
-            
+
             compareQuery = "Select s_code from ToernooiInschrijving where t_code = ?";
             Query = "Insert into ToernooiInschrijving set s_code = ?, t_code = ?, heeftBetaald = 'j'";
             ModelItemToernooi toer = (ModelItemToernooi) jListTenM.getSelectedValue();
-            
-                try {
+
+            try {
                 PreparedStatement comparestat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(compareQuery);
                 comparestat.setString(1, toer.id);
                 ResultSet comparers = comparestat.executeQuery();
                 comparers.first();
                 String s_code;
                 boolean keuze = false;
-                if (speler == null){
+                if (speler == null) {
                     JOptionPane.showMessageDialog(null, "Selecteer een speler uit de lijst");
                 } else {
-                while (comparers.next()) {
-                    s_code = comparers.getString("s_code");
-                    if (s_code.equals(speler.s_code)) {
-                        keuze = true;
-                    } else {
-                        keuze = false;
+                    while (comparers.next()) {
+                        s_code = comparers.getString("s_code");
+                        if (s_code.equals(speler.s_code)) {
+                            keuze = true;
+                        } else {
+                            keuze = false;
+                        }
+
                     }
-                    
-                }
-                if (keuze = true) {
-                    JOptionPane.showMessageDialog(null, "Speler staat al ingeschreven.");
-                } else {
-                    
-                    PreparedStatement stat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(Query);
-                    stat.setString(1, speler.s_code);
-                    stat.setString(2, toer.id);
-                    stat.execute();
-                    JOptionPane.showMessageDialog(null, "Ingeschreven");
-                }
+                    if (keuze = true) {
+                        JOptionPane.showMessageDialog(null, "Speler staat al ingeschreven.");
+                    } else {
+
+                        PreparedStatement stat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(Query);
+                        stat.setString(1, speler.s_code);
+                        stat.setString(2, toer.id);
+                        stat.execute();
+                        JOptionPane.showMessageDialog(null, "Ingeschreven");
+                    }
                 }
             } catch (SQLException sQLException) {
             } catch (HeadlessException headlessException) {
             }
-           
-            } else if (jRadioButtonM.isSelected()) {
-                
-                compareQuery = "Select Mi.s_code, S.rating, M.minimaleRating from MasterclassInschrijving Mi join Speler S on Mi.s_code = S.s_code"
-                        + " join Masterclass M on Mi.m_code = M.m_code where Mi.m_code = ?";
-                Query = "Insert into MasterclassInschrijving set s_code = ?, m_code = ?, heeftBetaald = 'j'";
-                ModelItemMasterclass mast = (ModelItemMasterclass) jListTenM.getSelectedValue();
-                if (mast == null) {
-                    JOptionPane.showMessageDialog(null, "Selecteer een masterclass");
-                } else {
-                    try {
-                        PreparedStatement comparestat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(compareQuery);
-                        comparestat.setString(1, mast.mcode);
-                        ResultSet comparers = comparestat.executeQuery();
-                        comparers.first();
-                        String s_code;
-                        boolean keuze = false;
-                       if (speler == null){
+
+        } else if (jRadioButtonM.isSelected()) {
+
+            compareQuery = "Select Mi.s_code, S.rating, M.minimaleRating from MasterclassInschrijving Mi join Speler S on Mi.s_code = S.s_code"
+                    + " join Masterclass M on Mi.m_code = M.m_code where Mi.m_code = ?";
+            Query = "Insert into MasterclassInschrijving set s_code = ?, m_code = ?, heeftBetaald = 'j'";
+            ModelItemMasterclass mast = (ModelItemMasterclass) jListTenM.getSelectedValue();
+            if (mast == null) {
+                JOptionPane.showMessageDialog(null, "Selecteer een masterclass");
+            } else {
+                try {
+                    PreparedStatement comparestat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(compareQuery);
+                    comparestat.setString(1, mast.mcode);
+                    ResultSet comparers = comparestat.executeQuery();
+                    comparers.first();
+                    String s_code;
+                    boolean keuze = false;
+                    if (speler == null) {
                         JOptionPane.showMessageDialog(null, "Selecteer een speler uit de lijst");
-                        } else {
+                    } else {
                         while (comparers.next()) {
                             s_code = comparers.getString("s_code");
                             rating = comparers.getInt("rating");
@@ -307,76 +307,72 @@ public class InschrijvingFrame extends javax.swing.JFrame {
                         }
                         if (keuze = true) {
                             JOptionPane.showMessageDialog(null, "Speler staat al ingeschreven");
-                        } 
-                        else if(rating < minRating)
-                        {
+                        } else if (rating < minRating) {
                             JOptionPane.showMessageDialog(null, "De rating van de gekozen speler is te laag");
-                        }
-                        
-                        else {
+                        } else {
                             PreparedStatement stat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(Query);
                             stat.setString(1, speler.s_code);
                             stat.setString(2, mast.mcode);
                             stat.execute();
                             JOptionPane.showMessageDialog(null, "Ingeschreven");
                         }
-                       }
-                    } catch (SQLException Ex) {
-                        JOptionPane.showMessageDialog(null, Ex);
                     }
-                        
+                } catch (SQLException Ex) {
+                    JOptionPane.showMessageDialog(null, Ex);
                 }
+
             }
+        }
     }//GEN-LAST:event_jButtonInConfirmMouseClicked
 
     private void jButtonTotaalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonTotaalMouseClicked
         String UQuery;
-        
+
         String SQuery;
-         
-       if (jRadioButtonT.isSelected()) {
+
+        if (jRadioButtonT.isSelected()) {
             SQuery = "Select count(s_code) as aantal from ToernooiInschrijving WHERE t_code = ? AND heeftBetaald = 'j'";
             UQuery = "Update Toernooi set aantalSpelers = ? WHERE t_code = ?";
             ModelItemToernooi toer = (ModelItemToernooi) jListTenM.getSelectedValue();
             try {
                 PreparedStatement countstat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(SQuery);
                 PreparedStatement updatestat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(UQuery);
-                
+
                 countstat.setString(1, toer.id);
                 updatestat.setString(2, toer.id);
                 ResultSet RS = countstat.executeQuery();
                 RS.first();
                 String aantal = RS.getString("aantal");
-                updatestat.setString(1,aantal);
+                updatestat.setString(1, aantal);
                 updatestat.execute();
                 JOptionPane.showMessageDialog(null, "Update voltooid");
-                
+
             } catch (SQLException sQLException) {
                 System.out.println(sQLException);
             }
-        
-        }else if (jRadioButtonM.isSelected()) {
+
+        } else if (jRadioButtonM.isSelected()) {
             SQuery = "Select count(s_code) as aantal from MasterclassInschrijving WHERE m_code = ? AND heeftBetaald = 'j'";
             UQuery = "Update Masterclass set aantalSpelers = ? WHERE m_code = ?";
             ModelItemMasterclass mast = (ModelItemMasterclass) jListTenM.getSelectedValue();
             try {
                 PreparedStatement countstat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(SQuery);
                 PreparedStatement updatestat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(UQuery);
-                
+
                 countstat.setString(1, mast.mcode);
                 updatestat.setString(2, mast.mcode);
                 ResultSet RS = countstat.executeQuery();
                 RS.first();
                 String aantal = RS.getString("aantal");
-                updatestat.setString(1,aantal);
+                updatestat.setString(1, aantal);
                 updatestat.execute();
                 JOptionPane.showMessageDialog(null, "Update voltooid");
             } catch (SQLException sQLException) {
                 System.out.println(sQLException);
             }
         }
-       
-      
+
+
     }//GEN-LAST:event_jButtonTotaalMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

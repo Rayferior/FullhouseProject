@@ -17,8 +17,10 @@ import javax.swing.table.DefaultTableModel;
  * @author Menno
  */
 public class MasterclassMethods {
+
     static ArrayList<String> kolomnamenM = new ArrayList<String>();
-     public static void MasterclassTonen() {
+
+    public static void MasterclassTonen() {
         DefaultTableModel model = new DefaultTableModel();
         String Query = "select * from Masterclass;";
 
@@ -56,7 +58,8 @@ public class MasterclassMethods {
             System.out.println(e);
         }
     }
-      public static void MasterclassLijstTonen() {
+
+    public static void MasterclassLijstTonen() {
         DefaultListModel model = new DefaultListModel();
 
 
@@ -78,6 +81,7 @@ public class MasterclassMethods {
             System.out.println(e);
         }
     }
+
     public static void MasterclassToevoegen() {
         String insertQuery = "insert into Masterclass(m_code,aantalSpelers, minimaleRating,inschrijfGeld, locatie, datum, masterclassGever) values( ?,?,?,?,?,?,?)";
         String toonHoogste = "select max(m_code) as hoogste from Masterclass";
@@ -104,10 +108,11 @@ public class MasterclassMethods {
             System.out.println(e);
         }
     }
+
     public static void tekstVullenMasterclass() throws ParseException {
         ModelItemMasterclass masterclass = (ModelItemMasterclass) Masterclass.masterclassLijst.getSelectedValue();
-        String selectQuery = "select * from Masterclass where datum = ?";  
-           try {
+        String selectQuery = "select * from Masterclass where datum = ?";
+        try {
             PreparedStatement stat = FullhouseProjectGui.con.prepareStatement(selectQuery);
             stat.setString(1, masterclass.datum);
             ResultSet rs = stat.executeQuery();
@@ -135,7 +140,6 @@ public class MasterclassMethods {
             Logger.getLogger(FullhouseProjectGui.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 
     public static void masterclassWijzigen() throws ParseException {
         ModelItemMasterclass mcode = (ModelItemMasterclass) Masterclass.masterclassLijst.getSelectedValue();
@@ -163,7 +167,8 @@ public class MasterclassMethods {
             Logger.getLogger(FullhouseProjectGui.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-     public static void verwijderMasterclass() {
+
+    public static void verwijderMasterclass() {
         ModelItemMasterclass masterclass = (ModelItemMasterclass) Masterclass.masterclassLijst.getSelectedValue();
         String deleteQuery = "Delete from Masterclass where datum = ?";
         try {
@@ -175,4 +180,3 @@ public class MasterclassMethods {
         }
     }
 }
-

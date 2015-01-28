@@ -260,15 +260,15 @@ public class InschrijvingFrame extends javax.swing.JFrame {
                         }
 
                     }
-                    if (keuze = true) {
-                        JOptionPane.showMessageDialog(null, "Speler staat al ingeschreven.");
-                    } else {
-
+                    if (keuze != true) {
                         PreparedStatement stat = (PreparedStatement) FullhouseProjectGui.con.prepareStatement(Query);
                         stat.setString(1, speler.s_code);
                         stat.setString(2, toer.id);
                         stat.execute();
                         JOptionPane.showMessageDialog(null, "Ingeschreven");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Speler staat al ingeschreven.");
+                        
                     }
                 }
             } catch (SQLException sQLException) {
